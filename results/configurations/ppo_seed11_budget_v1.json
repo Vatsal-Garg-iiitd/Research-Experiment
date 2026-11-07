@@ -6,7 +6,10 @@
   "budgets": [
     5000,
     10000,
-    25000
+    25000,
+    50000,
+    100000,
+    250000
   ],
   "evaluation_episodes": 20,
   "deterministic_evaluation": true,
@@ -16,5 +19,6 @@
     "n_epochs": 4
   },
   "device": "CPU",
+  "backend": "CPU; PyTorch 2.15.0; Stable-Baselines3 2.9.2; macOS",
   "separate_eval_environment": true
 }

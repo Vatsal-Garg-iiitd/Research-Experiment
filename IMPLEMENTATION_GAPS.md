@@ -2,20 +2,17 @@
 
 ## Implemented and exercised
 
-- Original project scripts and 20-entry model registry preserved; snapshots stored in `results/snapshots/`.
-- Replicated neural epoch sweeps, Random Forest warm-start sweep, unsupervised optimization curves, pseudo-label baseline ablation, AE/VAE curves, DBSCAN parameter grid and RL checkpoint sweeps save incremental raw CSVs and model checkpoints.
-- Separate CPU and DirectML environments. An isolated lm-evaluation-harness environment successfully ran three model/task subset evaluations. Windows console encoding was configured UTF-8 for the successful runs.
-- LLM 50K-token WikiText-2 test evaluation, harness JSON extraction and language-model plot/report generation.
-- Canonical result index builder, conventional statistical analysis and final completion matrix generation scripts.
-- Output validation script parses project CSV results and checks required deliverables and numeric finiteness. Latest run: zero errors and zero warnings.
+- Existing proposal code and artifacts preserved; additional platform setup, result repair snapshots, model checkpoints, and run notes are saved under the project.
+- Resumable multi-budget code exists for neural supervised models, Random Forest, clustering, pseudo-labeling and SSL, AE/VAE, LabelPropagation, DBSCAN, and RL. New output schemas retain actual examples/steps and support adding columns without corrupting older rows.
+- macOS backend selection and MPS-compatible execution are implemented for neural scripts. Classical and RL experiments use CPU. Historical DirectML runs remain separately identified.
+- Full-corpus WikiText-2 checkpoint evaluator and unbounded zero-shot harness execution are implemented and exercised. Pythia checkpoint trajectories use a common short prefix; no model pretraining is claimed.
+- Literature extraction creates a field-level evidence ledger with source URLs, locators, attribution, and evidence classes.
+- Canonical result index, strengthened statistical analysis, completion matrix, run registry, and output-validation scripts are present. Final independent validation is in progress and its exact outcome will be recorded in `FINAL_INDEPENDENT_AUDIT.md`.
 
 ## Remaining implementation work
 
-- Multi-budget/multi-seed implementations for Mean Teacher, FixMatch and MixMatch remain missing; their registered code/pilot status is not evidence of a full implementation study. LabelPropagation now has its own actual multi-seed iteration sweep; historical LabelSpreading remains a distinct pilot.
-- Replace compact ViT proxy with a standard ViT-Tiny definition if strict architecture fidelity is required.
-- Extend epoch and RL step schedules, and include full training-set or justified larger-data runs.
-- Canonical schema normalizes core fields and retains each raw record as JSON, but not every historical CSV has identical metric semantics. The validator does not yet check all matrix/report counts, checkpoint completeness, source locators, or plot regeneration provenance.
-- Conventional inference timing, FLOPs, GPU-placement/profile telemetry, and NPU runtime execution are incomplete.
-- Full LLM coverage and checkpoint-series analyses are incomplete; harness subsets are deliberately smoke subsets, not benchmark-grade runs.
-- Literature source extraction and independent locator/value verification are incomplete.
-- The lm-eval isolated environment has a Windows Application Control blocked pandas wheel if used alone; successful isolated execution uses ordered package paths to reuse the known-working project's pandas while leaving the base environment unchanged.
+- Full matched multi-budget/seed coverage across the 20 conventional entries remains incomplete. The compact transformer is not standard ViT-Tiny, and SSL recipes are task adaptations.
+- The validator checks CSV parseability, numeric finiteness, key output counts, and selected full-WikiText, harness, literature-ledger, registry, and matrix invariants. It does not verify every narrative result against every source row or verify third-party checkpoint contents.
+- Conventional inference timing, FLOPs, controlled MPS/CPU comparison, energy measurement, and NPU runtime execution are incomplete.
+- Eight requested LLM configurations lack full-corpus local evaluation. Only Pythia-70M has a full zero-shot task run; GPT-2 Small and OPT-125M have smoke harness subsets.
+- Literature page-level extraction and independent locator/value review remain incomplete for uncertain fields.

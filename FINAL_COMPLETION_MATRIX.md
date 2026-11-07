@@ -6,46 +6,46 @@ Updated 2026-11-07 from result files. `pilot` means actual runs exist but the re
 
 | Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |
 |---|---|---|---|---:|---|---|---|
-| MLP | yes | yes | epochs 1–5 | 3 | AMD Radeon 860M / DirectML (with operator CPU fallback) | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
-| LeNet-style CNN | yes | yes | epochs 1–5 | 3 | AMD Radeon 860M / DirectML (with operator CPU fallback) | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
-| ResNet-18 | yes | yes | epochs 1–5 | 3 | AMD Radeon 860M / DirectML (with operator CPU fallback) | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
-| ViT-Tiny (custom compact 3-layer, 96-wide proxy) | yes | yes | epochs 1–5 | 3 | AMD Radeon 860M / DirectML (with operator CPU fallback) | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
-| Random Forest | yes | yes | 10,25,50,100,200,400 trees | 3 | CPU | `results/raw/random_forest_scaling.csv`, `results/raw/random_forest_test_results.csv` | pilot |
+| MLP | yes | yes | 10K train: epochs 1–30; 30K/58K train: epochs 1–5; 3 seeds; 10K/30K/60K requested-size endpoints | 3 | Apple M3 / PyTorch MPS | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
+| LeNet-style CNN | yes | yes | 10K train: epochs 1–30; 30K/58K train: epochs 1–5; 3 seeds; 10K/30K/60K requested-size endpoints | 3 | Apple M3 / PyTorch MPS | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
+| ResNet-18 | yes | yes | 10K train: epochs 1–30; 30K/58K train: epochs 1–5; 3 seeds; 10K/30K/60K requested-size endpoints | 3 | Apple M3 / PyTorch MPS | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
+| ViT-Tiny (custom compact 3-layer, 96-wide proxy) | yes | yes | 10K train: epochs 1–30; 30K/58K train: epochs 1–5; 3 seeds; 10K/30K/60K requested-size endpoints | 3 | Apple M3 / PyTorch MPS | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
+| Random Forest | yes | yes | 10–1,000 warm-start trees; 3 seeds | 3 | CPU | `results/raw/random_forest_scaling.csv`, `results/raw/random_forest_test_results.csv` | pilot |
 | K-Means | yes | yes | algorithm-specific iterative budgets | 3 | CPU | `results/raw/unsupervised_scaling.csv` | pilot |
 | Gaussian Mixture Model | yes | yes | algorithm-specific iterative budgets | 3 | CPU | `results/raw/unsupervised_scaling.csv` | pilot |
 | DBSCAN | yes | yes | 2.5K,5K,10K samples x 3 seeds (data-size cost curve); separate 8-setting parameter sensitivity | 3 | CPU | `results/raw/dbscan_parameter_sweep.csv`, `results/raw/dbscan_size_scaling.csv` | pilot |
-| Autoencoder | yes | yes | epochs 1–5; 3 seeds | 3 | AMD Radeon 860M / DirectML | `results/raw/autoencoder_scaling.csv`, `results/raw/autoencoder_test_results.csv` | pilot |
-| Variational Autoencoder | yes | yes | epochs 1–5; 3 seeds | 3 | AMD Radeon 860M / DirectML | `results/raw/autoencoder_scaling.csv`, `results/raw/autoencoder_test_results.csv` | pilot |
-| Pseudo-Labeling | yes | yes | epochs 1–5; label fractions 1–40%; 3 seeds | 3 | AMD Radeon 860M / DirectML | `results/raw/pseudolabel_baseline_sweep.csv`, `results/raw/pseudolabel_test_results.csv` | pilot |
-| Mean Teacher | yes | yes | epochs 1–3; labeled fractions 1,5,10,20,40%; 3 seeds | 3 | DirectML for MeanTeacher/FixMatch; CPU MixMatch | `results/raw/ssl_algorithms.csv`, `results/raw/ssl_algorithms_test.csv` | pilot |
-| FixMatch | yes | yes | epochs 1–3; labeled fractions 1,5,10,20,40%; 3 seeds | 3 | DirectML for MeanTeacher/FixMatch; CPU MixMatch | `results/raw/ssl_algorithms.csv`, `results/raw/ssl_algorithms_test.csv` | pilot |
-| MixMatch | yes | yes | epochs 1–3; labeled fractions 1,5,10,20,40%; 3 seeds | 3 | DirectML for MeanTeacher/FixMatch; CPU MixMatch | `results/raw/ssl_algorithms.csv`, `results/raw/ssl_algorithms_test.csv` | pilot |
+| Autoencoder | yes | yes | epochs 1–30; 3 seeds; standardized linear probe | 3 | Apple M3 / PyTorch MPS | `results/raw/autoencoder_scaling.csv`, `results/raw/autoencoder_test_results.csv` | pilot |
+| Variational Autoencoder | yes | yes | epochs 1–30; 3 seeds; standardized linear probe | 3 | Apple M3 / PyTorch MPS | `results/raw/autoencoder_scaling.csv`, `results/raw/autoencoder_test_results.csv` | pilot |
+| Pseudo-Labeling | yes | yes | epochs 1–5; label fractions 1–40%; 3 seeds | 3 | Apple M3 / PyTorch MPS | `results/raw/pseudolabel_baseline_sweep.csv`, `results/raw/pseudolabel_test_results.csv` | pilot |
+| Mean Teacher | yes | yes | epochs 1–30; labeled fractions 1,5,10,20,40%; 3 seeds | 3 | Apple M3 / PyTorch MPS | `results/raw/ssl_algorithms.csv`, `results/raw/ssl_algorithms_test.csv` | pilot |
+| FixMatch | yes | yes | epochs 1–30; labeled fractions 1,5,10,20,40%; 3 seeds | 3 | Apple M3 / PyTorch MPS | `results/raw/ssl_algorithms.csv`, `results/raw/ssl_algorithms_test.csv` | pilot |
+| MixMatch | yes | yes | epochs 1–30; labeled fractions 1,5,10,20,40%; 3 seeds | 3 | Apple M3 / PyTorch MPS | `results/raw/ssl_algorithms.csv`, `results/raw/ssl_algorithms_test.csv` | pilot |
 | Label Propagation | yes | yes | max iterations 1–2,000; tol 1e-3; 3 seeds; convergence observed | 3 | CPU sklearn; actual LabelPropagation | `results/raw/label_propagation_scaling.csv` | pilot |
-| DQN | yes | yes | 5K,10K,25K environment steps; 3 seeds | 3 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
-| Double DQN | yes | yes | 5K,10K,25K environment steps; 3 seeds | 3 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
-| A2C | yes | yes | 5K,10K,25K environment steps; 3 seeds | 3 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
-| PPO | yes | yes | 5K,10K,25K environment steps; 3 seeds | 3 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
-| SAC | yes | yes | 5K,10K,25K environment steps; 3 seeds | 3 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
+| DQN | yes | yes | 5K–250K requested environment steps; 3 seeds (SAC/Double DQN: 5 seeds) | 3 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
+| Double DQN | yes | yes | 5K–250K requested environment steps; 3 seeds (SAC/Double DQN: 5 seeds) | 5 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
+| A2C | yes | yes | 5K–250K requested environment steps; 3 seeds (SAC/Double DQN: 5 seeds) | 3 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
+| PPO | yes | yes | 5K–250K requested environment steps; 3 seeds (SAC/Double DQN: 5 seeds) | 3 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
+| SAC | yes | yes | 5K–250K requested environment steps; 3 seeds (SAC/Double DQN: 5 seeds) | 5 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
 
 ## LLM configurations (15)
 
 | Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |
 |---|---|---|---|---:|---|---|---|
-| Pythia-70M | checkpoint/config available | yes, local inference | step143000; 50K WikiText-2 tokens + 100/task harness subset | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | pilot |
-| Pythia-160M | checkpoint/config available | yes, local inference | step143000; 50K tokens | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | pilot |
-| Pythia-410M | checkpoint/config available | yes, local inference | step143000; 50K tokens | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | pilot |
-| Pythia-1B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | resource_limited |
-| Pythia-1.4B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | resource_limited |
-| Pythia-2.8B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | resource_limited |
-| Pythia-6.9B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | resource_limited |
-| Pythia-12B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | resource_limited |
-| GPT-2 Small | checkpoint/config available | yes, local inference | main; 50K WikiText-2 tokens + 100/task harness subset | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | pilot |
-| GPT-2 Medium | checkpoint/config available | attempt/status in prior ledger only | weight retrieval/evaluation incomplete | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | resource_limited |
-| GPT-2 Large | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | resource_limited |
-| GPT-2 XL | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | resource_limited |
-| OPT-125M | checkpoint/config available | yes, local inference | main; 50K WikiText-2 tokens + 100/task harness subset | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | pilot |
-| OPT-350M | checkpoint/config available | yes, local inference | main; 50K WikiText-2 tokens | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | pilot |
-| OPT-1.3B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | CPU | `results/llm/full_wikitext2_evaluations.csv` / existing LLM ledgers | resource_limited |
+| Pythia-70M | checkpoint/config available | yes, local inference | 8 released checkpoints (0–143K); full WikiText-2 test; full HellaSwag/PIQA/ARC-Easy zero-shot | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | pilot |
+| Pythia-160M | checkpoint/config available | yes, local inference | 8 released checkpoints (0–143K); full WikiText-2 test | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | pilot |
+| Pythia-410M | checkpoint/config available | yes, local inference | step 0, 10K, 143K prefix checkpoints; full WikiText-2 test | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | pilot |
+| Pythia-1B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
+| Pythia-1.4B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
+| Pythia-2.8B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
+| Pythia-6.9B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
+| Pythia-12B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
+| GPT-2 Small | checkpoint/config available | yes, local inference | main; full WikiText-2 test + 100/task harness smoke subset | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | pilot |
+| GPT-2 Medium | checkpoint/config available | attempt/status in prior ledger only | weight retrieval/evaluation incomplete | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
+| GPT-2 Large | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
+| GPT-2 XL | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
+| OPT-125M | checkpoint/config available | yes, local inference | main; full WikiText-2 test + 100/task harness smoke subset | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | pilot |
+| OPT-350M | checkpoint/config available | yes, local inference | main; full WikiText-2 test | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | pilot |
+| OPT-1.3B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
 
 ## Literature configurations (15)
 

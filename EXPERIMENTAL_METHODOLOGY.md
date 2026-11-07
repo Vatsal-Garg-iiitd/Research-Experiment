@@ -13,7 +13,7 @@ Estimate, within each fixed model/task/protocol, how evaluation performance chan
 
 ## Existing experiment protocol
 
-> **Protocol update (2026-11-06):** The following historic pilot description is retained for provenance. Expanded runs now use a 10,000-image train subset and 2,000-image validation subset with seeds 11/23/37 for selected neural, classical, representation-learning, semi-supervised, and RL sweeps. Exact budgets, split details and deviations are reported in `FINAL_COMPLETION_MATRIX.md` and `REMAINING_WORK.md`.
+> **Protocol update (2026-11-07):** The following historic pilot description is retained for provenance. Expanded runs use several distinct scopes: 10K train / 2K validation Fashion-MNIST runs, MLP/LeNet data-size runs, RL environment-interaction schedules, and LLM checkpoint evaluations. Seeds, budgets, splits, platform, and deviations are recorded per run. The completion matrix and execution log are authoritative for current status.
 
 - Conventional pilots use Fashion-MNIST subsets, seed 11, and native units appropriate to the algorithm; training is on DirectML for neural pilots, CPU for scikit-learn and RL.
 - New full-suite vision pilots use 2,500 total images (2,000 train, 500 held-out), a single seed, and generally a single optimization pass. They are labeled pilots. The held-out values are not final independent test estimates.
@@ -21,6 +21,15 @@ Estimate, within each fixed model/task/protocol, how evaluation performance chan
 - RL pilots use a single seed and 5,000 environment steps, with five evaluation episodes. DQN uses CartPole, SAC Pendulum. This is not adequate for stable RL comparison.
 - LLM local evaluation uses CPU fp32 on a short prefix, one sequence, no downstream benchmark. `main` revisions must not be counted as additional checkpoints when identical to named step revisions.
 - Literature data remain a separate evidence class; paper-specific metrics and compute units are not pooled with local task outcomes.
+
+## Expanded local study notes (2026-11-07)
+
+- Selected neural, clustering, representation-learning, semi-supervised, and RL runs use seeds 11, 23, and 37; SAC and Double DQN also use seeds 41 and 53. The main 10K Fashion-MNIST development runs use a fixed 10K/2K train-validation split and untouched official test data. Requested 60K supervised runs reserve 2K from the official training partition, so 58K examples are optimized.
+- The 10K MLP/LeNet/ResNet-18/compact transformer and AE/VAE runs extend through 30 epochs. Mean Teacher, FixMatch, and MixMatch extend through 30 epochs for five labeled fractions. Fixed-budget endpoint tests use the final requested checkpoint; validation selection is not uniform across every historical endpoint.
+- Selected neural training ran on Apple M3 PyTorch MPS. CPU methods and RL remain CPU based. Wall-clock results with concurrent workloads are qualified; old Windows DirectML results are a separate platform and environment.
+- Six public checkpoints were evaluated on the full WikiText-2 raw-v1 test text using FP32, context 1024 and stride 512. A distinct released-checkpoint prefix trajectory evaluates Pythia checkpoints; step-to-token mapping is model-card metadata, not measured local pretraining work.
+- lm-evaluation-harness 0.4.13 completed an unbounded 0-shot Pythia-70M validation-split run on HellaSwag, PIQA, and ARC-Easy. Earlier 100-example evaluations of GPT-2 Small and OPT-125M are smoke runs only.
+- Literature fields use explicit reported/derived/estimated/uncertain classes, source URLs and locators. They remain separate from local measurements.
 
 ## Analysis conventions
 

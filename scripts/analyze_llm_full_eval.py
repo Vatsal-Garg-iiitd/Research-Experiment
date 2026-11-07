@@ -1,44 +1,31 @@
-"""Summarize locally evaluated language-model checkpoints and make figures."""
-import csv, math, statistics
+"""Summarize full-corpus local LLM evaluations and regenerate their figures."""
+import csv, math
 from pathlib import Path
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 ROOT=Path(__file__).resolve().parents[1]
-SRC=ROOT/'results/llm/full_wikitext2_evaluations.csv'
-OUT=ROOT/'results/processed'
-FIG=ROOT/'results/figures'
-OUT.mkdir(parents=True,exist_ok=True); FIG.mkdir(parents=True,exist_ok=True)
-with SRC.open(encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
+SRC=ROOT/'results/llm/macos_full_wikitext2_evaluations.csv'
+OUT=ROOT/'results/processed';FIG=ROOT/'results/figures'
+OUT.mkdir(parents=True,exist_ok=True);FIG.mkdir(parents=True,exist_ok=True)
+with SRC.open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
 rows=[r for r in rows if r.get('status')=='completed']
+fields=['model_name','model_revision','parameter_count','dataset','scored_tokens','context_length','stride','negative_log_likelihood','perplexity','bits_per_byte','model_load_seconds','evaluation_seconds','tokens_per_second','precision','device','backend','ram_bytes_after_eval','weight_memory_estimate_bytes','text_sha256','status']
+with (OUT/'llm_full_eval_summary.csv').open('w',encoding='utf-8-sig',newline='') as f:
+    w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows([{k:r.get(k,'') for k in fields} for r in rows])
 def num(r,k):
     try:
-        x=float(r[k]); return x if math.isfinite(x) else None
-    except (KeyError,ValueError,TypeError): return None
-with (OUT/'llm_full_eval_summary.csv').open('w',encoding='utf-8-sig',newline='') as f:
-    fields=['model_name','family','parameters','checkpoint_id','training_step','evaluation_tokens_scored','test_cross_entropy','test_perplexity','model_load_seconds','evaluation_seconds','tokens_per_second','peak_ram_bytes','hardware','backend','status']
-    w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows([{k:r.get(k,'') for k in fields} for r in rows])
-for x,y,xlab,ylab,name in [('parameters','test_perplexity','Parameters','WikiText-2 test perplexity','llm_model_size_vs_perplexity.png'),('parameters','test_cross_entropy','Parameters','WikiText-2 test cross entropy (nats/token)','llm_model_size_vs_loss.png'),('parameters','tokens_per_second','Parameters','Evaluation throughput (tokens/s)','llm_model_size_vs_throughput.png')]:
+        x=float(r[k]);return x if math.isfinite(x) else None
+    except (KeyError,ValueError,TypeError):return None
+plots=[('perplexity','Perplexity on WikiText-2 raw-v1 test','llm_model_size_vs_perplexity.png'),('negative_log_likelihood','Cross entropy (nats/scored token)','llm_model_size_vs_loss.png'),('tokens_per_second','Evaluation throughput (scored tokens/s)','llm_model_size_vs_throughput.png')]
+for metric,label,name in plots:
     fig,ax=plt.subplots(figsize=(8,5))
     for r in rows:
-        xv,yv=num(r,x),num(r,y)
-        if xv and yv: ax.scatter(xv,yv); ax.annotate(r['model_name'],(xv,yv),xytext=(4,4),textcoords='offset points',fontsize=8)
-    ax.set_xscale('log'); ax.set_xlabel(xlab); ax.set_ylabel(ylab); ax.grid(True,alpha=.25); fig.tight_layout(); fig.savefig(FIG/name,dpi=160); plt.close(fig)
-models=', '.join(f"{r['model_name']} ({r['checkpoint_id']})" for r in rows)
-lines=['# LLM Evaluation Report','',f"Updated from `{SRC.relative_to(ROOT)}`. All listed scores are local checkpoint inference measurements; they are not pretraining runs.",'',f'## Completed local evaluations','',f'{len(rows)} configurations completed a matched WikiText-2 raw-v1 test evaluation: {models}.','', 'The requested input budget was 50,000 tokenizer tokens for each run. Scored-token counts are 49,951–49,975 because causal next-token loss excludes each non-overlapping chunk’s first token. Pythia and OPT used 2,048-token context windows; GPT-2 Small used 1,024. That context difference is a comparability limitation. Runs used CPU FP32. The table reports model loading time, evaluation time, observed throughput, process peak RAM and the recorded checkpoint metadata. Local evaluation time is not a proxy for original pretraining compute.','', '## Results','', '| Model | Checkpoint | Parameters | Scored tokens | Cross entropy | Perplexity | Eval seconds | Tokens/s |', '|---|---|---:|---:|---:|---:|---:|---:|']
-for r in rows:
-    lines.append(f"| {r['model_name']} | {r['checkpoint_id']} | {int(float(r['parameters'])):,} | {r['evaluation_tokens_scored']} | {float(r['test_cross_entropy']):.4f} | {float(r['test_perplexity']):.3f} | {float(r['evaluation_seconds']):.2f} | {float(r['tokens_per_second']):.1f} |")
-lines += ['', '## Downstream harness evaluation', '', 'lm-evaluation-harness 0.4.13 ran 0-shot CPU FP32 evaluations on 100 examples per task for Pythia-70M step143000, GPT-2 Small, and OPT-125M. These are smoke subsets and must not be presented as full benchmark scores. The result JSONs and per-sample logs are under `results/llm/harness/`; the extracted table is `results/llm/harness_summary.csv`.','', '| Model | HellaSwag acc / normalized | PIQA acc / normalized | ARC-Easy acc / normalized | Total eval seconds |','|---|---:|---:|---:|---:|']
-try:
-    import csv
-    with (ROOT/'results/llm/harness_summary.csv').open(encoding='utf-8-sig',newline='') as f: harness=list(csv.DictReader(f))
-    grouped={}
-    for r in harness: grouped.setdefault(r['model'],{})[r['task']]=r
-    for model,t in grouped.items():
-        h=t.get('HellaSwag',{});p=t.get('PIQA',{});a=t.get('ARC-Easy',{})
-        lines.append(f"| {model} | {h.get('accuracy','')} / {h.get('normalized_accuracy','')} | {p.get('accuracy','')} / {p.get('normalized_accuracy','')} | {a.get('accuracy','')} / {a.get('normalized_accuracy','')} | {h.get('eval_seconds','')} |")
-except FileNotFoundError: lines.append('| Harness subset run pending | | | | |')
-lines += ['', '## Figures','', '- `results/figures/llm_model_size_vs_perplexity.png`', '- `results/figures/llm_model_size_vs_loss.png`', '- `results/figures/llm_model_size_vs_throughput.png`', '', 'No confidence intervals are reported for the WikiText comparisons: these are deterministic evaluations of distinct fixed checkpoints, not repeated seed runs. Harness standard errors are dataset-subset sampling estimates for n=100, not seed variability.']
-(ROOT/'LLM_EVALUATION_REPORT.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
-print(f'Wrote summary and report for {len(rows)} runs')
+        x,y=num(r,'parameter_count'),num(r,metric)
+        if x and y:
+            ax.scatter(x,y);ax.annotate(r['model_name'],(x,y),xytext=(4,4),textcoords='offset points',fontsize=8)
+    ax.set_xscale('log');ax.set_xlabel('Published checkpoint parameters');ax.set_ylabel(label)
+    ax.set_title('Full WikiText-2 raw-v1 test evaluation (FP32, MPS, context 1024, stride 512)')
+    ax.grid(True,alpha=.25);fig.tight_layout();fig.savefig(FIG/name,dpi=160);plt.close(fig)
+print(f'Wrote full-corpus summary and regenerated figures for {len(rows)} checkpoints; report content remains maintained in LLM_EVALUATION_REPORT.md')

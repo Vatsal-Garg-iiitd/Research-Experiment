@@ -5,13 +5,13 @@ from datetime import datetime,timezone
 from pathlib import Path
 import numpy as np,psutil,torch
 from torch import nn
-import torch_directml
+from backend import backend_name, get_device
 from torchvision.datasets import FashionMNIST
 from torchvision.transforms import ToTensor
 from sklearn.metrics import accuracy_score,precision_recall_fscore_support
 
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'results/raw/pseudolabel_baseline_sweep.csv';TEST=ROOT/'results/raw/pseudolabel_test_results.csv';CURVE=ROOT/'results/raw/pseudolabel_learning_curves.csv';CFG=ROOT/'results/configurations';CK=ROOT/'results/checkpoints/pseudolabel'
-FRACTIONS=[.01,.05,.10,.20,.40];MAX_EPOCH=5;DEVICE=torch_directml.device()
+FRACTIONS=[.01,.05,.10,.20,.40];MAX_EPOCH=5;DEVICE=get_device()
 class MLP(nn.Module):
  def __init__(self):super().__init__();self.net=nn.Sequential(nn.Flatten(),nn.Linear(784,256),nn.ReLU(),nn.Linear(256,10))
  def forward(self,x):return self.net(x)
@@ -58,7 +58,7 @@ def main():
        with torch.no_grad():probs=m(ub).softmax(1);conf,pseudo=probs.max(1);mask=conf>=.8;accepted+=int(mask.sum().cpu());seen+=len(mask)
        if mask.any():unlogits=m(ub);unloss=nn.functional.cross_entropy(unlogits[mask],pseudo[mask])
       loss=sup+unloss;loss.backward();opt.step();actual_steps+=1;loss_total+=float(loss.detach().cpu());sup_total+=float(sup.detach().cpu());unsup_total+=float(unloss.detach().cpu())
-     dt=time.perf_counter()-t0;cum+=dt;vl,va=evaluate(m,xv,yv);eid=f'{run}_epoch{epoch}';row={'experiment_id':eid,'run_id':run,'model_name':'MLP','paradigm':'semi_supervised' if method=='pseudo_label' else 'supervised_labeled_baseline','method':method,'dataset':'Fashion-MNIST','split_id':split,'seed':seed,'labeled_fraction':frac,'labeled_n':nl,'unlabeled_n':len(ui),'budget_type':'epochs','budget_value':epoch,'optimizer_steps':actual_steps,'training_time_seconds':dt,'cumulative_training_time_seconds':cum,'evaluation_time_seconds':'','peak_memory_bytes':psutil.Process().memory_info().rss,'backend':'DirectML; AMD Radeon(TM) 860M; PyTorch 2.4.1','evaluation_metric':'validation_accuracy','evaluation_value':va,'validation_loss':vl,'mean_supervised_training_loss':sup_total/actual_steps,'mean_unsupervised_loss':unsup_total/actual_steps,'pseudo_labels_accepted':accepted,'pseudo_label_acceptance_fraction':accepted/seen if seen else 0,'experiment_status':'completed','source_type':'local_measurement','configuration_path':str(cfg.relative_to(ROOT)),'timestamp_utc':datetime.now(timezone.utc).isoformat(),'details':json.dumps({'matched_optimizer_steps':True,'labeled_index_seed':seed+int(frac*10000),'validation_split_fixed':'yes'})}
+     dt=time.perf_counter()-t0;cum+=dt;vl,va=evaluate(m,xv,yv);eid=f'{run}_epoch{epoch}';row={'experiment_id':eid,'run_id':run,'model_name':'MLP','paradigm':'semi_supervised' if method=='pseudo_label' else 'supervised_labeled_baseline','method':method,'dataset':'Fashion-MNIST','split_id':split,'seed':seed,'labeled_fraction':frac,'labeled_n':nl,'unlabeled_n':len(ui),'budget_type':'epochs','budget_value':epoch,'optimizer_steps':actual_steps,'training_time_seconds':dt,'cumulative_training_time_seconds':cum,'evaluation_time_seconds':'','peak_memory_bytes':psutil.Process().memory_info().rss,'backend':backend_name(DEVICE),'evaluation_metric':'validation_accuracy','evaluation_value':va,'validation_loss':vl,'mean_supervised_training_loss':sup_total/actual_steps,'mean_unsupervised_loss':unsup_total/actual_steps,'pseudo_labels_accepted':accepted,'pseudo_label_acceptance_fraction':accepted/seen if seen else 0,'experiment_status':'completed','source_type':'local_measurement','configuration_path':str(cfg.relative_to(ROOT)),'timestamp_utc':datetime.now(timezone.utc).isoformat(),'details':json.dumps({'matched_optimizer_steps':True,'labeled_index_seed':seed+int(frac*10000),'validation_split_fixed':'yes'})}
      CK.mkdir(parents=True,exist_ok=True);tmp=ck.with_suffix('.tmp');torch.save({'epoch':epoch,'model':m.state_dict(),'optimizer':opt.state_dict(),'cumulative_seconds':cum},tmp);tmp.replace(ck)
      if eid not in exist:append(OUT,row);exist.add(eid)
      append(CURVE,{'experiment_id':eid,'run_id':run,'method':method,'seed':seed,'labeled_fraction':frac,'epoch':epoch,'validation_accuracy':va,'validation_loss':vl,'mean_supervised_loss':sup_total/actual_steps,'mean_unsupervised_loss':unsup_total/actual_steps,'accepted_pseudo_labels':accepted,'pseudo_label_acceptance_fraction':accepted/seen if seen else 0,'cumulative_training_time_seconds':cum})

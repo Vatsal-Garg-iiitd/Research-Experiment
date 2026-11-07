@@ -11,12 +11,13 @@ import psutil
 import torch
 from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
-import torch_directml
+import platform
+from backend import backend_name, get_device
 from torchvision.datasets import FashionMNIST
 from torchvision.transforms import ToTensor
 
 ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/'results/raw/full_suite_results.csv'; SEED=11
-D=torch_directml.device()
+D=get_device()
 
 class MLP(nn.Module):
     def __init__(self): super().__init__(); self.net=nn.Sequential(nn.Flatten(),nn.Linear(784,256),nn.ReLU(),nn.Linear(256,10))
@@ -66,7 +67,7 @@ def train_ce(m,x,y,epochs=1):
             bx=x[ids].to(D); by=y[ids].to(D); opt.zero_grad(); loss=lossfn(m(bx),by); loss.backward(); opt.step(); steps+=1
     return steps
 def record(name,para,metric,value,train_s,eval_s,steps,extra):
-    save(dict(run_id='full_'+name.lower().replace(' ','_').replace('/','_')+'_seed11_v1',paradigm=para,model=name,dataset='Fashion-MNIST-subset-2500',split_hash=SPLIT,seed=SEED,budget_unit='optimizer_steps',budget_value=steps,train_seconds=train_s,cumulative_train_seconds=train_s,eval_seconds=eval_s,metric_name=metric,metric_value=value,train_steps=steps,parameter_count='',peak_ram_bytes=psutil.Process().memory_info().rss,peak_vram_bytes='',hardware=f'DirectML; AMD Radeon(TM) 860M Graphics; torch-directml 0.2.5.dev240914; PyTorch {torch.__version__}',status='completed',details=json.dumps(extra)))
+    save(dict(run_id='full_'+name.lower().replace(' ','_').replace('/','_')+'_seed11_v1',paradigm=para,model=name,dataset='Fashion-MNIST-subset-2500',split_hash=SPLIT,seed=SEED,budget_unit='optimizer_steps',budget_value=steps,train_seconds=train_s,cumulative_train_seconds=train_s,eval_seconds=eval_s,metric_name=metric,metric_value=value,train_steps=steps,parameter_count='',peak_ram_bytes=psutil.Process().memory_info().rss,peak_vram_bytes='',hardware=platform.platform(),backend=backend_name(D),status='completed',details=json.dumps(extra)))
 
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument('--only-mixmatch',action='store_true'); args=parser.parse_args()

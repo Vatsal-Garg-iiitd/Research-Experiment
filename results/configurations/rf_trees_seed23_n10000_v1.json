@@ -13,7 +13,9 @@
     50,
     100,
     200,
-    400
+    400,
+    800,
+    1000
   ],
   "parameters": {
     "criterion": "gini",
@@ -21,5 +23,6 @@
     "warm_start": true,
     "n_jobs": -1
   },
-  "evaluation": "validation at each tree budget; official test once at 400 trees"
+  "backend": "scikit-learn CPU on macOS",
+  "evaluation": "validation at each tree budget; official test once at 1000 trees"
 }

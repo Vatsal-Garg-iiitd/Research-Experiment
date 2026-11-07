@@ -1,0 +1,24 @@
+{
+  "experiment_id": "ppo-pendulum_seed37_budget_v1",
+  "model": "PPO-Pendulum",
+  "environment": "Pendulum-v1",
+  "seed": 37,
+  "budgets": [
+    5000,
+    10000,
+    25000,
+    50000,
+    100000,
+    250000
+  ],
+  "evaluation_episodes": 20,
+  "deterministic_evaluation": true,
+  "algorithm_parameters": {
+    "n_steps": 2048,
+    "batch_size": 64,
+    "n_epochs": 10
+  },
+  "device": "CPU",
+  "backend": "CPU; PyTorch 2.15.0; Stable-Baselines3 2.9.2; macOS",
+  "separate_eval_environment": true
+}

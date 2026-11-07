@@ -1,33 +1,23 @@
 # Project audit
 
-Audit date: 2026-11-06. Scope: current workspace, source files, raw/processed CSVs, configs, reports, figures, available logs and original proposal PDF.
+Audit updated 2026-11-07 from the working tree, raw data, generated outputs, configuration records, checkpoint inventory, and execution log. The current project source `research-experiment` remote matched the starting HEAD `afc488a46f318c7b264eb44d8b7d4eb78536a4de`. The workspace contained pre-existing modifications before this audit; they were preserved. A compressed workspace snapshot excluding `.git` and virtual environments is stored at `../Tcom_project-audit-backup-20261107T140412Z.tar.gz`.
 
 ## Research objective
 
-The seven-page proposal, `ResearchProp_Grp119_sec_C (1).pdf`, asks whether model accuracy improves with additional computational effort and whether marginal gains become smaller. It proposes a small-scale experiment across training levels, records accuracy and wall time, and separately contextualizes results from papers where conditions are comparable. The current expanded project includes four conventional learning paradigms, LLM checkpoint evaluation, literature, and hardware work beyond the initial proposal.
+The proposal asks how performance changes with added computational effort and whether marginal gains diminish. The project also contains conventional ML, RL, semi-supervised, representation-learning, language-model, hardware, and literature evidence. Budgets and metrics remain native to each method. Published checkpoint inference is not original pretraining.
 
-## Inventory and evidence
+## Evidence inventory
 
-- Source proposal: present; a text extraction is stored in the dated snapshot directory.
-- `results.zip`: not present in the project or the checked Codex attachments. The current project tree itself contains the experiment scripts and outputs; no archive logs were available for cross-checking.
-- Scripts: `scripts/run_pilots.py`, `run_missing_classical.py`, `run_missing_neural.py`, `run_missing_rl.py`, `run_llm_evaluations.py`, `benchmark_backends.py`, `analyze_results.py`, `plot_pilots.py`, and `finalize_study_status.py`.
-- Raw conventional results: `results/raw/experiment_results.csv` (26 rows) and `results/raw/full_suite_results.csv` (33 rows; 20 current pilots and 13 superseded retries/versions).
-- Processed results: pilot and full-suite marginal CSVs. Current full-suite marginal CSV has no calculable marginal values because each current one-budget model entry has only one active point.
-- LLM: 34 rows in expanded evaluations (completed, failed, resource-limited, superseded); 23 rows in the Pythia checkpoint ledger including historical entries.
-- Literature: 15 configurations in `large_model_literature.csv`; field-by-field source verification is incomplete.
-- Hardware: Windows machine report and one small CPU/DirectML MLP microbenchmark. DirectML model pilots ran on Radeon 860M with some CPU fallbacks. NPU inference was not demonstrated; ROCm was not installed under the detected driver state.
-- Proposal and original files were copied before modifications to `results/snapshots/pre_strengthening_20261106_150150/`.
+- Raw results are under `results/raw/`; per-run configuration JSON under `results/configurations/`; checkpoints under `results/checkpoints/`; original and repaired snapshots under `results/snapshots/`.
+- `EXPERIMENT_RUN_REGISTRY.csv` indexes 3,720 result/evidence rows across raw experiment CSVs, LLM CSVs, and the literature ledger. `results/processed/canonical_results.csv` is the common local-result index with raw record JSON retained.
+- The regenerated strengthened analysis contains 3,614 validation summaries, 2,407 within-seed paired marginal increments, and 169 held-out endpoint groupings separated by final budget/checkpoint. These counts describe included measurements, not independent configurations.
+- Six public model checkpoints have completed full WikiText-2 raw-v1 test-text evaluation on common context/stride. Pythia-70M has an unbounded zero-shot validation-split harness run. Two earlier 100-example/task harness runs remain smoke tests.
+- The literature ledger contains 15 published configurations and 300 field-level evidence rows. 104 fields remain uncertain; sources and locators are stored per field. These are not local reproductions.
 
-## Model completion evidence
+## Integrity and interpretation
 
-All 20 conventional registry entries have at least one saved feasibility record, but these are not all exact implementations of the requested names: the ViT entry is a custom 3-layer/96-wide compact transformer; the Label Propagation entry used scikit-learn LabelSpreading. See `EXPERIMENT_COMPLETION_MATRIX.md` and `IMPLEMENTATION_GAPS.md`.
+Raw experiment files and pre-repair snapshots were retained. Repairs include schema union for SSL CSV rows, actual-example counts for supervised runs, unioned token-byte accounting for full WikiText-2, deduplication of successful identical Pythia checkpoint evaluations after a snapshot, and exact separation of smoke versus full harness scopes. `scripts/validate_project_outputs.py` checks CSV parseability, numeric finiteness, required deliverables, key analysis counts, literature field uniqueness/classes, full WikiText-2 protocol consistency, harness task/limit settings, and registry source paths.
 
-Six of 15 LLM configurations have completed 50K-token WikiText-2 raw test evaluations: Pythia-70M/160M/410M, GPT-2 Small, OPT-125M and OPT-350M. Three configurations (Pythia-70M step143000, GPT-2 Small and OPT-125M) also have lm-evaluation-harness 0-shot scores on 100 examples each for HellaSwag, PIQA and ARC-Easy. These are diagnostic subsets, not full benchmark scores. Pythia-70M has eight historical checkpoint points; Pythia-160M and Pythia-410M have three distinct points each. `main` duplicates `step143000`, not an additional checkpoint. GPT-2 Medium has an attempted failed weight retrieval; other configs lack a long local evaluation.
+Endpoint evaluation does not mean every endpoint was chosen by consistent validation-based selection. Training timing across different devices is not directly comparable. Some records include selected fixed-budget endpoints, shared fixed splits, rollout overshoot, and one non-exact legacy Double DQN continuation; those limitations are documented in run-level details and `MACOS_EXECUTION_LOG.md`.
 
-The 15 literature configurations are literature-only, not local reproductions. Some quantitative evidence is source-reported; some derived values are labeled in notes. The ledger has gaps in exact page/table locators and metadata; it is not yet a validated complete literature dataset.
-
-## Integrity and status
-
-No placeholder score was found in the current raw local result tables. Failed and superseded attempts are retained. The MixMatch v1 row is superseded by the v2 run. Reported perplexities are calculated from measured cross-entropy; selected literature token totals are derived and annotated. This audit does not independently re-verify every literature number against original papers.
-
-**Overall status: incomplete exploratory study.** The raw evidence does not support calling the requested full study complete, making cross-model significance claims, or claiming general diminishing returns.
+**Overall status: incomplete exploratory evidence.** The strict objective matrix is still 0/50. Available results do not support calling the proposed full study complete, causal cross-paper comparisons, cross-paradigm efficiency claims, or universal diminishing returns. See `FINAL_INDEPENDENT_AUDIT.md` for final post-generation checks.

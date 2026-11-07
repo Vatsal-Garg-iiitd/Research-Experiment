@@ -1,0 +1,37 @@
+﻿model_name,requested_train_size,actual_train_size,seed,test_accuracy,experiment_id,status
+MLP,10000,10000,11,0.8243,rep_mlp_seed11_n10000_v1_test_epoch5,completed
+MLP,10000,10000,23,0.8247,rep_mlp_seed23_n10000_v1_test_epoch5,completed
+MLP,10000,10000,37,0.8348,rep_mlp_seed37_n10000_v1_test_epoch5,completed
+CNN / LeNet,10000,10000,11,0.8407,rep_lenet_seed11_n10000_v1_test_epoch5,completed
+CNN / LeNet,10000,10000,23,0.8347,rep_lenet_seed23_n10000_v1_test_epoch5,completed
+CNN / LeNet,10000,10000,37,0.835,rep_lenet_seed37_n10000_v1_test_epoch5,completed
+ResNet-18,10000,10000,11,0.8458,rep_resnet18_seed11_n10000_v1_test_epoch5,completed
+ResNet-18,10000,10000,23,0.8476,rep_resnet18_seed23_n10000_v1_test_epoch5,completed
+ResNet-18,10000,10000,37,0.8267,rep_resnet18_seed37_n10000_v1_test_epoch5,completed
+Vision Transformer (compact ViT-Tiny-style),10000,10000,11,0.8029,rep_vit_compact_seed11_n10000_v1_test_epoch5,completed
+Vision Transformer (compact ViT-Tiny-style),10000,10000,23,0.8099,rep_vit_compact_seed23_n10000_v1_test_epoch5,completed
+Vision Transformer (compact ViT-Tiny-style),10000,10000,37,0.8068,rep_vit_compact_seed37_n10000_v1_test_epoch5,completed
+MLP,30000,30000,11,0.8556,rep_mlp_seed11_n30000_v1_test_epoch5,completed
+MLP,30000,30000,23,0.8606,rep_mlp_seed23_n30000_v1_test_epoch5,completed
+MLP,30000,30000,37,0.8448,rep_mlp_seed37_n30000_v1_test_epoch5,completed
+CNN / LeNet,30000,30000,11,0.8768,rep_lenet_seed11_n30000_v1_test_epoch5,completed
+CNN / LeNet,30000,30000,23,0.8824,rep_lenet_seed23_n30000_v1_test_epoch5,completed
+CNN / LeNet,30000,30000,37,0.8761,rep_lenet_seed37_n30000_v1_test_epoch5,completed
+MLP,60000,58000,11,0.868,rep_mlp_seed11_n60000_v1_test_epoch5,completed
+MLP,60000,58000,23,0.8692,rep_mlp_seed23_n60000_v1_test_epoch5,completed
+MLP,60000,58000,37,0.8696,rep_mlp_seed37_n60000_v1_test_epoch5,completed
+CNN / LeNet,60000,58000,11,0.8963,rep_lenet_seed11_n60000_v1_test_epoch5,completed
+CNN / LeNet,60000,58000,23,0.8975,rep_lenet_seed23_n60000_v1_test_epoch5,completed
+CNN / LeNet,60000,58000,37,0.9028,rep_lenet_seed37_n60000_v1_test_epoch5,completed
+MLP,10000,10000,11,0.8626,rep_mlp_seed11_n10000_v1_test_epoch30,completed
+MLP,10000,10000,23,0.8566,rep_mlp_seed23_n10000_v1_test_epoch30,completed
+MLP,10000,10000,37,0.8644,rep_mlp_seed37_n10000_v1_test_epoch30,completed
+CNN / LeNet,10000,10000,11,0.8882,rep_lenet_seed11_n10000_v1_test_epoch30,completed
+CNN / LeNet,10000,10000,23,0.8887,rep_lenet_seed23_n10000_v1_test_epoch30,completed
+CNN / LeNet,10000,10000,37,0.8903,rep_lenet_seed37_n10000_v1_test_epoch30,completed
+ResNet-18,10000,10000,11,0.8592,rep_resnet18_seed11_n10000_v1_test_epoch30,completed
+ResNet-18,10000,10000,23,0.8735,rep_resnet18_seed23_n10000_v1_test_epoch30,completed
+ResNet-18,10000,10000,37,0.8611,rep_resnet18_seed37_n10000_v1_test_epoch30,completed
+Vision Transformer (compact ViT-Tiny-style),10000,10000,11,0.8321,rep_vit_compact_seed11_n10000_v1_test_epoch30,completed
+Vision Transformer (compact ViT-Tiny-style),10000,10000,23,0.845,rep_vit_compact_seed23_n10000_v1_test_epoch30,completed
+Vision Transformer (compact ViT-Tiny-style),10000,10000,37,0.8431,rep_vit_compact_seed37_n10000_v1_test_epoch30,completed

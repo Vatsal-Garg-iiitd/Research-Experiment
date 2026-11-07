@@ -13,7 +13,7 @@ from sklearn.exceptions import ConvergenceWarning
 from sklearn.metrics import adjusted_rand_score,normalized_mutual_info_score,silhouette_score
 
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'results/raw/unsupervised_scaling.csv';CK=ROOT/'results/checkpoints/unsupervised';CFG=ROOT/'results/configurations'
-K_BUDGETS=[1,5,10,20,50];G_BUDGETS=[1,3,5,10,20]
+K_BUDGETS=[1,5,10,20,50];G_BUDGETS=[1,3,5,10,20,50,100]
 def append(path,row):
  path.parent.mkdir(parents=True,exist_ok=True);exists=path.exists() and path.stat().st_size>0
  with path.open('a',newline='',encoding='utf-8') as f:

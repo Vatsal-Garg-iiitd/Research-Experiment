@@ -1,28 +1,27 @@
-# Reproducibility guide
+# Reproducibility notes
 
-## Environment
+## Environments
 
-The core project environment is `.venv` on Windows/Python 3.12. Install the pinned top-level packages with `python -m pip install -r requirements.txt`; check compatibility with `python -m pip check`. Optional DirectML and lm-eval environments are separate. LLM harness commands are recorded in `EXECUTION_LOG.md`; the successful Windows invocation uses ordered `PYTHONPATH` entries to reuse the tested project pandas and lm-eval dependencies.
+The original Windows project environment and DirectML artifacts are preserved. The expanded macOS work used isolated `.venv-mac/`, Python 3.12, and the package set recorded in `MACOS_EXECUTION_LOG.md`. PyTorch 2.15.0 used Apple MPS where selected; scikit-learn and Gymnasium runs used CPU. The LLM harness run used lm-evaluation-harness 0.4.13, Transformers 5.22.1, and Accelerate 1.15.0.
 
-## Data and runs
+## Data, splits, and checkpoints
 
-Fashion-MNIST downloads to `results/cache/` using torchvision. Keep the raw CSVs immutable when possible; experiment scripts append incremental records. Neural and RL checkpoints/configurations are under `results/checkpoints/` and `results/configurations/`. Some scripts resume from saved checkpoint state; inspect each script’s CLI and checkpoint logic before resuming a partial run. Do not assume every script supports resumption equally.
+Raw data rows are under `results/raw/`; configuration JSON is under `results/configurations/`; model/optimizer checkpoints and environment snapshots are under `results/checkpoints/`; processing scripts preserve raw records in the canonical index. Dataset and split identities are recorded per run. Fashion-MNIST runs use fixed local splits and hold official test labels for endpoint evaluation. A requested 60K train run reserves 2K validation examples, yielding 58K optimization examples.
 
-## Regeneration
+## Language-model evaluation
 
-From the project root, use:
+Six selected public checkpoints were run locally on the complete WikiText-2 raw-v1 test text at FP32, context 1024, stride 512, batch size one. `results/llm/macos_full_wikitext2_evaluations.csv` contains source revision, dataset text hash, token and byte counts, timing, precision, and memory notes. `results/llm/expanded_llm_evaluations.csv` records released Pythia checkpoint prefix evaluations and derived step-token metadata. Harness runs retain exact JSON configs, versions, aggregates, sample logs, validation split counts, and task versions in `results/llm/harness_full/` and `results/llm/harness/`.
 
-```powershell
-.\.venv\Scripts\python.exe scripts\build_canonical_results.py
-.\.venv\Scripts\python.exe scripts\analyze_strengthened_runs.py
-.\.venv\Scripts\python.exe scripts\extract_lm_harness_results.py
-.\.venv\Scripts\python.exe scripts\analyze_llm_full_eval.py
-.\.venv\Scripts\python.exe scripts\generate_completion_matrix.py
-.\.venv\Scripts\python.exe scripts\validate_project_outputs.py
+## Rebuilding derived artifacts
+
+From the project root:
+
+```sh
+.venv-mac/bin/python scripts/build_canonical_results.py
+.venv-mac/bin/python scripts/analyze_strengthened_runs.py
+.venv-mac/bin/python scripts/build_literature_evidence.py
+.venv-mac/bin/python scripts/generate_completion_matrix.py
+.venv-mac/bin/python scripts/validate_project_outputs.py
 ```
 
-The canonical file preserves each source-row JSON and source path in addition to normalized common fields. Statistical scripts regenerate their summaries and plots from saved rows. Harness JSON and per-example outputs are under `results/llm/harness/`. Literature CSV is hand-curated with source notes and is not generated from local runs.
-
-## Important limitations
-
-These commands reproduce analyses from the existing artifacts; they do not complete missing model budgets, missing seeds, unavailable downstream full benchmark runs, missing NPU runs, or primary-source validation. The completion matrix and `REMAINING_WORK.md` define those outstanding items. Results from pilot/smoke subsets must remain labeled partial.
+Do not overwrite raw results with processed summaries. Repeated measures within one seed are paired across budgets; they are not independent replicates. See `MACOS_SETUP.md`, `MACOS_EXECUTION_LOG.md`, `EXPERIMENTAL_METHODOLOGY.md`, and `FINAL_INDEPENDENT_AUDIT.md` for platform-specific limits and unresolved scope.

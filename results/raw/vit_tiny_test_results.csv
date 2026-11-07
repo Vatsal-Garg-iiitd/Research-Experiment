@@ -1,0 +1,4 @@
+experiment_id,model_name,seed,split_id,epochs,test_loss,test_accuracy,test_size,parameter_count,macro_precision,macro_recall,macro_f1,checkpoint_path,backend,status
+vit_tiny_seed11_n10000_mac_v1_test_epoch30,ViT-Tiny,11,24574ee00a20ab31,30,0.5337447221755981,0.8057,10000,5353738,0.8087916626629387,0.8057000000000001,0.8049168066456724,results/checkpoints/vit_tiny/vit_tiny_seed11_n10000_mac_v1.pt,Apple MPS; PyTorch 2.15.0,completed
+vit_tiny_seed23_n10000_mac_v1_test_epoch30,ViT-Tiny,23,24574ee00a20ab31,30,0.8059312191009521,0.6916,10000,5353738,0.695763046136125,0.6916,0.6754667896155306,results/checkpoints/vit_tiny/vit_tiny_seed23_n10000_mac_v1.pt,Apple MPS; PyTorch 2.15.0,completed
+vit_tiny_seed37_n10000_mac_v1_test_epoch30,ViT-Tiny,37,24574ee00a20ab31,30,0.5787671605110168,0.789,10000,5353738,0.8000031012020499,0.7889999999999999,0.7909229333521998,results/checkpoints/vit_tiny/vit_tiny_seed37_n10000_mac_v1.pt,Apple MPS; PyTorch 2.15.0,completed

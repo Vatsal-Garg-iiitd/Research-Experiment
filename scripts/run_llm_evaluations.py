@@ -67,12 +67,16 @@ def main():
    with LEGACY.open(encoding='utf-8') as f: already=already or any(r.get('model')=='Pythia-70M' and r.get('checkpoint_id')=='step143000' and r.get('status')=='completed' for r in csv.DictReader(f))
   if already: continue
   measure('Pythia-70M','EleutherAI/pythia-70m',70_426_624,'Pythia',text,revision=f'step{s}',step=s)
- # Add three directly named checkpoints for the next two resource-feasible Pythia sizes.
- for name,repo,params,step in [('Pythia-160M','EleutherAI/pythia-160m',162_322_944,0),('Pythia-160M','EleutherAI/pythia-160m',162_322_944,10000),('Pythia-160M','EleutherAI/pythia-160m',162_322_944,143000),('Pythia-410M','EleutherAI/pythia-410m',405_334_016,0),('Pythia-410M','EleutherAI/pythia-410m',405_334_016,10000),('Pythia-410M','EleutherAI/pythia-410m',405_334_016,143000)]:
-  rev=f'step{step}'; exists=[]
-  if OUT.exists():
-   with OUT.open(encoding='utf-8') as f:exists=[r for r in csv.DictReader(f) if r.get('model')==name and r.get('checkpoint_id')==rev and r.get('status')=='completed']
-  if not exists:measure(name,repo,params,'Pythia',text,revision=rev,step=step)
+ # Use the same eight logarithmically spaced checkpoints for the two larger
+ # resource-feasible Pythia sizes as for 70M. Existing completed points remain.
+ trajectory_steps=[0,1000,5000,10000,20000,50000,100000,143000]
+ trajectory_models=[('Pythia-160M','EleutherAI/pythia-160m',162_322_944),('Pythia-410M','EleutherAI/pythia-410m',405_334_016)]
+ for name,repo,params in trajectory_models:
+  for step in trajectory_steps:
+   rev=f'step{step}'; exists=[]
+   if OUT.exists():
+    with OUT.open(encoding='utf-8') as f:exists=[r for r in csv.DictReader(f) if r.get('model')==name and r.get('checkpoint_id')==rev and r.get('status')=='completed']
+   if not exists:measure(name,repo,params,'Pythia',text,revision=rev,step=step)
  for name,repo,params,family in CONFIGS[1:]:
   existing=[]
   if OUT.exists():

@@ -4,11 +4,11 @@ This repository studies the marginal performance gain from additional computatio
 
 ## Current state
 
-The project contains expanded three-seed multi-budget runs for selected conventional methods, six locally evaluated LLM configurations (50K WikiText-2 tokens each), and three LLM configurations evaluated on 100-example lm-evaluation-harness subsets. This remains an incomplete study; do not interpret the subset benchmark scores as full test-set results. The CPU-only `.venv` is preserved. DirectML runs use a separate environment and have operator fallback warnings. The NPU is detected but no execution provider was qualified. See [final research report](FINAL_RESEARCH_REPORT.md), [hardware benchmark report](HARDWARE_BENCHMARK_REPORT.md), [completion matrix](FINAL_COMPLETION_MATRIX.md), and [remaining work](REMAINING_WORK.md).
+The project contains expanded multi-seed runs for selected conventional methods, six full WikiText-2 test checkpoint evaluations, Pythia checkpoint trajectories, a full validation-split zero-shot harness run for Pythia-70M, and earlier harness smoke runs for two more models. The requested study remains incomplete; see the strict objective count in [final completion matrix](FINAL_COMPLETION_MATRIX.md). macOS work uses the isolated `.venv-mac` with Apple MPS when available; earlier Windows/DirectML environments and evidence are retained. See [final research report](FINAL_RESEARCH_REPORT.md), [macOS execution log](MACOS_EXECUTION_LOG.md), [completion matrix](FINAL_COMPLETION_MATRIX.md), and [remaining work](REMAINING_WORK.md).
 
 ## Setup
 
-Use Python 3.10 or newer in an environment with the packages in `requirements.txt`. Install the RL Box2D extras only when running LunarLander. Large language models require additional checkpoint storage and RAM/VRAM; start with Pythia-70M and inspect actual resources before increasing model size.
+Use Python 3.10 or newer in an environment with the packages in `requirements.txt`. On the verified Mac, follow [macOS setup](MACOS_SETUP.md). `lm-evaluation-harness` and Accelerate are installed in `.venv-mac` for the recorded harness run. Install the RL Box2D extras only when running LunarLander. Checkpoint size, MPS memory use, and dataset downloads can dominate evaluation cost.
 
 For the DirectML neural feasibility runner, create a separate environment and install `requirements-directml.txt`; `torch-directml` pins its compatible PyTorch version. Keep the main `.venv` for CPU models, RL, and LLM evaluation.
 
@@ -19,12 +19,13 @@ For the DirectML neural feasibility runner, create a separate environment and in
 - `results/literature/large_model_literature.csv`: source-attributed published evidence; blanks are unavailable.
 - `results/literature/literature_sources.md`: source registry and extraction caveats.
 - `results/figures/`: plots generated from the measured pilots and compatible published evidence.
-- `results/raw/`, `results/processed/`, `results/llm/`: pilot records, marginal analysis, and language-model evaluation.
+- `results/raw/`, `results/processed/`, `results/llm/`: row-level records, regenerated marginal analysis, full-corpus LLM evaluations, harness results, and checkpoint trajectories.
 - `results/hardware/`: detected capability inventory and CPU/DirectML microbenchmark.
 - `FINAL_COMPLETION_MATRIX.md`, `REMAINING_WORK.md`: per-configuration status and concrete gaps.
-- `scripts/analyze_results.py`: marginal-gain analysis for measured experiment CSVs.
+- `scripts/analyze_strengthened_runs.py`: grouped validation/test summaries, paired marginal gains, and figures for expanded local runs.
 - `scripts/run_missing_classical.py`, `scripts/run_missing_neural.py`, `scripts/run_missing_rl.py`: sequential one-budget feasibility runs for previously missing conventional models.
-- `scripts/run_llm_evaluations.py`: resumable small-model/checkpoint WikiText-2 prefix evaluation; larger weight loads are marked resource-limited.
+- `scripts/evaluate_full_wikitext_macos.py`: full WikiText-2 raw test evaluation for selected local checkpoints.
+- `scripts/run_llm_evaluations.py`: resumable WikiText-2 prefix evaluations across published Pythia checkpoints and feasible small models.
 - `FINAL_RESEARCH_REPORT.md`: updated evidence, limitations, and conclusions; `research_report.md` is the earlier pilot report.
 
 ## Experiment record schema
