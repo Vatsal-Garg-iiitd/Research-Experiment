@@ -1,0 +1,18 @@
+{
+  "experiment_id": "double_dqn_seed23_budget_v1",
+  "model": "Double DQN",
+  "environment": "CartPole-v1",
+  "seed": 23,
+  "budgets": [
+    5000,
+    10000,
+    25000
+  ],
+  "batch_size": 64,
+  "replay_capacity": 50000,
+  "learning_starts": 500,
+  "target_sync_steps": 500,
+  "epsilon_schedule": "linear 1 to .05 over 10k interactions",
+  "double_dqn_target": "online argmax; target-network evaluation",
+  "evaluation_episodes": 20
+}

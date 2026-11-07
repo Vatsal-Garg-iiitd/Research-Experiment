@@ -1,0 +1,4 @@
+# Separate Windows environment: Microsoft DirectML pins a compatible PyTorch stack.
+torch-directml==0.2.5.dev240914
+numpy==2.5.4
+psutil==7.2.2

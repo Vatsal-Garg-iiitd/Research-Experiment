@@ -1,0 +1,20 @@
+{
+  "experiment_id": "sac_seed11_budget_v1",
+  "model": "SAC",
+  "environment": "Pendulum-v1",
+  "seed": 11,
+  "budgets": [
+    5000,
+    10000,
+    25000
+  ],
+  "evaluation_episodes": 20,
+  "deterministic_evaluation": true,
+  "algorithm_parameters": {
+    "learning_starts": 500,
+    "buffer_size": 50000,
+    "batch_size": 64
+  },
+  "device": "CPU",
+  "separate_eval_environment": true
+}

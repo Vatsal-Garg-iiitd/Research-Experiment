@@ -1,0 +1,20 @@
+{
+  "experiment_id": "ppo_seed23_budget_v1",
+  "model": "PPO",
+  "environment": "CartPole-v1",
+  "seed": 23,
+  "budgets": [
+    5000,
+    10000,
+    25000
+  ],
+  "evaluation_episodes": 20,
+  "deterministic_evaluation": true,
+  "algorithm_parameters": {
+    "n_steps": 256,
+    "batch_size": 64,
+    "n_epochs": 4
+  },
+  "device": "CPU",
+  "separate_eval_environment": true
+}

@@ -1,0 +1,19 @@
+{
+  "experiment_id": "gmm_seed23_n10000_v1",
+  "model": "GaussianMixture",
+  "seed": 23,
+  "split_id": "24574ee00a20ab31",
+  "train_size": 10000,
+  "pca_components": 32,
+  "pca_fit": "train only",
+  "warm_start_em_iterations": [
+    1,
+    3,
+    5,
+    10,
+    20
+  ],
+  "components": 10,
+  "covariance_type": "diag",
+  "n_init": 1
+}

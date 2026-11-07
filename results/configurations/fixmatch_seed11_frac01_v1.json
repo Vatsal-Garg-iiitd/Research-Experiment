@@ -1,0 +1,20 @@
+{
+  "experiment_id": "fixmatch_seed11_frac01_v1",
+  "method": "FixMatch",
+  "seed": 11,
+  "fraction": 0.01,
+  "labeled_n": 100,
+  "unlabeled_n": 9900,
+  "split_id": "24574ee00a20ab31",
+  "budgets_epochs": [
+    1,
+    2,
+    3
+  ],
+  "steps_per_epoch": 40,
+  "architecture": "MLP 784-256-10",
+  "confidence_threshold": 0.95,
+  "ema_decay": null,
+  "mixup_alpha": null,
+  "temperature": null
+}

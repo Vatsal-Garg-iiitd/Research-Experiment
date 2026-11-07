@@ -1,0 +1,23 @@
+{
+  "experiment_id": "ae_seed11_n10000_v1",
+  "model": "Autoencoder",
+  "dataset": "Fashion-MNIST",
+  "split_id": "24574ee00a20ab31",
+  "seed": 11,
+  "train_size": 10000,
+  "validation_size": 2000,
+  "budget_epochs": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "latent_dim": 32,
+  "optimizer": "Adam",
+  "learning_rate": 0.001,
+  "batch_size": 128,
+  "objective": "reconstruction MSE",
+  "backend": "DirectML",
+  "downstream": "per-checkpoint logistic-regression linear probe fit on train latents, scored on validation; test probe at final checkpoint"
+}

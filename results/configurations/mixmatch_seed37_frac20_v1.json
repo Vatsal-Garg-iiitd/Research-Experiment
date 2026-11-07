@@ -1,0 +1,20 @@
+{
+  "experiment_id": "mixmatch_seed37_frac20_v1",
+  "method": "MixMatch",
+  "seed": 37,
+  "fraction": 0.2,
+  "labeled_n": 2000,
+  "unlabeled_n": 8000,
+  "split_id": "24574ee00a20ab31",
+  "budgets_epochs": [
+    1,
+    2,
+    3
+  ],
+  "steps_per_epoch": 40,
+  "architecture": "MLP 784-256-10",
+  "confidence_threshold": null,
+  "ema_decay": null,
+  "mixup_alpha": 0.75,
+  "temperature": 0.5
+}

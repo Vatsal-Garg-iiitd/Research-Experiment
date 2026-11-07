@@ -1,0 +1,15 @@
+# Methodology gaps
+
+1. The suite has been expanded with three-seed budget curves for several models, but Mean Teacher, FixMatch, MixMatch and LabelSpreading remain one-point legacy feasibility runs. The full 20-model set is not at matched coverage.
+2. New Fashion-MNIST multi-seed runs use a fixed 10,000-image training subset and 2,000-image validation subset. This is more informative than the earlier 2,000-image pilots but still does not use the full official training partition. Results are conditional on the fixed split.
+3. Neural epoch curves currently stop at 5 epochs, below the requested 10–30 epoch schedule. RL stops at 25K interactions, below the requested 50K/100K endpoints. Some rollout methods overshoot their requested checkpoint by rollout granularity; actual steps are logged.
+4. The transformer run is a custom compact 3-layer/96-wide model, not standard ViT-Tiny. The requested Label Propagation method was represented by sklearn LabelSpreading, which differs algorithmically.
+5. Semi-supervised pseudo-labeling has a matched labeled-only baseline and labeled fractions. The other SSL method pilots are compact approximations without matched budgets, full benchmark recipes or repeated-seed schedules.
+6. K-Means/GMM have iterative curves; DBSCAN has parameter sensitivity only and is not a compute curve. Clustering is evaluated by external-label ARI/NMI and silhouette, which answer different questions and are not classification accuracy.
+7. AE/VAE report reconstruction MSE and linear-probe accuracy, but not a broad generative-quality assessment. The first probe version is superseded following convergence warnings; only corrected v2 is used for current summaries.
+8. RL runs have three seeds and 20 evaluation episodes per checkpoint, but use short 5K/10K/25K schedules. CartPole and Pendulum remain separate; reward scales cannot be compared directly.
+9. Six of 15 LLM configurations have 50K-token WikiText-2 test evaluation. Three have additionally completed lm-evaluation-harness smoke subsets (100 examples/task), not full benchmark evaluations. Context length differs for GPT-2 versus Pythia/OPT. No model was locally pretrained.
+10. Pythia checkpoint coverage is incomplete: 70M has a trajectory; 160M/410M have only a few distinct checkpoints; larger Pythia sizes lack local evaluation curves. Alias rows are not additional checkpoints.
+11. The 15-row literature ledger contains attributed records but not fully verified per-field extraction or precise locators for every row. Cross-paper benchmarks have different prompts, splits and protocols.
+12. Hardware comparison is a small MLP microbenchmark. DirectML has an Adam operator CPU fallback; no isolated utilization/power/device-memory telemetry was collected. NPU execution is not measured.
+13. Marginal increments and three-seed confidence intervals are exploratory and conditional on fixed splits. There are not enough matched points across the full suite to support a general saturation threshold or universal diminishing-returns conclusion.

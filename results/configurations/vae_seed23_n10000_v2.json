@@ -1,0 +1,25 @@
+{
+  "experiment_id": "vae_seed23_n10000_v2",
+  "model": "Variational Autoencoder",
+  "dataset": "Fashion-MNIST",
+  "split_id": "24574ee00a20ab31",
+  "seed": 23,
+  "train_size": 10000,
+  "validation_size": 2000,
+  "budget_epochs": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "latent_dim": 32,
+  "optimizer": "Adam",
+  "learning_rate": 0.001,
+  "batch_size": 128,
+  "objective": "reconstruction MSE + KL/784",
+  "backend": "DirectML",
+  "downstream": "per-checkpoint standardized logistic-regression linear probe fit on train latents, scored on validation; test probe at final checkpoint",
+  "probe_max_iter": 500,
+  "probe_tolerance": 0.001
+}

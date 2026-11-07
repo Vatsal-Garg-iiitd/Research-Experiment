@@ -1,0 +1,10 @@
+﻿model,task,sample_len,fewshot,accuracy,accuracy_stderr,normalized_accuracy,normalized_accuracy_stderr,eval_seconds,device,dtype,lm_eval_version,output_json
+openai-community/gpt2,HellaSwag,100,0,0.36,0.048241815132442176,0.44,0.049888765156985884,72.61219999999958,CPU,float32,0.4.13,results\llm\harness\gpt2_small_main\openai-community__gpt2\results_2026-11-06T17-05-59.561898.json
+openai-community/gpt2,PIQA,100,0,0.6,0.0492365963917331,0.63,0.048523658709390974,72.61219999999958,CPU,float32,0.4.13,results\llm\harness\gpt2_small_main\openai-community__gpt2\results_2026-11-06T17-05-59.561898.json
+openai-community/gpt2,ARC-Easy,100,0,0.38,0.04878317312145634,0.34,0.04760952285695233,72.61219999999958,CPU,float32,0.4.13,results\llm\harness\gpt2_small_main\openai-community__gpt2\results_2026-11-06T17-05-59.561898.json
+facebook/opt-125m,HellaSwag,100,0,0.38,0.04878317312145634,0.43,0.049756985195624305,180.38221200000044,CPU,float32,0.4.13,results\llm\harness\opt125m_main\facebook__opt-125m\results_2026-11-06T17-09-07.965252.json
+facebook/opt-125m,PIQA,100,0,0.66,0.04760952285695234,0.6,0.0492365963917331,180.38221200000044,CPU,float32,0.4.13,results\llm\harness\opt125m_main\facebook__opt-125m\results_2026-11-06T17-09-07.965252.json
+facebook/opt-125m,ARC-Easy,100,0,0.46,0.05009082659620332,0.45,0.05,180.38221200000044,CPU,float32,0.4.13,results\llm\harness\opt125m_main\facebook__opt-125m\results_2026-11-06T17-09-07.965252.json
+EleutherAI/pythia-70m,HellaSwag,100,0,0.33,0.04725815626252609,0.41,0.04943110704237104,50.01474390000112,CPU,float32,0.4.13,results\llm\harness\pythia70m_step143000\EleutherAI__pythia-70m\results_2026-11-06T17-04-37.280312.json
+EleutherAI/pythia-70m,PIQA,100,0,0.6,0.0492365963917331,0.6,0.0492365963917331,50.01474390000112,CPU,float32,0.4.13,results\llm\harness\pythia70m_step143000\EleutherAI__pythia-70m\results_2026-11-06T17-04-37.280312.json
+EleutherAI/pythia-70m,ARC-Easy,100,0,0.4,0.0492365963917331,0.33,0.04725815626252609,50.01474390000112,CPU,float32,0.4.13,results\llm\harness\pythia70m_step143000\EleutherAI__pythia-70m\results_2026-11-06T17-04-37.280312.json

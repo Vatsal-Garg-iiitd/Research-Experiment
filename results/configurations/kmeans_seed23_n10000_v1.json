@@ -1,0 +1,18 @@
+{
+  "experiment_id": "kmeans_seed23_n10000_v1",
+  "model": "MiniBatchKMeans",
+  "seed": 23,
+  "split_id": "24574ee00a20ab31",
+  "train_size": 10000,
+  "pca_components": 32,
+  "pca_fit": "train only",
+  "partial_fit_budgets": [
+    1,
+    5,
+    10,
+    20,
+    50
+  ],
+  "batch_size": 512,
+  "random_state": 23
+}

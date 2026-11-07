@@ -1,0 +1,25 @@
+{
+  "experiment_id": "labeled_only_frac10_seed23_v1",
+  "model": "MLP",
+  "method": "labeled_only",
+  "dataset": "Fashion-MNIST",
+  "split_id": "24574ee00a20ab31",
+  "seed": 23,
+  "labeled_fraction": 0.1,
+  "labeled_n": 1000,
+  "unlabeled_n": 9000,
+  "epochs": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "optimizer": "Adam",
+  "learning_rate": 0.001,
+  "batch_size": 128,
+  "matched_optimizer_steps_per_epoch": 71,
+  "pseudo_threshold": null,
+  "unsupervised_loss_weight": 0,
+  "test_evaluation": "final epoch only"
+}

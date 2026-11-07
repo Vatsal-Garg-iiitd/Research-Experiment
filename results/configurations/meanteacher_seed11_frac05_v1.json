@@ -1,0 +1,20 @@
+{
+  "experiment_id": "meanteacher_seed11_frac05_v1",
+  "method": "MeanTeacher",
+  "seed": 11,
+  "fraction": 0.05,
+  "labeled_n": 500,
+  "unlabeled_n": 9500,
+  "split_id": "24574ee00a20ab31",
+  "budgets_epochs": [
+    1,
+    2,
+    3
+  ],
+  "steps_per_epoch": 40,
+  "architecture": "MLP 784-256-10",
+  "confidence_threshold": null,
+  "ema_decay": 0.99,
+  "mixup_alpha": null,
+  "temperature": null
+}
