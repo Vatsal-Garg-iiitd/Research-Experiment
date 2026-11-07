@@ -1,17 +1,35 @@
+# Python environments and generated files
 .venv/
-results/cache/
-results/checkpoints/
+.venv-*/
 __pycache__/
 *.py[cod]
 
-.venv-*/
+# Local secrets
 .env
 .env.*
 !.env.example
-__pycache__/
-*.py[cod]
-results/cache/
-results/checkpoints/
-results/snapshots/
 
+# Datasets and downloaded data
+data/
+dataset/
+datasets/
+**/data/
+**/dataset/
+**/datasets/
+results/cache/
+
+# Model weights and training checkpoints
+results/checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.h5
+*.hdf5
+*.keras
+*.model
+
+# Local snapshots and archives
+results/snapshots/
 results.zip
