@@ -1,39 +1,57 @@
-# Compute and performance research project
+# Computational scaling research project
 
-This repository studies the marginal performance gain from additional computational expenditure. It preserves the question in the proposal and separates local experiments, model-family training trajectories, and literature-derived evidence.
+This repository studies how model performance changes as computational budgets increase, and whether marginal gains decline. It keeps local experiments, evaluations of published checkpoints, and literature-derived evidence separate. Budget units stay specific to each method; results from different tasks are not pooled onto one compute scale.
 
-## Current state
+## Current status
 
-The project contains expanded multi-seed runs for selected conventional methods, six full WikiText-2 test checkpoint evaluations, Pythia checkpoint trajectories, a full validation-split zero-shot harness run for Pythia-70M, and earlier harness smoke runs for two more models. The requested study remains incomplete; see the strict objective count in [final completion matrix](FINAL_COMPLETION_MATRIX.md). macOS work uses the isolated `.venv-mac` with Apple MPS when available; earlier Windows/DirectML environments and evidence are retained. See [final research report](FINAL_RESEARCH_REPORT.md), [macOS execution log](MACOS_EXECUTION_LOG.md), [completion matrix](FINAL_COMPLETION_MATRIX.md), and [remaining work](REMAINING_WORK.md).
+This is an expanded but incomplete exploratory study. The strict matrix counts **0 of 50 requested configurations as fully complete**: 20 conventional methods, 15 LLM configurations, and 15 literature configurations. Many substantial experiments are complete, but pilots, partial schedules, and literature-only observations do not satisfy the full registered objective. See the [completion matrix](FINAL_COMPLETION_MATRIX.md) and [independent audit](FINAL_INDEPENDENT_AUDIT.md).
+
+### Completed work
+
+- **Conventional methods:** multi-seed and multi-budget runs include 30-epoch MLP, LeNet, ResNet-18, compact-transformer, AE/VAE, and SSL curves; MLP/LeNet five-epoch data-size comparisons; Random Forest through 1,000 trees; clustering and LabelPropagation sweeps; DBSCAN parameter and data-size studies; and RL schedules through 250K requested interactions. SAC and Double DQN have five seeds. The transformer is a compact proxy, and SSL recipes are grayscale task adaptations.
+- **Language models:** six published checkpoints have full WikiText-2 raw-v1 test evaluations using FP32, Apple MPS, context 1,024, and stride 512. Pythia-70M and Pythia-160M each have eight released-checkpoint prefix evaluations. Pythia-410M has selected prefix checkpoints. A full zero-shot Pythia-70M harness run covers the HellaSwag, PIQA, and ARC-Easy validation splits; earlier GPT-2 Small and OPT-125M harness runs are 100-example-per-task smoke checks. No model was pretrained locally.
+- **Literature evidence:** 15 published configurations have a 300-row field ledger with source URLs, locators, and reported/derived/estimated/uncertain classes. The ledger is not a standardized cross-paper benchmark; 104 fields remain uncertain.
+- **Audit artifacts:** the project includes a 3,720-row [run registry](EXPERIMENT_RUN_REGISTRY.csv), a 2,612-row canonical result index, regenerated statistical summaries, figures, and a validator. The final validator reported zero errors and zero warnings. See the [final research report](FINAL_RESEARCH_REPORT.md), [macOS execution log](MACOS_EXECUTION_LOG.md), and [remaining work](REMAINING_WORK.md).
+
+### Selected observations
+
+At five epochs, mean held-out Fashion-MNIST accuracy across three seeds was 0.8537 for MLP at the requested 30K training size (30K optimization examples) and 0.8689 at the requested 60K size (58K optimization examples plus 2K validation). LeNet means were 0.8784 and 0.8989, respectively. These fixed-split results are descriptive; they do not establish a general data-scaling law.
+
+Full WikiText-2 test perplexities were Pythia-70M 44.9334, Pythia-160M 25.6365, Pythia-410M 15.4583, GPT-2 Small 24.9794, OPT-125M 25.8534, and OPT-350M 20.7992. These are local evaluations of public checkpoints, not matched measurements of original training compute.
+
+The full zero-shot Pythia-70M harness run evaluated 10,042 HellaSwag, 1,838 PIQA, and 2,376 ARC-Easy validation examples with no task limit. The results and protocol are in the [LLM evaluation report](LLM_EVALUATION_REPORT.md).
 
 ## Setup
 
-Use Python 3.10 or newer in an environment with the packages in `requirements.txt`. On the verified Mac, follow [macOS setup](MACOS_SETUP.md). `lm-evaluation-harness` and Accelerate are installed in `.venv-mac` for the recorded harness run. Install the RL Box2D extras only when running LunarLander. Checkpoint size, MPS memory use, and dataset downloads can dominate evaluation cost.
+For the verified Apple M3 macOS environment, see [macOS setup](MACOS_SETUP.md). The isolated `.venv-mac` uses PyTorch MPS where supported; scikit-learn and RL runs use CPU. Install the project requirements with Python 3.10 or newer. The recorded harness run also uses Accelerate, installed as documented in the setup guide.
 
-For the DirectML neural feasibility runner, create a separate environment and install `requirements-directml.txt`; `torch-directml` pins its compatible PyTorch version. Keep the main `.venv` for CPU models, RL, and LLM evaluation.
+The original Windows and DirectML artifacts are retained. On Windows, use the separate DirectML environment and `requirements-directml.txt`; do not mix its timings with macOS or CPU timings as a controlled hardware comparison. The NPU has not been benchmarked.
 
-## Structure
+## Repository map
 
-- `configs/experiments.yaml`: target methods, budgets, seeds, and LLM checkpoint selection.
-- `EXPERIMENT_DESIGN.md`, `LLM_RESEARCH_DESIGN.md`: protocol and comparability rules.
-- `results/literature/large_model_literature.csv`: source-attributed published evidence; blanks are unavailable.
-- `results/literature/literature_sources.md`: source registry and extraction caveats.
-- `results/figures/`: plots generated from the measured pilots and compatible published evidence.
-- `results/raw/`, `results/processed/`, `results/llm/`: row-level records, regenerated marginal analysis, full-corpus LLM evaluations, harness results, and checkpoint trajectories.
-- `results/hardware/`: detected capability inventory and CPU/DirectML microbenchmark.
-- `FINAL_COMPLETION_MATRIX.md`, `REMAINING_WORK.md`: per-configuration status and concrete gaps.
-- `scripts/analyze_strengthened_runs.py`: grouped validation/test summaries, paired marginal gains, and figures for expanded local runs.
-- `scripts/run_missing_classical.py`, `scripts/run_missing_neural.py`, `scripts/run_missing_rl.py`: sequential one-budget feasibility runs for previously missing conventional models.
-- `scripts/evaluate_full_wikitext_macos.py`: full WikiText-2 raw test evaluation for selected local checkpoints.
-- `scripts/run_llm_evaluations.py`: resumable WikiText-2 prefix evaluations across published Pythia checkpoints and feasible small models.
-- `FINAL_RESEARCH_REPORT.md`: updated evidence, limitations, and conclusions; `research_report.md` is the earlier pilot report.
+- `configs/`: target experiment design and model registry.
+- `results/configurations/`: per-run configuration JSON.
+- `results/raw/`: row-level conventional experiment results.
+- `results/llm/`: full-corpus evaluations, checkpoint trajectories, harness aggregates, and sample logs.
+- `results/literature/`: published configuration ledger, source notes, and field-level evidence.
+- `results/processed/`: canonical result index and generated statistical summaries.
+- `results/figures/`: generated result plots.
+- `results/checkpoints/`: local training checkpoints; these are not needed to read the saved results.
+- `EXPERIMENT_RUN_REGISTRY.csv`: row-level index of results and literature evidence.
+- `FINAL_COMPLETION_MATRIX.md`, `FINAL_RESEARCH_REPORT.md`, and `FINAL_INDEPENDENT_AUDIT.md`: scope, evidence, and limitations.
 
-## Experiment record schema
+## Rebuild analysis outputs
 
-The raw pilot schema records `run_id, paradigm, model, dataset, split_hash, seed, budget_unit, budget_value, train_seconds, cumulative_train_seconds, eval_seconds, metric_name, metric_value, train_steps, parameter_count, peak_ram_bytes, peak_vram_bytes, hardware, status, details`. These pilot rows do not contain a full validation/training metric history; the confirmatory schema should add those fields before expanding the experiments. Store inference measurements separately and use the actual model-specific budget unit (epochs, optimizer steps, algorithm iterations, or environment steps).
+From the project root on the verified Mac:
 
-## Analysis
+```sh
+.venv-mac/bin/python scripts/build_canonical_results.py
+.venv-mac/bin/python scripts/analyze_strengthened_runs.py
+.venv-mac/bin/python scripts/analyze_llm_full_eval.py
+.venv-mac/bin/python scripts/build_literature_evidence.py
+.venv-mac/bin/python scripts/generate_completion_matrix.py
+.venv-mac/bin/python scripts/build_experiment_run_registry.py
+.venv-mac/bin/python scripts/validate_project_outputs.py
+```
 
-Run original pilots with `\.venv\Scripts\python.exe scripts/run_pilots.py`. Run the CPU classical and RL feasibility batches with `.venv\Scripts\python.exe scripts/run_missing_classical.py` and `.venv\Scripts\python.exe scripts/run_missing_rl.py`. Run neural DirectML feasibility batches with `.venv-dml\Scripts\python.exe scripts/run_missing_neural.py`. These scripts append rows to `results/raw/full_suite_results.csv`; they do not implement the full budget/seed schedule. Checkpoint evaluation cost is not its original pretraining cost.
-
-`\.venv\Scripts\python.exe scripts/analyze_results.py results/raw/experiment_results.csv --output results/processed/marginal_results.csv` computes adjacent-budget improvements within each run/model/seed, uses cumulative wall time as the practical cost axis, and reports saturation flags at 0.5%, 1%, and 2% relative thresholds. Use `--lower-is-better` for loss or perplexity. `scripts/plot_pilots.py` plots only collected pilot data and compatible reported literature points. Neither utility trains models or creates missing results.
+The scripts rebuild derived artifacts from saved records; they do not fill in missing experiment runs. Checkpoints and validation curves are method-specific, and held-out endpoints are not uniformly selected with the same validation-based rule across every run. Consult `EXPERIMENTAL_METHODOLOGY.md` before interpreting the summaries.
