@@ -26,6 +26,9 @@ for path in sources:
     if not path.is_file():continue
     for i,r in rows_from(path):
         name=path.relative_to(ROOT).as_posix();rid=first(r,'experiment_id','run_id','canonical_id') or f'{name}:{i}'
+        if path.name=='rl_scaling_results.csv' and r.get('model_name')=='Double DQN' and r.get('details') in (None,''):
+            r=dict(r)
+            r['details']=r.get('timestamp_utc','');r['timestamp_utc']=r.get('checkpoint_path','');r['checkpoint_path']=r.get('configuration_path','');r['configuration_path']=r.get('source_type','');r['source_type']='local_measurement';r['experiment_status']=r.get('backend','');r['backend']=r.get('hardware','');r['hardware']=r.get('peak_memory_bytes','');r['peak_memory_bytes']=r.get('success_rate','');r['success_rate']=''
         budget=first(r,'budget_value','requested_budget','environment_steps','training_step','scored_tokens','evaluation_tokens_scored','tokens_processed','evaluated_examples')
         actual=first(r,'environment_steps','optimizer_steps','examples_processed','scored_tokens','evaluation_tokens_scored','tokens_processed')
         records.append({

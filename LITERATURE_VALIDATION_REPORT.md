@@ -1,16 +1,38 @@
-# Literature validation report
+# Literature evidence validation report
 
-The literature ledger contains 15 published configurations across seven model families. They are published observations only and were not reproduced locally. `results/literature/literature_field_evidence.csv` contains 300 rows: 20 requested fields for each configuration. Each field is labeled `reported`, `derived`, `estimated`, or `uncertain`, and stores a source URL, source locator, and attribution note where available.
+## Scope and evidence rules
 
-| Evidence class | Fields | Interpretation |
+The literature ledger covers 15 published configurations across GPT-3, Gopher, Chinchilla, PaLM, OPT, LLaMA, and BLOOM. It contains 300 model-field rows (20 fields per configuration) in `results/literature/literature_field_evidence.csv`. Evidence classes distinguish directly reported values (`reported`), calculations from reported inputs (`derived`), secondary estimates (`estimated`), and unresolved or insufficiently verified fields (`uncertain`). An uncertain field is not interpreted as zero or as proof that a paper omitted it. Local experiments and published evidence remain separate.
+
+| Evidence class | Rows | Interpretation |
 |---|---:|---|
-| Reported | 172 | Direct value found in the cited primary paper or documented source |
-| Derived | 8 | Reproducible calculation from cited reported values, such as a compute conversion |
-| Estimated | 16 | Secondary estimate, including documented training-time estimates |
-| Uncertain | 104 | Field unresolved, not extracted, or not demonstrated to be absent from the source |
+| Reported | 172 | Directly located in a cited primary paper, official technical report, or model documentation. |
+| Derived | 8 | Reproducible calculation from reported inputs; source and method are in the field note. |
+| Estimated | 16 | Explicit estimates, generally from secondary sources; not presented as paper-reported. |
+| Uncertain | 104 | Not resolved from saved evidence; may be unavailable, unextracted, or unclear. |
 
-The primary evidence sources include [GPT-3](https://arxiv.org/abs/2005.14165), [Gopher](https://arxiv.org/abs/2112.11446), [Chinchilla](https://arxiv.org/abs/2203.15556), [PaLM](https://arxiv.org/abs/2204.02311), [OPT](https://arxiv.org/abs/2205.01068), [LLaMA](https://arxiv.org/abs/2302.13971), and [BLOOM](https://www.jmlr.org/papers/v25/23-0581.html). BLOOM carbon and duration details additionally cite the [BLOOM carbon footprint analysis](https://arxiv.org/abs/2211.02001). Detailed source mapping and known caveats are in `results/literature/literature_sources.md` and per-field locators are in the CSV.
+Every ledger row includes model, field, value, evidence class, source URL, locator, and notes. Source names and link mapping are in `results/literature/literature_sources.md`. The automated integrity check confirms 300 unique model/field keys and non-empty URL/locator fields. This structural check does not substitute for a fresh line-by-line review of every cited paper.
 
-The strongest coverage is for published model size, training-token totals, batch, sequence length, optimizer, selected learning rates, accelerator system, and published benchmark observations. Coverage varies by model and field. Epoch counts, training/validation losses, per-configuration training duration, and evaluation protocols are often not consistently reported. Some benchmark values are cross-listed by a later paper and are attributed as such; PaLM 62B task-average results are kept distinct from individual benchmark metrics. Several runtime estimates come from later sources rather than the original study.
+## Primary-source spot verification
 
-These sources use different datasets, tokenization, context lengths, training recipes, evaluation prompts, and metric definitions. Keep local experiments separate from published observations. Do not infer a causal training-compute effect from cross-paper comparisons, treat an uncertain field as zero, or describe the literature ledger as a complete standardized benchmark. Full page-level verification and an apples-to-apples benchmark synthesis remain open work.
+The core claims central to the comparison are consistent with the cited primary sources:
+
+- GPT-3 is reported as a 175B-parameter model; the paper’s Table 2.1 states that the model series, including GPT-3, was trained for 300B tokens. [Brown et al. (2020), arXiv:2005.14165](https://arxiv.org/abs/2005.14165), Table 2.1.
+- Gopher is the 280B model in the paper’s scale range. [Rae et al. (2021), arXiv:2112.11446](https://arxiv.org/abs/2112.11446).
+- Chinchilla is reported as 70B parameters and is described as using four times more data than Gopher at the same compute budget. [Hoffmann et al. (2022), arXiv:2203.15556](https://arxiv.org/abs/2203.15556).
+- PaLM is reported as a 540B dense Transformer; the paper also analyzes smaller configurations. [Chowdhery et al. (2022), arXiv:2204.02311](https://arxiv.org/abs/2204.02311).
+- OPT is a model suite from 125M through 175B parameters. [Zhang et al. (2022), arXiv:2205.01068](https://arxiv.org/abs/2205.01068).
+- LLaMA reports model sizes from 7B through 65B. [Touvron et al. (2023), arXiv:2302.13971](https://arxiv.org/abs/2302.13971).
+- BLOOM is reported as a 176B-parameter open-access multilingual model. Its paper and technical reporting describe a 384-GPU A100 training system; duration and total energy/carbon values should be taken from the specific technical or carbon-footprint source named in the ledger, not inferred from parameter count. [Scao et al. (2023), JMLR](https://www.jmlr.org/papers/v25/23-0581.html); [BLOOM carbon-footprint analysis](https://jmlr.org/papers/volume24/23-0069/23-0069.pdf).
+
+These spot checks verify stated headline identities, not every benchmark cell or training-runtime estimate. Benchmark values are reported only with the source attribution and protocol note available in the field ledger. If a later paper reproduces an earlier paper’s score, the ledger notes that attribution rather than presenting the score as a new measurement.
+
+## Comparability and unresolved fields
+
+Published parameter counts and token totals are often directly documented, but training duration, optimizer details, hardware utilization, energy, FLOPs, evaluation prompts, and comparable held-out benchmark metrics have uneven coverage. FLOPs, accelerator-hours, wall-clock duration, and carbon emissions are different quantities. No conversion is implied without explicit assumptions, and estimated fields are not promoted to reported values.
+
+Cross-paper benchmark outcomes are not a controlled scaling curve: models use different training corpora, tokenization, context lengths, architectures, compute budgets, and evaluation protocols. PaLM 62B checkpoints trained for different token counts remain separate configurations. The ledger is an evidence audit, not a standardized re-evaluation or causal compute analysis.
+
+## Conclusion
+
+The literature records support selected factual comparisons about published model scale and documented training setup. They do not supply a complete, uniform compute-performance dataset for the project’s research question. The 104 uncertain fields remain explicit limitations; no missing hardware, training compute, duration, or score has been fabricated.

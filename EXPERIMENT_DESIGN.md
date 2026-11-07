@@ -1,31 +1,25 @@
-# Experiment design
-
-**Execution status:** the full schedules below remain the target protocol. All 20 conventional methods now have one-seed feasibility evaluation records; the full multi-budget/multi-seed sweeps are pending. See `FINAL_COMPLETION_MATRIX.md` and `REMAINING_WORK.md`.
+# Research design and final evidence state
 
 ## Research question
 
-How does model performance change as computational expenditure increases, and does marginal improvement diminish at higher budgets? This preserves the proposal's question while extending the analysis to conventional ML, language-model training trajectories, and published large-model studies.
+How much measured performance improvement accompanies additional computational budget, and do observed marginal gains diminish? Budgets and metrics are method-specific. The project does not treat epochs, optimizer steps, tree counts, environment interactions, inference time, and published FLOPs as interchangeable.
 
-## Evidence classes
+## Original scope
 
-Every result must be tagged as one of: (1) locally measured, (2) copied from a source, or (3) calculated from source-reported inputs. Literature results are not reproductions. Missing values stay missing. Wall time is only compared within the same hardware/software run; literature compute is kept in its reported unit and source.
+The strict completion framework has 50 objectives: 20 conventional methods (supervised, unsupervised, semi-supervised, and RL), 15 specified local LLM configurations, and 15 literature configurations. The fifth original RL set is DQN, Double DQN, A2C, PPO, SAC. PPO-Pendulum is a recorded extension. Literature entries are source-based observations, not local model runs.
 
-## Local experimental design
+## Evidence and completion criteria
 
-The target architecture registry covers 20 algorithms across supervised, unsupervised, semi-supervised, and reinforcement learning. Every adapter must declare its task metric, budget unit, training/evaluation timings, parameter count, seed, hardware, peak memory when observable, and evaluation status. Epoch budgets are 1, 3, 5, 10, 20, and 30 for iterative supervised learners. K-means/GMM/DBSCAN use algorithm-specific iteration or neighborhood budgets; RL uses environment interactions and gradient updates. Non-iterative estimators are recorded as one fit budget and are not given fictitious epochs.
+Raw CSV/JSON/JSONL records, model/configuration files, evaluator outputs, and execution logs define the evidence. A result counts as complete only under the original registered objective; a pilot, smoke test, partial schedule, literature-only observation, or resource-limited run is not upgraded to complete. Therefore, the final strict status remains 0/50 while the amount of collected partial evidence is substantial. Current status by objective is in `FINAL_COMPLETION_MATRIX.md`.
 
-Use fixed train/validation/test splits and preserve the same split across budgets and seeds. Choose preprocessing and hyperparameters on training/validation only; consult test metrics only at preregistered final checkpoints. Semi-supervised runs share labeled indices at each label fraction (5%, 10%, 25%) across methods. RL reports mean episodic return and uncertainty across seeds, not classification accuracy. Train/evaluation/inference costs are separate.
+## Current dataset and protocol summary
+
+The main supervised and representation-learning dataset is Fashion-MNIST with a fixed 10K train/2K validation split and official test endpoints. Core neural curves extend to 30 epochs over three seeds. MLP/LeNet data-size checkpoints use 5 epochs at 10K/30K/58K actual train examples. Random Forest uses warm-start tree counts; unsupervised algorithms retain native units; SSL includes five label fractions; RL extends through requested 250K environment steps; selected public LLM checkpoints have separate full-corpus and checkpoint-prefix inference protocols. See `EXPERIMENTAL_METHODOLOGY.md` for implementation and metric details.
 
 ## Analysis
 
-For a higher-is-better metric, gain is `score[i] - score[i-1]`; for loss/perplexity, improvement is `metric[i-1] - metric[i]`. Cost deltas use cumulative measured seconds within a run. Efficiency is metric-specific gain per second. Report seed mean, standard deviation, and 95% t intervals where replicate runs exist. Use paired comparisons only when seeds/splits align. Do not infer significance from paper-to-paper comparisons.
+Seed means, standard deviations, medians, minima/maxima, and t intervals are computed from independent aligned seed runs. Adjacent budget changes pair within seed and setting. No p-values are reported. Saturation flags are exploratory and do not establish a general law. Results are kept within metric families; cross-paradigm display uses separate normalized panels only.
 
-Saturation is a descriptive flag, not a universal property: define the outcome and threshold before a run. The default is less than 1% relative improvement in the target metric over two consecutive budget increments, with absolute-threshold sensitivity analyses and uncertainty reported. This threshold is an operational convention, not evidence that the remaining gain has no value.
+## Final status
 
-## Current feasibility and status
-
-The workspace initially contained only the seven-page proposal PDF. The runtime reports 16 logical processors, 25 GB RAM (about 6 GB available after dependencies were installed), and approximately 866 GB free on C:. PyTorch reports no CUDA device. Small pilots for the four conventional paradigms and Pythia-70M WikiText-2 evaluation are in the raw CSVs. These are single-seed exploratory pilots, not the full suite. The remaining methods and full accelerator evaluation remain pending.
-
-## Reproducibility
-
-Pin versions before a full run, store config and source revision with every run, seed Python/NumPy/frameworks, record actual device/hardware and package versions, and checkpoint only resumable iterative models. Dataset versions, preprocessing, split hashes, tokenizer, prompts, few-shot examples, and evaluator version belong in run metadata. Never combine incompatible benchmark protocols into one score.
+Experimental phase closed. No additional experiment, training, inference, benchmarking, or data collection is included in this final audit. Data-quality exclusions and anomalies are recorded in `DATA_QUALITY_REGISTER.md`; raw data remain preserved. See `FINAL_RESEARCH_REPORT.md` for results and limitations.

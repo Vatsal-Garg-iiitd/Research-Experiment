@@ -8,14 +8,15 @@ def count(file,model_key,model):
  p=ROOT/'results/raw'/file
  if not p.exists():return []
  return [r for r in read(p) if r.get(model_key)==model and r.get('experiment_status',r.get('status','')) not in ('superseded','failed','resource_limited')]
-out=['# Final Completion Matrix','', 'Updated 2026-11-07 from result files. `pilot` means actual runs exist but the requested full study for that entry is incomplete. Local checkpoint evaluation of an LLM does not mean local pretraining.', '', '**Strict objective completion: 0/50 configurations (0%).** The denominator is 20 conventional models + 15 specified LLM configurations + 15 literature configurations. A configuration counts complete only when its requested study objective is met; pilot/smoke/subset evaluations and partially verified literature rows do not count. This does not mean no work was completed; it distinguishes partial evidence from full requested scope.','', '| Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |','|---|---|---|---|---:|---|---|---|']
+out=['# Final Completion Matrix','', 'Updated 2026-11-07 from verified result files. `pilot` means evidence exists but the full registered objective is not complete. Double DQN has `completed` experiment status and `local_measurement` provenance source type after raw-column alignment. Local checkpoint evaluation of an LLM does not mean local pretraining.', '', '**Strict objective completion: 0/50 configurations (0%).** The denominator remains 20 conventional models + 15 specified LLM configurations + 15 literature configurations. No definitions were relaxed. A configuration counts complete only when its registered study objective is met; pilots, smoke/subset evaluations, and partial literature rows do not count. This does not mean no work was completed; evidence volume, partially completed objectives, and fully complete objectives are distinct.','', '| Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |','|---|---|---|---|---:|---|---|---|']
 for x in reg:
  m=x['model']; p=x['paradigm']; rows=[]; loc=[]; hardware=''
- if m in ('MLP','LeNet-style CNN','ResNet-18','ViT-Tiny'):
+ if m in ('MLP','LeNet-style CNN','ResNet-18'):
   key={'MLP':'MLP','LeNet-style CNN':'CNN / LeNet','ResNet-18':'ResNet-18','ViT-Tiny':'Vision Transformer (compact ViT-Tiny-style)'}[m]
   rows=count('replicated_scaling_results.csv','model_name',key);loc=['replicated_scaling_results.csv','replicated_scaling_test_results.csv']
   budget='10K train: epochs 1–30; 30K/58K train: epochs 1–5; 3 seeds; 10K/30K/60K requested-size endpoints'; hardware='Apple M3 / PyTorch MPS'
-  if m=='ViT-Tiny': m='ViT-Tiny (custom compact 3-layer, 96-wide proxy)'
+ elif m=='ViT-Tiny':
+  rows=count('vit_tiny_scaling.csv','model_name','ViT-Tiny');loc=['vit_tiny_scaling.csv','vit_tiny_test_results.csv'];budget='10K Fashion-MNIST: epochs 1–30; 3 seeds; 5,353,738 parameters; 28x28 grayscale / 4x4 patches';hardware='Apple M3 / PyTorch MPS'
  elif m=='Random Forest':
   rows=count('random_forest_scaling.csv','model_name',m);loc=['random_forest_scaling.csv','random_forest_test_results.csv'];budget='10–1,000 warm-start trees; 3 seeds';hardware='CPU'
  elif p=='unsupervised' and m in ('K-Means','Gaussian Mixture Model'):
@@ -45,10 +46,13 @@ for x in reg:
  status='pilot' if rows else 'implemented'
  path=', '.join(f'`results/raw/{p}`' for p in loc) if loc else 'none'
  out.append(f"| {m} | {'yes' if x.get('implementation_target') else 'unverified'} | {'yes' if rows else 'no verified run'} | {budget} | {seeds} | {hardware} | {path} | {status} |")
+out += ['', '### Additional recorded extensions (outside the 50-objective denominator)', '', '| Model | Environment | Budget | Seeds | Result location | Status |', '|---|---|---|---:|---|---|', '| Compact transformer proxy | Fashion-MNIST | 10K split, epochs 1–30 | 3 | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | Supplementary 3-layer, width-96 proxy; separate from the ViT-Tiny-scope implementation |', '| PPO-Pendulum | Pendulum-v1 | 5K–250K requested environment steps | 3 | `results/raw/rl_scaling_results.csv` | Recorded RL extension; not an original sixth method |']
 llm=[('Pythia-70M','8 released checkpoints (0–143K); full WikiText-2 test; full HellaSwag/PIQA/ARC-Easy zero-shot',True),('Pythia-160M','8 released checkpoints (0–143K); full WikiText-2 test',True),('Pythia-410M','step 0, 10K, 143K prefix checkpoints; full WikiText-2 test',True),('Pythia-1B','no long local evaluation',False),('Pythia-1.4B','no long local evaluation',False),('Pythia-2.8B','no long local evaluation',False),('Pythia-6.9B','no long local evaluation',False),('Pythia-12B','no long local evaluation',False),('GPT-2 Small','main; full WikiText-2 test + 100/task harness smoke subset',True),('GPT-2 Medium','weight retrieval/evaluation incomplete',False),('GPT-2 Large','no long local evaluation',False),('GPT-2 XL','no long local evaluation',False),('OPT-125M','main; full WikiText-2 test + 100/task harness smoke subset',True),('OPT-350M','main; full WikiText-2 test',True),('OPT-1.3B','no long local evaluation',False)]
 out += ['', '## LLM configurations (15)', '', '| Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |','|---|---|---|---|---:|---|---|---|']
 for m,b,done in llm:
- out.append(f"| {m} | checkpoint/config available | {'yes, local inference' if done else 'attempt/status in prior ledger only'} | {b} | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | {'pilot' if done else 'resource_limited'} |")
+ status='failed' if m=='GPT-2 Medium' else ('pilot' if done else 'resource_limited')
+ eval_status='failed local checkpoint attempt' if m=='GPT-2 Medium' else ('yes, local inference' if done else 'attempt/status in prior ledger only')
+ out.append(f"| {m} | checkpoint/config available | {eval_status} | {b} | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | {status} |")
 lit=read(ROOT/'results/literature/large_model_literature.csv')
 out += ['',f'## Literature configurations ({len(lit)})','', '| Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |','|---|---|---|---|---:|---|---|---|']
 for r in lit:

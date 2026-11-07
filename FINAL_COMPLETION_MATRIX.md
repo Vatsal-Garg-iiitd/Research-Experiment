@@ -1,15 +1,15 @@
 # Final Completion Matrix
 
-Updated 2026-11-07 from result files. `pilot` means actual runs exist but the requested full study for that entry is incomplete. Local checkpoint evaluation of an LLM does not mean local pretraining.
+Updated 2026-11-07 from verified result files. `pilot` means evidence exists but the full registered objective is not complete. Double DQN has `completed` experiment status and `local_measurement` provenance source type after raw-column alignment. Local checkpoint evaluation of an LLM does not mean local pretraining.
 
-**Strict objective completion: 0/50 configurations (0%).** The denominator is 20 conventional models + 15 specified LLM configurations + 15 literature configurations. A configuration counts complete only when its requested study objective is met; pilot/smoke/subset evaluations and partially verified literature rows do not count. This does not mean no work was completed; it distinguishes partial evidence from full requested scope.
+**Strict objective completion: 0/50 configurations (0%).** The denominator remains 20 conventional models + 15 specified LLM configurations + 15 literature configurations. No definitions were relaxed. A configuration counts complete only when its registered study objective is met; pilots, smoke/subset evaluations, and partial literature rows do not count. This does not mean no work was completed; evidence volume, partially completed objectives, and fully complete objectives are distinct.
 
 | Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |
 |---|---|---|---|---:|---|---|---|
 | MLP | yes | yes | 10K train: epochs 1–30; 30K/58K train: epochs 1–5; 3 seeds; 10K/30K/60K requested-size endpoints | 3 | Apple M3 / PyTorch MPS | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
 | LeNet-style CNN | yes | yes | 10K train: epochs 1–30; 30K/58K train: epochs 1–5; 3 seeds; 10K/30K/60K requested-size endpoints | 3 | Apple M3 / PyTorch MPS | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
 | ResNet-18 | yes | yes | 10K train: epochs 1–30; 30K/58K train: epochs 1–5; 3 seeds; 10K/30K/60K requested-size endpoints | 3 | Apple M3 / PyTorch MPS | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
-| ViT-Tiny (custom compact 3-layer, 96-wide proxy) | yes | yes | 10K train: epochs 1–30; 30K/58K train: epochs 1–5; 3 seeds; 10K/30K/60K requested-size endpoints | 3 | Apple M3 / PyTorch MPS | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | pilot |
+| ViT-Tiny | yes | yes | 10K Fashion-MNIST: epochs 1–30; 3 seeds; 5,353,738 parameters; 28x28 grayscale / 4x4 patches | 3 | Apple M3 / PyTorch MPS | `results/raw/vit_tiny_scaling.csv`, `results/raw/vit_tiny_test_results.csv` | pilot |
 | Random Forest | yes | yes | 10–1,000 warm-start trees; 3 seeds | 3 | CPU | `results/raw/random_forest_scaling.csv`, `results/raw/random_forest_test_results.csv` | pilot |
 | K-Means | yes | yes | algorithm-specific iterative budgets | 3 | CPU | `results/raw/unsupervised_scaling.csv` | pilot |
 | Gaussian Mixture Model | yes | yes | algorithm-specific iterative budgets | 3 | CPU | `results/raw/unsupervised_scaling.csv` | pilot |
@@ -27,6 +27,13 @@ Updated 2026-11-07 from result files. `pilot` means actual runs exist but the re
 | PPO | yes | yes | 5K–250K requested environment steps; 3 seeds (SAC/Double DQN: 5 seeds) | 3 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
 | SAC | yes | yes | 5K–250K requested environment steps; 3 seeds (SAC/Double DQN: 5 seeds) | 5 | CPU | `results/raw/rl_scaling_results.csv` | pilot |
 
+### Additional recorded extensions (outside the 50-objective denominator)
+
+| Model | Environment | Budget | Seeds | Result location | Status |
+|---|---|---|---:|---|---|
+| Compact transformer proxy | Fashion-MNIST | 10K split, epochs 1–30 | 3 | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | Supplementary 3-layer, width-96 proxy; separate from the ViT-Tiny-scope implementation |
+| PPO-Pendulum | Pendulum-v1 | 5K–250K requested environment steps | 3 | `results/raw/rl_scaling_results.csv` | Recorded RL extension; not an original sixth method |
+
 ## LLM configurations (15)
 
 | Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |
@@ -40,7 +47,7 @@ Updated 2026-11-07 from result files. `pilot` means actual runs exist but the re
 | Pythia-6.9B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
 | Pythia-12B | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
 | GPT-2 Small | checkpoint/config available | yes, local inference | main; full WikiText-2 test + 100/task harness smoke subset | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | pilot |
-| GPT-2 Medium | checkpoint/config available | attempt/status in prior ledger only | weight retrieval/evaluation incomplete | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
+| GPT-2 Medium | checkpoint/config available | failed local checkpoint attempt | weight retrieval/evaluation incomplete | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | failed |
 | GPT-2 Large | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
 | GPT-2 XL | checkpoint/config available | attempt/status in prior ledger only | no long local evaluation | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | resource_limited |
 | OPT-125M | checkpoint/config available | yes, local inference | main; full WikiText-2 test + 100/task harness smoke subset | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | pilot |

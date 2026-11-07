@@ -1,23 +1,26 @@
-# LLM research design
+# LLM evaluation design and final status
 
-**Execution status:** six of the 15 requested model configurations have local WikiText-2 prefix evaluations, including eight Pythia-70M checkpoint points. The full checkpoint sweeps, downstream benchmarks, and remaining configurations are incomplete; see `FINAL_COMPLETION_MATRIX.md` and `REMAINING_WORK.md`.
+## Research question
 
-## Primary question
+Describe how local checkpoint evaluation metrics vary with released model size or checkpoint step while keeping inference cost distinct from original pretraining compute. No LLM was pretrained in this project.
 
-Measure how language-model loss and downstream metrics vary with tokens and compute, keeping parameter scaling separate from training progression. Checkpoint evaluation cost is not original pretraining cost.
+## Planned coverage and actual evidence
 
-## Candidate coverage
+The 15-config target comprises Pythia-70M/160M/410M/1B/1.4B/2.8B/6.9B/12B, GPT-2 Small/Medium/Large/XL, and OPT-125M/350M/1.3B. Six checkpoints (Pythia-70M/160M/410M, GPT-2 Small, OPT-125M/350M) have full WikiText-2 raw-v1 test-text evaluations. Pythia-70M and 160M have eight selected released checkpoint-prefix points each; Pythia-410M has selected steps 0, 10K, and 143K. Pythia-70M also has a full, unrestricted 0-shot validation-harness evaluation on HellaSwag, PIQA, and ARC-Easy. GPT-2 Small and OPT-125M have earlier 100-example/task smoke checks. Remaining target sizes are resource-limited, failed, or not evaluated under full protocols as recorded in `FINAL_COMPLETION_MATRIX.md` and `results/llm/expanded_llm_evaluations.csv`.
 
-The requested eight Pythia scales (70M through 12B), four GPT-2 scales, and three OPT scales form the 15-configuration evaluation target. Pythia's published suite has 154 checkpoints per model; select 10 logarithmically spaced training stages including early, intermediate, and final checkpoints. Record the actual checkpoint step and token count from model metadata. A Pythia-70M final checkpoint was loaded sequentially on CPU for a short WikiText-2 pilot. The remaining checkpoints were not attempted because the machine is CPU-only and had about 6 GB available RAM after package installation.
+## Protocol separation
 
-For each successfully evaluated checkpoint record parameter count, step, tokens, source-reported train/validation loss when available, locally measured WikiText-103 loss/perplexity, benchmark task/protocol, load/evaluation duration, peak RAM/VRAM if measurable, and status. Use a fixed tokenizer, dataset revision, context length, harness version, and zero-shot protocol for primary comparisons. A small common task suite can use PIQA, HellaSwag, and ARC-Easy only if the same harness revision and task configs support every selected model. Do not compare raw scores from unrelated papers as a single leaderboard.
+1. **Full WikiText-2 raw-v1 test:** six completed runs; FP32, Apple M3 MPS, context 1,024, stride 512, batch one. The common text SHA-256, scored-token counts, perplexity, NLL, and evaluation seconds are recorded in `macos_full_wikitext2_evaluations.csv`.
+2. **Historical 50K-token evaluation:** six CPU FP32 runs, restricted budget, context 2,048. Kept separate from the full test set.
+3. **Checkpoint-prefix trajectory:** Pythia selected released checkpoints, CPU FP32, one 2,048-token sequence from the first 30,000 raw text characters. Token counts per step are published metadata, not local training compute. `main` aliases for 160M/410M are not extra trajectory points.
+4. **Full zero-shot harness:** Pythia-70M step143000, lm-evaluation-harness 0.4.13, Transformers 5.22.1, FP32 MPS, batch one, no task limit, validation splits.
+5. **Smoke tests:** 100 examples per task for Pythia-70M/GPT-2 Small/OPT-125M on CPU FP32; not full benchmark results.
+6. **Superseded, failed, and resource-limited rows:** retained with status and excluded from completed-result claims.
 
-Tokens and steps are the primary progression axes. Epochs are omitted unless corpus size and sampling policy establish an actual data pass. Training FLOPs, duration, and energy are reported only if available from a source or measurement. The 6ND approximation can be added as a separate calculated column only when N and D are known and the dense-transformer assumption is stated.
+## Measurement and comparison
 
-## Budget and evaluation safety
+Full-corpus NLL and perplexity are computed from token-level losses, with tokenizer-specific token counts retained. Bits per byte uses UTF-8 byte-span accounting for cross-tokenizer context but remains a single-corpus local inference measure. Parameter count is not a compute budget. Published training-step/token metadata are not elapsed training measurements. Evaluation time is compared only within the same local protocol and device, with tokenizer token-count differences noted. Full benchmark model-size comparisons are unavailable because only one model has a full validation-split harness run; the smoke subset is shown separately and never labeled a complete benchmark.
 
-Load models sequentially. Before attempting a checkpoint, estimate weight memory from parameter count and dtype plus runtime overhead; skip with a reason if the measured available memory is insufficient. The 6.9B/12B Pythia and multi-billion GPT-2/OPT configurations are not assumed feasible. Use source-reported training trajectory values for those rows when local inference cannot be performed, keeping local evaluation fields null.
+## Completion and limits
 
-## Analysis
-
-Plot loss and perplexity against tokens only for comparable checkpoints in a family/protocol. Plot downstream task scores separately by task. Fit power laws only when there are enough distinct observations and a plausible scaling regime; report fitted parameters, residuals, uncertainty, and sensitivity to exclusions. A final checkpoint alone cannot establish diminishing returns. Marginal gain versus compute requires intermediate measurements and an explicit, consistent cost measure.
+The LLM portion remains partial under the strict 50-objective framework. The 6 full WikiText-2 evaluations, selected Pythia trajectories, one full harness model, and three smoke-run models do not complete the 15-configuration target. This design note documents current evidence only and does not authorize more evaluation.

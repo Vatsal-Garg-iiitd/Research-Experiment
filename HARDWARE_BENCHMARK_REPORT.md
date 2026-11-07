@@ -1,5 +1,7 @@
 # Hardware and backend benchmark report
 
+> **Final audit note (2026-11-07):** The hardware measurements below are preserved historical platform/provenance evidence. No additional hardware tests were run for the final audit. DirectML, CPU, and Apple MPS results are not pooled as a controlled comparison; no NPU, ROCm, or new benchmark claim is made.
+
 Inspection evidence is in [hardware_capabilities.md](results/hardware/hardware_capabilities.md); timed microbenchmark rows are in [backend_benchmark.csv](results/hardware/backend_benchmark.csv). Current execution is on the Ryzen AI 7 350 Windows machine with Radeon 860M and XDNA2 NPU. The 2026-11-05 recorded inventory identifies 23.3 GiB RAM, Windows 11, GPU driver 32.0.22024.3004 and NPU driver 32.0.203.314. Integrated GPU WMI adapter memory (512 MiB) is not the total shared-memory limit.
 
 ## Measured microbenchmark

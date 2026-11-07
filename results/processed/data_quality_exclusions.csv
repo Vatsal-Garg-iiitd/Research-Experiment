@@ -1,0 +1,16 @@
+﻿source_file,source_row,experiment_id,disposition,reason
+results/raw/unsupervised_scaling.csv,32,minibatch_k-means_seed11_budget1_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,33,minibatch_k-means_seed11_budget5_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,34,minibatch_k-means_seed11_budget10_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,35,minibatch_k-means_seed11_budget20_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,36,minibatch_k-means_seed11_budget50_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,39,minibatch_k-means_seed23_budget1_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,40,minibatch_k-means_seed23_budget5_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,41,minibatch_k-means_seed23_budget10_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,42,minibatch_k-means_seed23_budget20_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,43,minibatch_k-means_seed23_budget50_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,46,minibatch_k-means_seed37_budget1_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,47,minibatch_k-means_seed37_budget5_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,48,minibatch_k-means_seed37_budget10_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,49,minibatch_k-means_seed37_budget20_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.
+results/raw/unsupervised_scaling.csv,50,minibatch_k-means_seed37_budget50_v1,excluded_duplicate_checkpoint_reuse,Repeated experiment ID; later appended row carries the 50-update score at an earlier budget.

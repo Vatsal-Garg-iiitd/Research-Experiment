@@ -1,57 +1,54 @@
-# Computational scaling research project
+# Research Experiment: Accuracy and Computational Cost
 
-This repository studies how model performance changes as computational budgets increase, and whether marginal gains decline. It keeps local experiments, evaluations of published checkpoints, and literature-derived evidence separate. Budget units stay specific to each method; results from different tasks are not pooled onto one compute scale.
+This repository studies how task performance changes as computational budgets increase and whether the additional gain diminishes. The experimental phase is closed. This final audit used existing records only; it conducted no training, inference, benchmark runs, data collection, or hardware testing.
 
-## Current status
+## Final status
 
-This is an expanded but incomplete exploratory study. The strict matrix counts **0 of 50 requested configurations as fully complete**: 20 conventional methods, 15 LLM configurations, and 15 literature configurations. Many substantial experiments are complete, but pilots, partial schedules, and literature-only observations do not satisfy the full registered objective. See the [completion matrix](FINAL_COMPLETION_MATRIX.md) and [independent audit](FINAL_INDEPENDENT_AUDIT.md).
+The strict, unchanged completion framework records **0 of 50 registered objectives fully complete** (20 conventional methods, 15 LLM configurations, and 15 literature configurations). That count describes objective completion, not the amount of evidence collected. The repository contains extensive partial and completed runs, but no registered objective met all criteria. The current conclusion is descriptive: gains vary by method, task, and budget; the evidence does not establish a universal diminishing-returns law or a cross-paradigm compute-efficiency ranking.
 
-### Completed work
+## Verified evidence at a glance
 
-- **Conventional methods:** multi-seed and multi-budget runs include 30-epoch MLP, LeNet, ResNet-18, compact-transformer, AE/VAE, and SSL curves; MLP/LeNet five-epoch data-size comparisons; Random Forest through 1,000 trees; clustering and LabelPropagation sweeps; DBSCAN parameter and data-size studies; and RL schedules through 250K requested interactions. SAC and Double DQN have five seeds. The transformer is a compact proxy, and SSL recipes are grayscale task adaptations.
-- **Language models:** six published checkpoints have full WikiText-2 raw-v1 test evaluations using FP32, Apple MPS, context 1,024, and stride 512. Pythia-70M and Pythia-160M each have eight released-checkpoint prefix evaluations. Pythia-410M has selected prefix checkpoints. A full zero-shot Pythia-70M harness run covers the HellaSwag, PIQA, and ARC-Easy validation splits; earlier GPT-2 Small and OPT-125M harness runs are 100-example-per-task smoke checks. No model was pretrained locally.
-- **Literature evidence:** 15 published configurations have a 300-row field ledger with source URLs, locators, and reported/derived/estimated/uncertain classes. The ledger is not a standardized cross-paper benchmark; 104 fields remain uncertain.
-- **Audit artifacts:** the project includes a 3,720-row [run registry](EXPERIMENT_RUN_REGISTRY.csv), a 2,612-row canonical result index, regenerated statistical summaries, figures, and a validator. The final validator reported zero errors and zero warnings. See the [final research report](FINAL_RESEARCH_REPORT.md), [macOS execution log](MACOS_EXECUTION_LOG.md), and [remaining work](REMAINING_WORK.md).
+- **Canonical local index:** 2,612 rows, consisting of 2,548 conventional raw-result rows and 64 selected LLM evaluation rows. It is a heterogeneous index, not 2,612 independent experiments.
+- **Analysis:** 3,614 grouped metric summaries, 2,417 paired within-seed budget transitions, and 169 held-out metric groups. Fifteen repeated K-Means records were excluded from its curve analysis, while raw records remain unchanged.
+- **Supervised learning:** MLP, LeNet-style CNN, ResNet-18, and the genuine ViT-Tiny-dimension implementation have three-seed curves through 30 epochs on the fixed 10K Fashion-MNIST split. The repository also retains a separate three-layer, width-96 compact transformer proxy. MLP and LeNet have matched five-epoch comparisons at 30K and 58K actual training examples.
+- **Unsupervised and semi-supervised learning:** K-Means/GMM, DBSCAN, Autoencoder/VAE, LabelPropagation, pseudo-labeling, Mean Teacher, FixMatch, and MixMatch are documented with their native budgets and metrics. The transformer is a compact proxy; SSL methods are task adaptations.
+- **Reinforcement learning:** DQN, Double DQN, A2C, PPO, and SAC are the original scope. PPO-Pendulum is a separately identified recorded extension. Double DQN rows have `completed` status and `local_measurement` provenance after the derived builder repairs a missing raw CSV field; raw records remain unchanged.
+- **Language models:** six public checkpoints have full WikiText-2 raw-v1 test evaluations (FP32, Apple M3 MPS, context 1,024, stride 512). Pythia checkpoint-prefix evaluations and a Pythia-70M full validation-split zero-shot run are reported separately. No model was pretrained locally; smoke tests are not reported as full benchmarks.
+- **Literature:** 15 configurations have 300 field-level evidence records: 172 reported, 8 derived, 16 estimated, and 104 uncertain. Published configurations were not locally reproduced.
 
-### Selected observations
+## Key result and interpretation
 
-At five epochs, mean held-out Fashion-MNIST accuracy across three seeds was 0.8537 for MLP at the requested 30K training size (30K optimization examples) and 0.8689 at the requested 60K size (58K optimization examples plus 2K validation). LeNet means were 0.8784 and 0.8989, respectively. These fixed-split results are descriptive; they do not establish a general data-scaling law.
+At five epochs, three-seed test accuracy was 0.8537 (SD 0.0081) for MLP at 30K training examples and 0.8689 (SD 0.0008) at 58K. LeNet was 0.8784 (SD 0.0035) and 0.8989 (SD 0.0035). These fixed-split observations are consistent with higher accuracy at the larger sizes, but do not establish a general data-scaling law. Full WikiText-2 test perplexities ranged from 44.9334 (Pythia-70M) to 15.4583 (Pythia-410M) in the Pythia family, but model size here does not measure original pretraining compute.
 
-Full WikiText-2 test perplexities were Pythia-70M 44.9334, Pythia-160M 25.6365, Pythia-410M 15.4583, GPT-2 Small 24.9794, OPT-125M 25.8534, and OPT-350M 20.7992. These are local evaluations of public checkpoints, not matched measurements of original training compute.
+The separate ViT-Tiny-dimension implementation has 30-epoch test accuracy 0.7621 across three seeds (SD 0.0616; 95% t CI [0.6090, 0.9152]); this wide interval reflects high seed variability in the observed runs.
 
-The full zero-shot Pythia-70M harness run evaluated 10,042 HellaSwag, 1,838 PIQA, and 2,376 ARC-Easy validation examples with no task limit. The results and protocol are in the [LLM evaluation report](LLM_EVALUATION_REPORT.md).
+## Repository guide
 
-## Setup
+- `results/raw/`: source experimental CSVs. Do not overwrite these records.
+- `results/llm/`: full-corpus checkpoint evaluations, checkpoint-prefix trajectories, benchmark outputs, and smoke-test records.
+- `results/literature/`: published model ledger and field-level evidence with source locations.
+- `results/processed/`: canonical index, audit inventory, statistical tables, marginal transitions, exclusions, and figure catalogue data.
+- `results/figures/final/`: 25 publication-style figures in PNG and vector SVG formats.
+- `scripts/`: separate read-only analysis, plotting, inventory, and validation workflows. Experimental entry points are retained but are not needed for the final audit.
+- `FINAL_RESEARCH_REPORT.md` and `reports/FINAL_RESEARCH_REPORT.pdf`: final research report.
+- `FINAL_COMPLETION_MATRIX.md`: 50-objective status and separately listed PPO-Pendulum extension.
+- `DATA_INVENTORY.md`, `FIGURE_CATALOGUE.md`, and `PROJECT_AUDIT.md`: file/data inventory, figure provenance, and consistency findings.
+- `RESULT_PROVENANCE.md` and `DATA_QUALITY_REGISTER.md`: source hierarchy, canonical count reconciliation, analytical eligibility, and documented anomalies.
+- `IDENTIFIER_AUDIT.md` and `IDENTIFIER_RECONCILIATION.csv`: ID scope checks, generated evaluation IDs, and corrected derived mappings.
 
-For the verified Apple M3 macOS environment, see [macOS setup](MACOS_SETUP.md). The isolated `.venv-mac` uses PyTorch MPS where supported; scikit-learn and RL runs use CPU. Install the project requirements with Python 3.10 or newer. The recorded harness run also uses Accelerate, installed as documented in the setup guide.
+## Rebuild the derived audit artifacts
 
-The original Windows and DirectML artifacts are retained. On Windows, use the separate DirectML environment and `requirements-directml.txt`; do not mix its timings with macOS or CPU timings as a controlled hardware comparison. The NPU has not been benchmarked.
-
-## Repository map
-
-- `configs/`: target experiment design and model registry.
-- `results/configurations/`: per-run configuration JSON.
-- `results/raw/`: row-level conventional experiment results.
-- `results/llm/`: full-corpus evaluations, checkpoint trajectories, harness aggregates, and sample logs.
-- `results/literature/`: published configuration ledger, source notes, and field-level evidence.
-- `results/processed/`: canonical result index and generated statistical summaries.
-- `results/figures/`: generated result plots.
-- `results/checkpoints/`: local training checkpoints; these are not needed to read the saved results.
-- `EXPERIMENT_RUN_REGISTRY.csv`: row-level index of results and literature evidence.
-- `FINAL_COMPLETION_MATRIX.md`, `FINAL_RESEARCH_REPORT.md`, and `FINAL_INDEPENDENT_AUDIT.md`: scope, evidence, and limitations.
-
-## Rebuild analysis outputs
-
-From the project root on the verified Mac:
+Using the recorded `.venv-mac` environment from the repository root:
 
 ```sh
 .venv-mac/bin/python scripts/build_canonical_results.py
+.venv-mac/bin/python scripts/build_verified_dataset.py
 .venv-mac/bin/python scripts/analyze_strengthened_runs.py
 .venv-mac/bin/python scripts/analyze_llm_full_eval.py
 .venv-mac/bin/python scripts/build_literature_evidence.py
-.venv-mac/bin/python scripts/generate_completion_matrix.py
-.venv-mac/bin/python scripts/build_experiment_run_registry.py
+.venv-mac/bin/python scripts/plot_final_figures.py
+.venv-mac/bin/python scripts/audit_repository_inventory.py
 .venv-mac/bin/python scripts/validate_project_outputs.py
 ```
 
-The scripts rebuild derived artifacts from saved records; they do not fill in missing experiment runs. Checkpoints and validation curves are method-specific, and held-out endpoints are not uniformly selected with the same validation-based rule across every run. Consult `EXPERIMENTAL_METHODOLOGY.md` before interpreting the summaries.
+These workflows read saved data and regenerate analysis artifacts only. They do not complete missing experiments. See [reproducibility notes](REPRODUCIBILITY.md), [final report](FINAL_RESEARCH_REPORT.md), [statistical analysis](STATISTICAL_ANALYSIS_REPORT.md), and [limitations and gaps](REMAINING_WORK.md).

@@ -1,5 +1,11 @@
 # Execution log
 
+# Final audit reconciliation (2026-11-07)
+
+The dated entries below are a chronological record; figures in older entries describe the outputs at those milestones, not current totals. The current repository state is summarized here: fetched GitHub `main` matched local HEAD `d5fdc732f9527e20ee687a27daded3145670741e` before audit edits; the worktree was clean; a pre-edit backup is `../Tcom_project-pre-final-audit-20261107.tar.gz`. No new experiments, training, inference, benchmarking, or data collection were run.
+
+Current reproducible totals: 2,612 canonical index rows (2,548 raw conventional rows + 64 selected LLM rows), 3,614 grouped statistical summaries, 2,417 seed-paired marginal transitions, and 169 final held-out metric groups. The earlier logged 430-row export and 458/279/84 analysis are historical milestones. A committed 619-row export is present at historical commit `afc488a`; neither historical export is the current source of truth. Fifteen later K-Means duplicate-checkpoint rows are retained in raw CSV and excluded from curves; the 10K data-size endpoint now filters to five epochs; Double DQN `local_measurement` rows are included as recorded RL measurements. See `PROJECT_AUDIT.md` and `DATA_QUALITY_REGISTER.md` for discrepancy-level detail.
+
 Times are local Asia/Kolkata where known. This log records verified actions and does not infer missing historical logs.
 
 ## 2026-11-06 — audit and preservation
@@ -37,7 +43,7 @@ Detailed historical actions are represented by source scripts and raw result row
 - Implemented and executed actual sklearn LabelPropagation with 3 seeds and maximum iteration budgets 1, 5, 10, 30, 100 on fixed 2,500-sample Fashion-MNIST transductive splits (2,000 train nodes, 500 test nodes, 10% labels, standardized PCA-32 features, 10-neighbor graph). Convergence warnings were generated and retained in terminal run history; rows record actual iterations/convergence status. Output: `results/raw/label_propagation_scaling.csv`.
 - Added the LabelPropagation rows to canonical export and updated the research/remaining-work reports and reproducibility guide. Legacy LabelSpreading pilot remains distinct and unchanged.
 
-- Implemented and executed Mean Teacher, FixMatch and MixMatch on shared Fashion-MNIST split: 5 label fractions x 3 seeds x 3 epoch checkpoints per method (135 seed-budget rows) plus 45 final test endpoints. DirectML failed on a FixMatch boolean-mask autograd op and MixMatch indexed MixUp op; FixMatch was corrected with a float mask and MixMatch ran on CPU, both recorded. Results: esults/raw/ssl_algorithms.csv, ssl_algorithms_test.csv; summary and plots generated.
+- Implemented and executed Mean Teacher, FixMatch and MixMatch on shared Fashion-MNIST split: 5 label fractions x 3 seeds x 3 epoch checkpoints per method (135 seed-budget rows) plus 45 final test endpoints. DirectML failed on a FixMatch boolean-mask autograd op and MixMatch indexed MixUp op; FixMatch was corrected with a float mask and MixMatch ran on CPU, both recorded.
 
 ## 2026-11-07 — current project-wide inventory
 
@@ -53,7 +59,6 @@ Detailed historical actions are represented by source scripts and raw result row
 - Completed full zero-shot Pythia-70M validation-split harness evaluation on HellaSwag (10,042), PIQA (1,838), and ARC-Easy (2,376); no task limit was used. Full JSON and per-sample logs are retained. Earlier GPT-2 Small and OPT-125M 100-example/task results remain smoke subsets.
 - Regenerated 3,614 statistical group summaries, 2,407 paired marginal increments, 169 test endpoint summaries separated by final budget, figures, the canonical index (2,612 rows), both completion matrices (20+15+15 objectives), and the 3,720-row experiment registry. Literature ledger has 300 fields and uses explicit reported/derived/estimated/uncertain classifications.
 - Ran `.venv-mac/bin/python -m compileall -q scripts` and `.venv-mac/bin/python scripts/validate_project_outputs.py`; compile succeeded and final validator reported 0 errors and 0 warnings. `git -c core.whitespace=cr-at-eol diff --check` passed. No standalone `tests/` directory or pytest configuration was found. The strict completion status remains 0/50; this remains an incomplete exploratory study.
-
 
 - Implemented and executed Mean Teacher, FixMatch and MixMatch on shared Fashion-MNIST split: 5 label fractions x 3 seeds x 3 epoch checkpoints per method (135 seed-budget rows) plus 45 final test endpoints. DirectML failed on a FixMatch boolean-mask autograd op and MixMatch indexed MixUp op; FixMatch was corrected with a float mask and MixMatch ran on CPU, both recorded. Results: results/raw/ssl_algorithms.csv, ssl_algorithms_test.csv; summary and plots generated.
 

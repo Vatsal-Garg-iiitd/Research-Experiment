@@ -1,13 +1,15 @@
-# Methodology gaps
+# Methodology gaps and limits
 
-1. The 20-model local suite is uneven. Several methods have expanded multi-budget, three-seed evidence; others retain only pilots or limited metrics. The strict 50-configuration objective matrix remains 0/50 complete.
-2. Fashion-MNIST results generally use fixed development splits. The 10K training subset and 2K validation subset results are conditional on those splits. The larger 30K and requested-60K (58K actual optimization examples) supervised runs cover MLP and LeNet only, for five epochs.
-3. Neural runs are extended to 30 epochs for MLP, LeNet, ResNet-18, compact transformer, AE/VAE and three SSL methods, but not all model/fraction/budget combinations from the full study. Test endpoints are fixed-budget; validation-based best-checkpoint selection has not been applied consistently across every endpoint.
-4. The transformer is a custom compact 3-layer, width-96 proxy, not standard ViT-Tiny. Mean Teacher, FixMatch, MixMatch, and pseudo-labeling are small grayscale Fashion-MNIST adaptations rather than canonical CIFAR/ImageNet implementations.
-5. K-Means/GMM have iterative curves. DBSCAN’s parameter sensitivity and data-size curves measure different questions; DBSCAN has no iterative training budget. LabelPropagation uses a transductive PCA/kNN graph on a fixed subset and is not directly comparable to inductive classifiers.
-6. AE/VAE metrics separate reconstruction error from downstream linear-probe accuracy. They do not constitute a broad generative-quality evaluation.
-7. RL curves now reach 250K requested interactions for selected methods; SAC and Double DQN have five seeds. Other RL methods have three seeds. Rollout overshoot is retained, and one legacy Double DQN continuation from 25K cannot be exact because that checkpoint lacked environment/RNG state.
-8. Six of 15 LLM configurations have full WikiText-2 raw-v1 test evaluations with a common 1,024 context and 512 stride. Pythia 70M and 160M have eight-point released-checkpoint prefix curves; 410M has selected endpoints only. Three other models have only a 100-example/task harness smoke run; Pythia-70M has a full zero-shot validation-split run. No local pretraining was performed.
-9. Published literature fields now have a 300-row evidence ledger with direct/derived/estimated/uncertain status and source locators. 104 of 300 fields remain uncertain, and paper protocols are not standardized for cross-paper regressions.
-10. Hardware timing is not a controlled cross-device comparison. Apple MPS, CPU, and legacy DirectML results come from different machines and software stacks; no energy or utilization instrumentation was collected for the current Mac runs. NPU execution remains unmeasured.
-11. Marginal gains, saturation screens, and confidence intervals are exploratory and conditional on fixed splits. Short, non-monotonic curves and small seed counts do not establish a universal saturation threshold or a general diminishing-returns law.
+The following limitations apply to the saved evidence and are reflected in the final report. They are not resolved by post hoc analysis and do not trigger new runs.
+
+- **Completion criterion:** the original 50-objective all-or-nothing framework remains 0/50. Partial evidence is not promoted to complete.
+- **Replicates:** most supervised, SSL, representation, and core RL conditions have three seeds; Double DQN and SAC have five. Intervals are conditional on fixed splits and small-sample uncertainty is substantial.
+- **Validation and testing:** historical endpoint selection is not completely uniform. Some analyses use held-out endpoints at designated budgets; validation curves are treated separately. Data-size scaling is restricted to matched epoch-5 endpoints.
+- **Architecture and algorithm fidelity:** the compact transformer is a 3-layer/96-width proxy. SSL recipes are Fashion-MNIST adaptations. Historical LabelSpreading rows do not count as LabelPropagation.
+- **Unsupervised comparability:** K-Means updates, GMM warm-start EM calls, DBSCAN fit sizes/parameters, graph iteration ceilings, and reconstruction epochs are distinct computational budgets.
+- **RL variability:** reward distributions are noisy; tasks use different scales; seed counts differ; elapsed time depends on runtime and host. PPO-Pendulum is an extension.
+- **LLM protocol:** local full-test checkpoint evaluation, restricted checkpoint-prefix curves, full validation harness results, smoke tests, and superseded/failed rows are different evidence classes. Local inference does not reveal original training compute.
+- **Hardware/resource accounting:** wall time is not energy or accelerator FLOPs. The 1,122.16-second ResNet interval is unexplained; historical Windows/DirectML and newer Mac/MPS timings are separate.
+- **Literature:** model identities and selected training facts were spot-checked against primary sources. 104 of 300 field rows remain uncertain; benchmark protocols are not harmonized.
+
+The current analysis scripts expose these limitations and retain raw values. See `DATA_QUALITY_REGISTER.md`, `LITERATURE_VALIDATION_REPORT.md`, and `FINAL_RESEARCH_REPORT.md`.

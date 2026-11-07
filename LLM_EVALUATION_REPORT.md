@@ -2,6 +2,14 @@
 
 All local measurements evaluate published checkpoints; no language model was pretrained in this project. Checkpoint evaluation, benchmark accuracy, and published training-token metadata are separate quantities.
 
+## Evaluation inventory and reconciliation
+
+The project contains several distinct evidence sets. The complete WikiText-2 raw-v1 test evaluation is six completed checkpoint rows in `macos_full_wikitext2_evaluations.csv`: Apple M3 MPS, PyTorch 2.15.0, FP32, context 1,024, stride 512, batch size 1. Pythia-70M/160M/410M use step143000; GPT-2 Small, OPT-125M, and OPT-350M use their recorded `main` revisions. Model parameter counts and evaluation seconds are in the table below and raw CSV. This is local checkpoint inference, not original pretraining.
+
+`expanded_llm_evaluations.csv` contains 40 records with status counts: 24 completed, 7 superseded, 8 resource-limited, and 1 failed. The 24 completed rows include duplicate `main` aliases for Pythia-160M/410M; they are not extra points beyond explicit step143000. Pythia-70M and 160M each have eight distinct released checkpoint steps in the current prefix series. Pythia-410M has selected 0, 10K, and 143K points. These prefix evaluations use CPU FP32 and 2,048 model tokens from the first 30,000 raw characters. Token counts shown as training progress are model-card-derived metadata, not local training compute.
+
+The older `full_wikitext2_evaluations.csv` contains six completed 50K-token CPU FP32 evaluations and is a restricted prefix protocol. It must not be substituted for or pooled with the full-test MPS results. The `harness_full_summary.csv` contains three unrestricted 0-shot validation tasks for Pythia-70M, evaluated on MPS FP32, batch 1. `harness_summary.csv` contains nine rows from 100-example/task checks (three tasks each for Pythia-70M, GPT-2 Small, and OPT-125M); these are smoke tests. The sample limits and hardware differ, so those rows are not presented as full benchmark comparisons. The `expanded_llm_evaluations.csv` failed/resource-limited/superseded statuses are retained as evidence of scope limits and are not included as completed evaluations.
+
 ## Matched WikiText-2 test evaluation
 
 Six checkpoints were evaluated on the complete WikiText-2 raw-v1 test text in FP32 on Apple M3 MPS with context 1,024 and stride 512. Each corpus token is scored once, except the initial context token. Raw test corpus and byte accounting are shared across models; GPT-2 and OPT models use their own tokenizers, so scored token counts differ. See `results/llm/macos_full_wikitext2_evaluations.csv`.

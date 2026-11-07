@@ -1,12 +1,22 @@
-# Remaining work
+# Remaining work and evidence limits
 
-The following items remain incomplete relative to the full proposed study. This list is not a statement that the completed partial experiments are invalid; it distinguishes their scope from the registered objectives.
+## Experimental phase
 
-1. **Conventional suite coverage.** Twenty registered methods are not all measured across the full multi-seed and native-budget schedules. Expanded MLP/LeNet data-size comparisons stop at five epochs; the 60K request uses 58K training examples and 2K validation. The compact transformer remains a proxy. SSL adaptations do not reproduce canonical benchmark settings. DBSCAN measures parameter and sample-size cost, not iterative compute.
-2. **Model selection.** Some held-out endpoints use a fixed final epoch/budget rather than a consistently prespecified validation-selected checkpoint across every method. Do not interpret them as uniformly optimized best checkpoints.
-3. **LLM coverage.** Six of 15 requested configurations have full WikiText-2 raw-v1 test evaluations. Pythia-70M and Pythia-160M have eight-point released-checkpoint prefix trajectories; Pythia-410M has selected endpoints (0, 10K, 143K), with remaining revisions skipped after slow checkpoint retrieval. Eight larger/alternate configurations lack full local evaluation. No local pretraining was run.
-4. **Harness breadth.** Full zero-shot validation-split evaluation exists for Pythia-70M on HellaSwag, PIQA, and ARC-Easy. GPT-2 Small and OPT-125M have only 100-example/task smoke runs. Full harness runs for the remaining feasible checkpoints and broader task coverage remain open.
-5. **Hardware qualification.** Current neural work used Apple MPS; classical/RL work used CPU. Prior Windows DirectML evidence remains separate. These runs are not a controlled backend comparison, and power, utilization, peak device memory, and NPU execution are not measured consistently.
-6. **Literature synthesis.** The 15-row ledger now has 300 field-level evidence records and source locators. 104 fields remain uncertain, and 16 use estimates. Exact page-level locator review and protocol-aligned cross-paper comparisons are still needed before a quantitative literature scaling regression.
-7. **Analysis scope.** Regenerated summaries cover 3,614 validation groupings, 2,407 within-seed increments, and 169 held-out endpoint groupings separated by budget/checkpoint. They do not cover every registered model or metric. The threshold screens are descriptive, not evidence of a universal saturation point.
-8. **Independent audit.** The canonical index and completion matrices have been rebuilt. A final run registry, independent claim-to-source audit, and comprehensive validator pass must be completed after current artifact reconciliation. The original strict objective denominator remains 50; partials do not count as complete.
+Closed. No further training, inference, benchmarking, hardware testing, data collection, or attempts to finish missing runs were performed for the final audit. Incomplete items are recorded below as limitations rather than tasks silently carried into this report.
+
+## Unresolved research coverage
+
+- Strict completion remains 0/50 under the original criterion; see `FINAL_COMPLETION_MATRIX.md` for detailed statuses.
+- Many of the 15 planned local LLM configurations were not evaluated with full-corpus and standardized benchmark protocols. Six full WikiText-2 checkpoint evaluations and the separate Pythia results do not satisfy that broader scope.
+- The five original RL algorithms have saved curves, but finite seeds, task coverage, protocol details, budget overshoot, and recorded statuses constrain comparison. PPO-Pendulum is an extension, not an original objective.
+- The compact transformer is a custom three-layer, width-96 proxy; SSL implementations are task adaptations. They should not be represented as canonical benchmark reproductions.
+- Literature field coverage includes 104 uncertain values. Existing primary-source spot checks do not replace complete field-by-field human verification.
+- Energy and measured accelerator compute are unavailable or incomplete. Logged wall time has at least one unexplained 1,122.16-second ResNet interval.
+
+## Audit artifacts now available
+
+The final repository includes a rebuilt canonical index and statistics, paired marginal-gain table, full CSV inventory, data-quality register, 19 PNG/SVG figure pairs with catalogue, final Markdown/PDF report, literature validation report, and reproducibility workflow. These outputs make the existing evidence reviewable; they do not fill any experimental gap.
+
+## Conclusions that remain unsupported
+
+The current observations do not establish universal diminishing returns, cross-model causal efficiency, an overall “accuracy per compute” ranking, or generalization beyond the recorded tasks and protocols. Further evidence would require a separately authorized and preregistered study.
