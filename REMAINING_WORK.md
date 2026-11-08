@@ -4,7 +4,7 @@ The registered conventional schedules are complete; this file records limits on 
 
 ## Unresolved evidence limits
 
-- The strict completion matrix remains 20/50. Fifteen local LLM objectives are partial or unevaluated; 15 literature entries are published evidence, not local experiments.
+- The strict completion matrix is 35/50. Fifteen local LLM objectives are partial or unevaluated. All 15 literature objectives are complete as source-based reviews, not local experiments; missing source fields remain classified and disclosed.
 - Six public checkpoints have complete WikiText-2 test evaluations, but checkpoint trajectories and zero-shot tasks cover only selected models. No local model pretraining was performed. Restricted smoke subsets are not complete benchmarks.
 - Transformer and semi-supervised implementations are Fashion-MNIST task adaptations. The custom three-layer width-96 transformer proxy is separate from the ViT-Tiny-dimension implementation.
 - Published literature fields are unevenly reported. Unavailable and uncertain values remain unfilled, and estimates are explicitly labeled.

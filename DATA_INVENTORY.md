@@ -1,12 +1,12 @@
 # Repository and data inventory
 
-Inventory generated from `/Users/jagdishgarg/Downloads/Tcom_project`; 687 files after excluding Git internals, virtual environments, bytecode, and cache folders. Raw records are read-only inputs.
+Inventory generated from `/Users/jagdishgarg/Downloads/Tcom_project`; 689 files after excluding Git internals, virtual environments, bytecode, and cache folders. Raw records are read-only inputs.
 
 ## File types
 
 | Type | Files |
 |---|---:|
-| `.csv` | 52 |
+| `.csv` | 53 |
 | `.gz` | 4 |
 | `.joblib` | 9 |
 | `.json` | 153 |
@@ -17,7 +17,7 @@ Inventory generated from `/Users/jagdishgarg/Downloads/Tcom_project`; 687 files 
 | `.pkl` | 30 |
 | `.png` | 73 |
 | `.pt` | 144 |
-| `.py` | 39 |
+| `.py` | 40 |
 | `.svg` | 25 |
 | `.txt` | 2 |
 | `.yaml` | 1 |
@@ -52,6 +52,7 @@ CSV row counts below exclude headers. Candidate identifier repetition is a scree
 | `results/processed/identifier_audit.csv` | 99 | 7 | — | 0 | 29 |
 | `results/processed/identifier_findings.csv` | 1533 | 7 | — | 0 | 243 |
 | `results/processed/identifier_reconciliation.csv` | 95 | 8 | — | 0 | 50 |
+| `results/processed/literature_completion_audit.csv` | 15 | 16 | — | 0 | 15 |
 | `results/processed/llm_full_eval_summary.csv` | 6 | 20 | — | 0 | 0 |
 | `results/processed/ssl_algorithm_summary.csv` | 45 | 8 | — | 0 | 0 |
 | `results/processed/strengthened_marginal_gains.csv` | 3167 | 22 | — | 0 | 4325 |

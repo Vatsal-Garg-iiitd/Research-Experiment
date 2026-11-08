@@ -4,7 +4,7 @@ This repository studies how task performance changes as computational budgets in
 
 ## Final status
 
-The strict, unchanged 50-objective framework records **20 of 50 objectives complete (40%)**: all 20 conventional objectives meet their registered schedule, seed, and endpoint checks. The remaining 15 local LLM configurations are evaluated only in part, and the 15 literature entries are source-based comparisons rather than local experiments. Completion status reflects the original objectives and does not imply that results across paradigms are directly comparable. The evidence remains descriptive and does not establish a universal diminishing-returns law or a cross-paradigm compute-efficiency ranking.
+The strict, unchanged 50-objective framework records **35 of 50 objectives complete (70%)**: 20 conventional objectives pass their local schedule, seed, and endpoint checks, and all 15 literature objectives pass the source-evidence audit. Literature completion means the published-study review is complete to the extent the sources report data; it does not mean local reproduction or that every source reports every field. The remaining 15 local LLM configurations are evaluated only in part or remain unevaluated. Results across paradigms are not directly comparable, and the evidence does not establish a universal diminishing-returns law or cross-paradigm efficiency ranking.
 
 ## Verified evidence at a glance
 
@@ -14,7 +14,7 @@ The strict, unchanged 50-objective framework records **20 of 50 objectives compl
 - **Unsupervised and semi-supervised learning:** K-Means/GMM, DBSCAN, Autoencoder/VAE, LabelPropagation, pseudo-labeling, Mean Teacher, FixMatch, and MixMatch are documented with their native budgets and metrics. Pseudo-labeling and its matched labeled-only baseline now cover five label fractions, three seeds, and 30 epochs. The transformer is a compact proxy; SSL methods are task adaptations.
 - **Reinforcement learning:** DQN, Double DQN, A2C, PPO, and SAC are the original scope. PPO-Pendulum is a separately identified recorded extension. Double DQN rows have `completed` status and `local_measurement` provenance after the derived builder repairs a missing raw CSV field; raw records remain unchanged.
 - **Language models:** six public checkpoints have full WikiText-2 raw-v1 test evaluations (FP32, Apple M3 MPS, context 1,024, stride 512). Pythia checkpoint-prefix evaluations and a Pythia-70M full validation-split zero-shot run are reported separately. No model was pretrained locally; smoke tests are not reported as full benchmarks.
-- **Literature:** 15 configurations have 300 field-level evidence records. Reported, derived, estimated, uncertain, and unavailable values are distinguished; unavailable values are not treated as zero. Published configurations were not locally reproduced.
+- **Literature:** 15 configurations have 300 field-level evidence records and pass the literature-only completion audit. Reported, derived, estimated, uncertain, and unavailable values are distinguished; gaps are explicit and are not treated as zero. Published configurations were not locally reproduced.
 
 ## Key result and interpretation
 
@@ -32,6 +32,7 @@ The separate ViT-Tiny-dimension implementation has 30-epoch test accuracy 0.7621
 - `scripts/`: separate read-only analysis, plotting, inventory, and validation workflows. Experimental entry points are retained but are not needed for the final audit.
 - `FINAL_RESEARCH_REPORT.md` and `reports/FINAL_RESEARCH_REPORT.pdf`: final research report.
 - `FINAL_COMPLETION_MATRIX.md`: 50-objective status and separately listed PPO-Pendulum extension.
+- `results/processed/literature_completion_audit.csv`: per-entry source and field validation for the completed literature-only objectives.
 - `DATA_INVENTORY.md`, `FIGURE_CATALOGUE.md`, and `PROJECT_AUDIT.md`: file/data inventory, figure provenance, and consistency findings.
 - `RESULT_PROVENANCE.md` and `DATA_QUALITY_REGISTER.md`: source hierarchy, canonical count reconciliation, analytical eligibility, and documented anomalies.
 - `IDENTIFIER_AUDIT.md` and `IDENTIFIER_RECONCILIATION.csv`: ID scope checks, generated evaluation IDs, and corrected derived mappings.
@@ -47,6 +48,7 @@ Using the recorded `.venv-mac` environment from the repository root:
 .venv-mac/bin/python scripts/analyze_llm_full_eval.py
 .venv-mac/bin/python scripts/build_literature_evidence.py
 .venv-mac/bin/python scripts/audit_conventional_completion.py
+.venv-mac/bin/python scripts/audit_literature_completion.py
 .venv-mac/bin/python scripts/generate_completion_matrix.py
 .venv-mac/bin/python scripts/build_experiment_run_registry.py
 .venv-mac/bin/python scripts/plot_final_figures.py

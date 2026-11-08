@@ -1,6 +1,6 @@
 # Literature sources and extraction ledger
 
-This file records primary sources and rules for the accompanying CSV. CSV blanks mean “not yet extracted or not reported,” never zero. Model parameter counts are source-reported; calculated or differently defined token totals are identified in row notes. Literature comparisons are descriptive only.
+This file records primary sources and rules for the accompanying CSV. CSV blanks are classified as uncertain or unavailable in the field-evidence ledger, never interpreted as zero. Model parameter counts are source-reported; calculated or differently defined token totals are identified in row notes. Literature comparisons are descriptive only.
 
 | ID | Source | DOI / arXiv | Relevant evidence and locator |
 |---|---|---|---|
@@ -20,11 +20,11 @@ This file records primary sources and rules for the accompanying CSV. CSV blanks
 
 ## Quantitative status
 
-The initial CSV contains 15 model configurations from seven families and records source-reported parameter counts plus selected token allocations. Some configurations lack compute, durations, or compatible downstream scores; those fields remain blank. BLOOM's 366B processed tokens are labeled calculated as 341B ROOTS tokens plus 25B repeated tokens. Exact printed page numbers remain to be added where the source is available as HTML; current locators use paper sections/tables. This is an evidence ledger under construction, not a completed quantitative synthesis.
+The final source ledger contains 15 configurations from seven families, each with 20 field-level records. All 15 literature-only objectives pass `scripts/audit_literature_completion.py`: each entry has source identity, source-located core scale/token evidence, and an evidence class plus locator for every field. The corresponding audit is `results/processed/literature_completion_audit.csv`. Coverage includes 174 reported, 6 derived, 16 estimated, 88 uncertain, and 16 unavailable field records. Some configurations lack reported compute, duration, or compatible downstream scores; these gaps remain explicitly classified and are not filled with fabricated values. BLOOM's 366B processed tokens are labeled calculated as 341B ROOTS tokens plus 25B repeated tokens. Locators use paper sections, tables, or figures; where evidence is not resolved, the field is classified uncertain/unavailable. This is a completed source review, not a uniform quantitative synthesis or local reproduction.
 
 ## Interpretation cautions
 
-1. Training FLOPs inferred via `6 * parameters * tokens` are estimates and must be placed in a separate derived field with the formula and dense-transformer assumption; none are currently filled.
+1. Training FLOPs inferred via `6 * parameters * tokens` are estimates and are kept distinct from directly reported compute; estimate status, formula, and assumptions are recorded in the field ledger.
 2. Hardware-days, GPU-hours, energy, and dollar estimates use different definitions and must remain separate.
 3. Benchmark scores depend on prompt, shots, dataset version, tokenizer, and scoring method; only the same paper protocol is directly comparable.
 4. Training mixture repeats make a single epoch count ill-defined for GPT-3; do not report an epoch count from its total tokens alone.

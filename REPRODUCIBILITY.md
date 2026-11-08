@@ -18,6 +18,8 @@ From the repository root:
 .venv-mac/bin/python scripts/analyze_strengthened_runs.py
 .venv-mac/bin/python scripts/analyze_llm_full_eval.py
 .venv-mac/bin/python scripts/build_literature_evidence.py
+.venv-mac/bin/python scripts/audit_conventional_completion.py
+.venv-mac/bin/python scripts/audit_literature_completion.py
 .venv-mac/bin/python scripts/generate_completion_matrix.py
 .venv-mac/bin/python scripts/build_experiment_run_registry.py
 .venv-mac/bin/python scripts/plot_final_figures.py
@@ -33,4 +35,4 @@ Grouped summaries include (n), mean, standard deviation, median, minimum, maximu
 
 ## Integrity and completion
 
-Run `scripts/validate_project_outputs.py` after rebuilding outputs. The original strict 50-objective denominator is unchanged; the current matrix verifies 20 conventional objectives complete. The run registry and canonical index are catalogs, not independent observation counts. See `DATA_QUALITY_REGISTER.md` and `PROJECT_AUDIT.md` for anomalies, exclusions, count reconciliation, and limitations. The pseudo-label extension log records the sequential continuation from saved epoch-5 checkpoints to the original 30-epoch schedule; it added no seeds or split changes.
+Run `scripts/validate_project_outputs.py` after rebuilding outputs. The original strict 50-objective denominator is unchanged; 20 conventional and 15 literature-review objectives are complete, while 15 local LLM objectives remain incomplete. The run registry and canonical index are catalogs, not independent observation counts. See `DATA_QUALITY_REGISTER.md` and `PROJECT_AUDIT.md` for anomalies, exclusions, count reconciliation, and limitations. The pseudo-label extension log records the sequential continuation from saved epoch-5 checkpoints to the original 30-epoch schedule; it added no seeds or split changes.

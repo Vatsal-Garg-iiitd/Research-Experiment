@@ -11,7 +11,7 @@ Audit date: 8 November 2026. The local `main` branch was compared with fetched `
 | 3,167 | Paired adjacent-budget marginal transitions within matched seed/configuration series. |
 | 219 | Held-out metric endpoint groups. |
 | 5,250 | Evidence registry rows across 29 source paths; a source catalog, not unique runs. |
-| 20/50 | Strict registered objectives complete: all 20 conventional schedules verified; 15 local LLM configurations remain partial/not evaluated; 15 literature entries remain literature-only. |
+| 35/50 | Strict registered objectives complete: all 20 conventional schedules and all 15 literature-only reviews pass their respective audits; 15 local LLM configurations remain partial/not evaluated. |
 
 Earlier counts (including 430/619 canonical rows, 458/279/84 analysis rows, 2,612/3,614/2,417/169, and 3,720 registry rows) describe older source snapshots or processing generations. They are not additive and are superseded by the reproducible current outputs. The original 50-objective denominator and criteria remain unchanged.
 
@@ -28,6 +28,8 @@ Earlier counts (including 430/619 canonical rows, 458/279/84 analysis rows, 2,61
 ## Scope and completion
 
 The 20 conventional objectives cover supervised learning, unsupervised learning, semi-supervised learning, and RL using their method-specific budgets. The matrix distinguishes the ViT-Tiny-dimension VisionTransformer from the separate three-layer width-96 transformer proxy. Current Label Propagation rows use the actual LabelPropagation estimator; superseded LabelSpreading records remain distinct. Five original RL methods are present; PPO-Pendulum is a separately identified extension, not a sixth required algorithm.
+
+The 15 literature objectives are source-based review tasks, not local model runs. Each configuration has one source-ledger row and 20 unique field-evidence rows; source identity, parameter/token evidence, and every field's source URL, locator, and evidence class pass `scripts/audit_literature_completion.py`. The status `completed_literature_only` means the review is complete to the extent data are reported. Uncertain/unavailable fields remain explicit and do not imply local reproduction. Per-entry counts are in `results/processed/literature_completion_audit.csv`.
 
 The 15 local LLM configurations are not all evaluated. Six public checkpoints have full WikiText-2 test-set evaluations under a shared local protocol; checkpoint-prefix trajectories, selected endpoints, full zero-shot Pythia-70M tasks, smoke subsets, failed attempts, and unevaluated models remain separately identified. Public checkpoint inference is not local pretraining.
 

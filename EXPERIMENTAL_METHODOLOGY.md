@@ -2,7 +2,7 @@
 
 ## Current status
 
-The registered conventional schedules are complete and the analysis is finalized. The pseudo-label and matched labeled-only runs resumed from saved epoch-5 checkpoints to the original 30-epoch target, preserving the same seeds and splits. This document describes the measured protocols and analysis. The strict objective matrix is 20/50; see `FINAL_COMPLETION_MATRIX.md` for statuses.
+The registered conventional schedules are complete and the analysis is finalized. The pseudo-label and matched labeled-only runs resumed from saved epoch-5 checkpoints to the original 30-epoch target, preserving the same seeds and splits. This document describes the measured protocols and analysis. The strict objective matrix is 35/50: 20 conventional local studies and 15 literature-only reviews are complete under separate criteria; 15 local LLM objectives remain incomplete. See `FINAL_COMPLETION_MATRIX.md` for statuses.
 
 ## Evidence hierarchy
 
@@ -45,4 +45,4 @@ The ResNet-18 seed-11 epoch-2-to-3 elapsed interval is 1,122.1625 seconds. It is
 
 ## Completion and limitations
 
-Completion criteria were not relaxed after results. 20/50 reflects verified completion of the conventional schedules; the 15 local LLM objectives remain incomplete and the 15 literature objectives are not local experiments. Evidence supports selected descriptive comparisons, but not broad saturation claims, family rankings, or training-compute comparisons for locally evaluated public LLMs.
+Completion criteria were not relaxed after results. The denominator remains 50: all 20 conventional schedules and all 15 literature-only reviews pass their respective audits, while the 15 local LLM objectives remain partial or unevaluated. Literature completion denotes source-based review, not local experiments or reproduction. Evidence supports selected descriptive comparisons, but not broad saturation claims, family rankings, or training-compute comparisons for locally evaluated public LLMs.

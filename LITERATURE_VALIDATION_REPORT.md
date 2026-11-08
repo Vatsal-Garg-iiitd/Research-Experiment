@@ -12,7 +12,29 @@ The literature ledger covers 15 published configurations across GPT-3, Gopher, C
 | Uncertain | 88 | Not resolved from available evidence; not treated as source-confirmed absence. |
 | Unavailable | 16 | No verified value appears in the cited source location reviewed for that field. |
 
-Every ledger row includes model, field, value, evidence class, source URL, locator, and notes. Source names and link mapping are in `results/literature/literature_sources.md`. The automated integrity check confirms 300 unique model/field keys and non-empty URL/locator fields. This structural check does not substitute for a fresh line-by-line review of every cited paper.
+Every ledger row includes model, field, value, evidence class, source URL, locator, and notes. Source names and link mapping are in `results/literature/literature_sources.md`. The automated integrity check confirms 300 unique model/field keys, non-empty URL/locator fields, and consistency between each field row's source ID and its configuration-level source record. Primary-source spot checks below cover headline facts; the per-field verification notes retain the specific locator and the unresolved items. This audit does not claim that every benchmark protocol is harmonized or that every uncertain field has a known value.
+
+## Configuration-level completion audit
+
+The following table is generated from `results/processed/literature_completion_audit.csv`. For each entry, the completion rule checks a unique 20-field schema, a source identity, source URL and locator on every field, reported parameter count, reported or transparently derived token count, and explicit classification of all unresolved blanks. Benchmark evidence is separately labeled as a reported compatible score or an explicit score gap. Counts describe evidence availability; uncertain and unavailable fields remain genuine limitations. All 15 entries pass this literature-review criterion. The field-level values, locators, and notes remain the detailed evidence record.
+
+| Configuration | Source ID | Reported | Derived | Estimated | Uncertain | Unavailable | Benchmark evidence | Status |
+|---|---|---:|---:|---:|---:|---:|---|---|
+| GPT-3 175B | `BROWN2020` | 14 | 0 | 1 | 5 | 0 | reported_score | completed_literature_only |
+| Gopher 280B | `RAE2021` | 12 | 0 | 1 | 7 | 0 | reported_score | completed_literature_only |
+| Chinchilla 70B | `HOFFMANN2022` | 13 | 0 | 1 | 5 | 1 | reported_score | completed_literature_only |
+| PaLM 540B | `CHOWDHERY2022` | 15 | 0 | 1 | 4 | 0 | reported_score | completed_literature_only |
+| OPT-13B | `ZHANG2022` | 8 | 1 | 1 | 7 | 3 | score_gap_explicitly_classified | completed_literature_only |
+| OPT-30B | `ZHANG2022` | 8 | 1 | 1 | 7 | 3 | score_gap_explicitly_classified | completed_literature_only |
+| OPT-66B | `ZHANG2022` | 8 | 1 | 1 | 7 | 3 | score_gap_explicitly_classified | completed_literature_only |
+| OPT-175B | `ZHANG2022` | 10 | 1 | 2 | 7 | 0 | score_gap_explicitly_classified | completed_literature_only |
+| LLaMA-7B | `TOUVRON2023` | 12 | 0 | 1 | 6 | 1 | reported_score | completed_literature_only |
+| LLaMA-13B | `TOUVRON2023` | 12 | 0 | 1 | 6 | 1 | reported_score | completed_literature_only |
+| LLaMA-33B | `TOUVRON2023` | 12 | 0 | 1 | 6 | 1 | reported_score | completed_literature_only |
+| LLaMA-65B | `TOUVRON2023` | 14 | 0 | 1 | 5 | 0 | reported_score | completed_literature_only |
+| BLOOM-176B | `BIGSCIENCE2022` | 10 | 2 | 1 | 6 | 1 | score_gap_explicitly_classified | completed_literature_only |
+| PaLM-62B (795B tokens) | `CHOWDHERY2022` | 13 | 0 | 1 | 5 | 1 | reported_score | completed_literature_only |
+| PaLM-62B continued (1.325T tokens) | `CHOWDHERY2022` | 13 | 0 | 1 | 5 | 1 | reported_score | completed_literature_only |
 
 ## Primary-source spot verification
 

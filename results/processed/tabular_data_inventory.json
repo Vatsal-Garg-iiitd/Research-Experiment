@@ -817,6 +817,44 @@
       ]
     },
     {
+      "path": "results/processed/literature_completion_audit.csv",
+      "rows": 15,
+      "columns": 16,
+      "column_names": [
+        "model",
+        "source_id",
+        "primary_source_url",
+        "source_fields",
+        "expected_fields",
+        "reported_fields",
+        "derived_fields",
+        "estimated_fields",
+        "uncertain_fields",
+        "unavailable_fields",
+        "parameter_evidence",
+        "token_evidence",
+        "benchmark_evidence",
+        "status",
+        "validation_errors",
+        "completion_basis"
+      ],
+      "candidate_identifier": null,
+      "candidate_identifier_duplicate_excess": 0,
+      "missing_cells": 15,
+      "missing_by_column": {
+        "validation_errors": 15
+      },
+      "status_column": "status",
+      "status_counts": {
+        "completed_literature_only": 15
+      },
+      "provenance_columns": [
+        "source_id",
+        "primary_source_url",
+        "source_fields"
+      ]
+    },
+    {
       "path": "results/processed/llm_full_eval_summary.csv",
       "rows": 6,
       "columns": 20,

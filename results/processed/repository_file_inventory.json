@@ -7,9 +7,9 @@
     "*.pyc",
     "*.pyo"
   ],
-  "file_count": 687,
+  "file_count": 689,
   "extension_counts": {
-    ".csv": 52,
+    ".csv": 53,
     ".gz": 4,
     ".joblib": 9,
     ".json": 153,
@@ -20,7 +20,7 @@
     ".pkl": 30,
     ".png": 73,
     ".pt": 144,
-    ".py": 39,
+    ".py": 40,
     ".svg": 25,
     ".txt": 2,
     ".yaml": 1,
@@ -35,7 +35,7 @@
     },
     {
       "path": "DATA_INVENTORY.md",
-      "bytes": 4966,
+      "bytes": 5046,
       "suffix": ".md"
     },
     {
@@ -45,22 +45,22 @@
     },
     {
       "path": "EXECUTION_LOG.md",
-      "bytes": 2499,
+      "bytes": 2508,
       "suffix": ".md"
     },
     {
       "path": "EXPERIMENTAL_METHODOLOGY.md",
-      "bytes": 5908,
+      "bytes": 6156,
       "suffix": ".md"
     },
     {
       "path": "EXPERIMENT_COMPLETION_MATRIX.md",
-      "bytes": 13743,
+      "bytes": 16056,
       "suffix": ".md"
     },
     {
       "path": "EXPERIMENT_DESIGN.md",
-      "bytes": 2720,
+      "bytes": 2786,
       "suffix": ".md"
     },
     {
@@ -75,17 +75,17 @@
     },
     {
       "path": "FINAL_COMPLETION_MATRIX.md",
-      "bytes": 13743,
+      "bytes": 16056,
       "suffix": ".md"
     },
     {
       "path": "FINAL_INDEPENDENT_AUDIT.md",
-      "bytes": 1634,
+      "bytes": 1786,
       "suffix": ".md"
     },
     {
       "path": "FINAL_RESEARCH_REPORT.md",
-      "bytes": 28764,
+      "bytes": 29466,
       "suffix": ".md"
     },
     {
@@ -105,17 +105,17 @@
     },
     {
       "path": "IMPLEMENTATION_GAPS.md",
-      "bytes": 2430,
+      "bytes": 2505,
       "suffix": ".md"
     },
     {
       "path": "LITERATURE_REVIEW.md",
-      "bytes": 3277,
+      "bytes": 3480,
       "suffix": ".md"
     },
     {
       "path": "LITERATURE_VALIDATION_REPORT.md",
-      "bytes": 5325,
+      "bytes": 8021,
       "suffix": ".md"
     },
     {
@@ -130,7 +130,7 @@
     },
     {
       "path": "MACOS_EXECUTION_LOG.md",
-      "bytes": 2143,
+      "bytes": 2216,
       "suffix": ".md"
     },
     {
@@ -145,27 +145,27 @@
     },
     {
       "path": "METHODOLOGY_GAPS.md",
-      "bytes": 2306,
+      "bytes": 2352,
       "suffix": ".md"
     },
     {
       "path": "PROJECT_AUDIT.md",
-      "bytes": 5033,
+      "bytes": 5613,
       "suffix": ".md"
     },
     {
       "path": "README.md",
-      "bytes": 6675,
+      "bytes": 6994,
       "suffix": ".md"
     },
     {
       "path": "REMAINING_WORK.md",
-      "bytes": 1955,
+      "bytes": 2026,
       "suffix": ".md"
     },
     {
       "path": "REPRODUCIBILITY.md",
-      "bytes": 3220,
+      "bytes": 3392,
       "suffix": ".md"
     },
     {
@@ -200,7 +200,7 @@
     },
     {
       "path": "reports/FINAL_RESEARCH_REPORT.pdf",
-      "bytes": 3769322,
+      "bytes": 3770567,
       "suffix": ".pdf"
     },
     {
@@ -2915,7 +2915,7 @@
     },
     {
       "path": "results/literature/literature_sources.md",
-      "bytes": 5363,
+      "bytes": 5832,
       "suffix": ".md"
     },
     {
@@ -3119,13 +3119,18 @@
       "suffix": ".json"
     },
     {
+      "path": "results/processed/literature_completion_audit.csv",
+      "bytes": 5764,
+      "suffix": ".csv"
+    },
+    {
       "path": "results/processed/llm_full_eval_summary.csv",
       "bytes": 2169,
       "suffix": ".csv"
     },
     {
       "path": "results/processed/repository_file_inventory.json",
-      "bytes": 91321,
+      "bytes": 91425,
       "suffix": ".json"
     },
     {
@@ -3150,7 +3155,7 @@
     },
     {
       "path": "results/processed/tabular_data_inventory.json",
-      "bytes": 50943,
+      "bytes": 51916,
       "suffix": ".json"
     },
     {
@@ -3304,6 +3309,11 @@
       "suffix": ".py"
     },
     {
+      "path": "scripts/audit_literature_completion.py",
+      "bytes": 6029,
+      "suffix": ".py"
+    },
+    {
       "path": "scripts/audit_repository_inventory.py",
       "bytes": 6108,
       "suffix": ".py"
@@ -3360,7 +3370,7 @@
     },
     {
       "path": "scripts/generate_completion_matrix.py",
-      "bytes": 8871,
+      "bytes": 9746,
       "suffix": ".py"
     },
     {
@@ -3460,7 +3470,7 @@
     },
     {
       "path": "scripts/validate_project_outputs.py",
-      "bytes": 12588,
+      "bytes": 13392,
       "suffix": ".py"
     }
   ]
