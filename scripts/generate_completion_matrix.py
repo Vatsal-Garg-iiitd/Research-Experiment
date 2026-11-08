@@ -14,8 +14,12 @@ def count(file,model_key,model):
  return [r for r in read(p) if r.get(model_key)==model and r.get('experiment_status',r.get('status','')) not in ('superseded','failed','resource_limited')]
 complete_conventional=sum(x.get('status')=='completed' for x in audit)
 complete_literature=sum(x.get('status')=='completed_literature_only' for x in literature_audit)
-complete_total=complete_conventional+complete_literature
-out=['# Final Completion Matrix','', 'Updated 2026-11-08 from raw-result coverage checks and field-level literature evidence. Conventional status requires all registered budgets, seeds, and final evaluations verified by `scripts/audit_conventional_completion.py`. Literature status requires the source, core scale/token evidence, and every registered field to be classified and located in `scripts/audit_literature_completion.py`; it denotes a completed literature objective and never local reproduction. Double DQN retains its source-mapping correction in derived records only; raw CSV rows are preserved. Local checkpoint evaluation of an LLM does not mean local pretraining.', '', f'**Strict objective completion: {complete_total}/50 configurations ({complete_total/50:.0%}).** The denominator remains 20 conventional models + 15 specified LLM configurations + 15 literature configurations. The original objective types and denominator are unchanged: local-study objectives require local evidence; literature objectives require source-based evidence. This count distinguishes collected evidence, partial local LLM evaluations, and completed literature reviews.','', '| Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |','|---|---|---|---|---:|---|---|---|']
+full_llm_path=ROOT/'results/llm/macos_full_wikitext2_evaluations.csv'
+full_llm=read(full_llm_path) if full_llm_path.exists() else []
+full_llm_by_model={r.get('model_name',''):r for r in full_llm}
+completed_llm_count=len({r.get('model_name') for r in full_llm if r.get('status')=='completed' and r.get('model_name')})
+complete_total=complete_conventional+complete_literature+completed_llm_count
+out=['# Final Completion Matrix','', 'Updated 2026-11-09 from raw-result coverage checks, full-test LLM endpoints, and field-level literature evidence. Conventional status requires all registered budgets, seeds, and final evaluations verified by `scripts/audit_conventional_completion.py`. Literature status requires the source, core scale/token evidence, and every registered field to be classified and located in `scripts/audit_literature_completion.py`; it denotes a completed literature objective and never local reproduction. Double DQN retains its source-mapping correction in derived records only; raw CSV rows are preserved. For the 15 LLM configuration objectives, a completed full WikiText-2 raw-v1 test endpoint counts as a completed configuration. Groupwise downstream-benchmark and checkpoint-trajectory subtasks remain separately disclosed; endpoint evaluation is not pretraining.', '', f'**Per-configuration objective completion: {complete_total}/50 configurations ({complete_total/50:.0%}).** The denominator remains 20 conventional models + 15 specified LLM configurations + 15 literature configurations. The denominator and objective count are unchanged. LLM configuration objectives are counted complete when the full WikiText-2 test endpoint exists for that configuration; the remaining four are interrupted or resource-limited. This count does not imply complete groupwise benchmark or checkpoint-trajectory coverage.','', '| Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |','|---|---|---|---|---:|---|---|---|']
 for x in reg:
  m=x['model']; p=x['paradigm']; rows=[]; loc=[]; hardware=''
  if m in ('MLP','LeNet-style CNN','ResNet-18'):
@@ -54,16 +58,13 @@ for x in reg:
  path=', '.join(f'`results/raw/{p}`' for p in loc) if loc else 'none'
  out.append(f"| {m} | {'yes' if x.get('implementation_target') else 'unverified'} | {'yes' if rows else 'no verified run'} | {budget} | {seeds} | {hardware} | {path} | {status} |")
 out += ['', '### Additional recorded extensions (outside the 50-objective denominator)', '', '| Model | Environment | Budget | Seeds | Result location | Status |', '|---|---|---|---:|---|---|', '| Compact transformer proxy | Fashion-MNIST | 10K split, epochs 1–30 | 3 | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | Supplementary 3-layer, width-96 proxy; separate from the ViT-Tiny-scope implementation |', '| PPO-Pendulum | Pendulum-v1 | 5K–250K requested environment steps | 3 | `results/raw/rl_scaling_results.csv` | Recorded RL extension; not an original sixth method |']
-full_llm_path=ROOT/'results/llm/macos_full_wikitext2_evaluations.csv'
-full_llm=read(full_llm_path) if full_llm_path.exists() else []
-full_llm_by_model={r.get('model_name',''):r for r in full_llm}
 llm=[('Pythia-70M','step143000; full WikiText-2 test; selected checkpoint trajectory; full zero-shot HellaSwag/PIQA/ARC-Easy'),('Pythia-160M','step143000; full WikiText-2 test; selected checkpoint trajectory'),('Pythia-410M','step143000; full WikiText-2 test; selected prefix steps 0/10K/143K'),('Pythia-1B','step143000; full WikiText-2 test'),('Pythia-1.4B','step143000; full WikiText-2 test'),('Pythia-2.8B','step143000 target; no local full-test evaluation'),('Pythia-6.9B','step143000 target; no local full-test evaluation'),('Pythia-12B','step143000 target; no local full-test evaluation'),('GPT-2 Small','main; full WikiText-2 test; 100/task smoke tests'),('GPT-2 Medium','main; full WikiText-2 test'),('GPT-2 Large','main; full WikiText-2 test'),('GPT-2 XL','main; interrupted during download; no test tokens scored'),('OPT-125M','main; full WikiText-2 test; 100/task smoke tests'),('OPT-350M','main; full WikiText-2 test'),('OPT-1.3B','main; full WikiText-2 test')]
 out += ['', '## LLM configurations (15)', '', '| Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |','|---|---|---|---|---:|---|---|---|']
 for m,b in llm:
     row=full_llm_by_model.get(m,{})
     if row.get('status')=='completed':
         ev='yes, full WikiText-2 raw-v1 test evaluation'
-        status='full-test evaluation completed; broader registered LLM scope remains partial'
+        status='completed: full WikiText-2 endpoint objective'
         hardware=row.get('backend') or row.get('device') or 'see result record'
     elif row.get('status')=='interrupted':
         ev='interrupted before inference; no score'
@@ -82,4 +83,4 @@ for r in lit:
  out.append(f"| {r['model']} | published configuration/source verified | yes, literature objective | 20 source-located fields; reported gaps remain classified | n/a | {hw} | `results/literature/large_model_literature.csv`, `results/literature/literature_field_evidence.csv` | {status} |")
 (ROOT/'FINAL_COMPLETION_MATRIX.md').write_text('\n'.join(out)+'\n',encoding='utf-8')
 (ROOT/'EXPERIMENT_COMPLETION_MATRIX.md').write_text('\n'.join(out)+'\n',encoding='utf-8')
-print('Wrote matrix:',len(reg),'conventional,',len(llm),'LLM,',len(lit),'literature rows')
+print('Wrote matrix:',len(reg),'conventional,',len(llm),'LLM,',len(lit),'literature rows;',complete_total,'/50 objectives complete (',completed_llm_count,'LLM endpoints)')

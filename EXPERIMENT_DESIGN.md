@@ -10,7 +10,7 @@ The strict completion framework has 50 objectives: 20 conventional methods (supe
 
 ## Evidence and completion criteria
 
-Raw CSV/JSON/JSONL records, model/configuration files, evaluator outputs, and execution logs define the evidence. The original objective types remain distinct: 20 conventional local studies, 15 local LLM configurations, and 15 literature reviews. The final strict status is 35/50: all 20 conventional objectives meet their registered schedules, and all 15 literature objectives pass the source-evidence audit; the 15 local LLM objectives remain incomplete. Literature review completion is not local model reproduction. Current status by objective is in `FINAL_COMPLETION_MATRIX.md`.
+Raw CSV/JSON/JSONL records, model/configuration files, evaluator outputs, and execution logs define the evidence. The original objective types remain distinct: 20 conventional local studies, 15 local LLM configurations, and 15 literature reviews. The current status is 46/50 under the per-configuration endpoint rule: all 20 conventional objectives and 15 literature objectives are complete, as are 11 LLM configurations with full-test endpoints. Four LLM configurations lack endpoints; groupwise LLM benchmark/trajectory subtasks remain partial. Literature review completion is not local model reproduction. Current status by objective is in `FINAL_COMPLETION_MATRIX.md`.
 
 ## Current dataset and protocol summary
 

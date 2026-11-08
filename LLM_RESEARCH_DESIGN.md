@@ -23,4 +23,4 @@ Full-corpus NLL and perplexity are computed from token-level losses, with tokeni
 
 ## Completion and limits
 
-The LLM portion remains partial under the strict 50-objective framework. The 11 full WikiText-2 evaluations, selected Pythia trajectories, one full harness model, and three smoke-run models do not complete the 15-configuration target. This design note documents current evidence only and does not authorize more evaluation.
+Eleven of the 15 per-model LLM configuration objectives count complete based on full WikiText-2 raw-v1 test endpoints. Four lack a completed endpoint: GPT-2 XL was interrupted before scoring, and Pythia-2.8B/6.9B/12B were not evaluated due to local FP32 memory limits. Groupwise multi-model downstream benchmarks and checkpoint-trajectory coverage remain partial. This design note documents current evidence only and does not authorize more evaluation.

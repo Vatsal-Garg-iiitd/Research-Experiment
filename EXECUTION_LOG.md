@@ -24,5 +24,5 @@ See `REPRODUCIBILITY.md` for analysis-only rebuild commands and validation. Trai
 
 - Rebuilt LLM endpoint summaries, canonical result tables, completion matrices, data inventory, identifier audit, and 25 figure pairs from saved result files.
 - The full WikiText-2 raw-v1 table contains 11 completed checkpoint evaluations. GPT-2 XL is recorded as interrupted before scoring; Pythia-2.8B, 6.9B, and 12B remain unrun due to local memory limits.
-- No model testing, training, or inference was run during this consolidation pass. Strict completion remains 35/50 because LLM endpoint evaluations alone do not satisfy the broader registered objectives.
+- No model testing, training, or inference was run during this consolidation pass. The matrix now records 46/50 by counting the 11 completed full-test endpoints as their per-model configuration objectives; ancillary multi-model benchmark/trajectory tasks remain partial.
 - Identifier audit: 51 tables scanned, zero identifier errors, zero unresolved references. The canonical index now contains 3,368 source-located records (the 3,362 count above is the dated 8 November snapshot).

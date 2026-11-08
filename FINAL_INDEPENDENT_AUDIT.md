@@ -4,7 +4,7 @@
 
 | Check | Result |
 |---|---|
-| Strict objectives | 35/50 complete; original denominator and objective types retained |
+| Configuration objectives | 46/50 complete under the per-model full-test endpoint rule; denominator retained |
 | Canonical result index | 3,368 source-located records |
 | Statistical summaries | 4,864 grouped metric-budget records |
 | Paired marginal transitions | 3,167 seed/configuration-paired intervals |

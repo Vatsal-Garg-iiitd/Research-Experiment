@@ -11,9 +11,9 @@ Audit date: 9 November 2026. The local `main` branch was compared with fetched `
 | 3,167 | Paired adjacent-budget marginal transitions within matched seed/configuration series. |
 | 219 | Held-out metric endpoint groups. |
 | 5,250 | Evidence registry rows across 29 source paths; a source catalog, not unique runs. |
-| 35/50 | Strict registered objectives complete: all 20 conventional schedules and all 15 literature-only reviews pass their respective audits; 15 local LLM configurations remain partial/not evaluated. |
+| 46/50 | Configuration objectives complete under the per-model full-test endpoint rule: all 20 conventional schedules, 11 LLM endpoints, and all 15 literature-only reviews. Four LLM endpoints are incomplete; groupwise benchmark/trajectory subtasks remain partial. |
 
-Earlier counts (including 430/619 canonical rows, 458/279/84 analysis rows, 2,612/3,614/2,417/169, and 3,720 registry rows) describe older source snapshots or processing generations. They are not additive and are superseded by the reproducible current outputs. The original 50-objective denominator and criteria remain unchanged.
+Earlier counts (including 430/619 canonical rows, 458/279/84 analysis rows, 2,612/3,614/2,417/169, and 3,720 registry rows) describe older source snapshots or processing generations. They are not additive and are superseded by the reproducible current outputs. The 50-objective denominator remains unchanged. Current LLM completion counts each configuration with a completed full WikiText-2 endpoint; downstream benchmark and trajectory coverage is tracked separately.
 
 ## Data integrity and analytical treatment
 

@@ -68,6 +68,10 @@ if (ROOT/'results/llm/macos_full_wikitext2_evaluations.csv').is_file():
     if len(done)!=11:errors.append(f'Expected eleven completed full WikiText-2 checkpoint evaluations, found {len(done)}')
     if len({r.get('text_sha256') for r in done})!=1:errors.append('Full WikiText evaluations do not share a text hash')
     if any(r.get('context_length')!='1024' or r.get('stride')!='512' for r in done):errors.append('Full WikiText protocol mismatch')
+    completed_models={r.get('model_name') for r in done}
+    if len(completed_models)!=11:errors.append(f'Expected 11 unique LLM configuration endpoints, found {len(completed_models)}')
+    registered_llm={'Pythia-70M','Pythia-160M','Pythia-410M','Pythia-1B','Pythia-1.4B','Pythia-2.8B','Pythia-6.9B','Pythia-12B','GPT-2 Small','GPT-2 Medium','GPT-2 Large','GPT-2 XL','OPT-125M','OPT-350M','OPT-1.3B'}
+    if not completed_models.issubset(registered_llm):errors.append('A completed LLM endpoint is not one of the 15 registered configurations')
     stopped=[r for r in rows if r.get('model_name')=='GPT-2 XL']
     if not stopped or any(r.get('status')!='interrupted' or r.get('scored_tokens') for r in stopped):errors.append('GPT-2 XL interruption must be recorded without scored tokens')
 if (ROOT/'results/llm/harness_full_summary.csv').is_file():
@@ -103,7 +107,7 @@ if (ROOT/'results/processed/literature_completion_audit.csv').is_file():
     if any(int(r.get('source_fields') or 0)!=20 or int(r.get('expected_fields') or 0)!=20 for r in rows):errors.append('Literature audit has incomplete field coverage')
 if (ROOT/'FINAL_COMPLETION_MATRIX.md').is_file():
     matrix=(ROOT/'FINAL_COMPLETION_MATRIX.md').read_text(encoding='utf-8')
-    if '**Strict objective completion: 35/50 configurations (70%).**' not in matrix:errors.append('Strict completion count missing or inconsistent with objective audits')
+    if '**Per-configuration objective completion: 46/50 configurations (92%).**' not in matrix:errors.append('Completion count missing or inconsistent with the 20 conventional, 11 full-test LLM, and 15 literature objectives')
 if (ROOT/'results/processed/strengthened_statistical_summaries.csv').is_file():
     rows=load_csv('results/processed/strengthened_statistical_summaries.csv')
     if len(rows)!=4864:errors.append(f'Unexpected grouped analysis count: {len(rows)}')
@@ -129,7 +133,7 @@ if (ROOT/'FINAL_RESEARCH_REPORT.md').is_file():
     report=(ROOT/'FINAL_RESEARCH_REPORT.md').read_text(encoding='utf-8')
     expected=[f'## {i}.' for i in range(1,37)]
     if any(h not in report for h in expected):errors.append('Final report is missing one or more of its 36 required sections')
-    for phrase in ('35 of 50','4,864','3,167','219','1,122.1625'):
+    for phrase in ('46 of 50','4,864','3,167','219','1,122.1625'):
         if phrase not in report:errors.append(f'Final report lacks reconciled key value: {phrase}')
 pdf=ROOT/'reports/FINAL_RESEARCH_REPORT.pdf'
 if pdf.is_file() and (pdf.stat().st_size<100000 or pdf.read_bytes()[:5]!=b'%PDF-'):errors.append('Final report PDF is invalid or unexpectedly small')

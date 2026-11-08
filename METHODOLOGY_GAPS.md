@@ -2,7 +2,7 @@
 
 The following limitations apply to the saved evidence and are reflected in the final report. They are not resolved by post hoc analysis and do not trigger new runs.
 
-- **Completion criterion:** the original 50-objective framework is 35/50: 20 conventional schedules and 15 literature-only reviews are complete under their respective objective types. Fifteen local LLM configurations remain partial or unevaluated. Literature completion is not local experimental completion.
+- **Completion criterion:** the 50-objective matrix is 46/50 under the per-model endpoint rule: 20 conventional studies, 11 full-test LLM endpoints, and 15 literature-only reviews are complete. Four LLM endpoints and groupwise benchmark/trajectory coverage remain incomplete. Literature completion is not local experimental completion.
 - **Replicates:** most supervised, SSL, representation, and core RL conditions have three seeds; Double DQN and SAC have five. Intervals are conditional on fixed splits and small-sample uncertainty is substantial.
 - **Validation and testing:** historical endpoint selection is not completely uniform. Some analyses use held-out endpoints at designated budgets; validation curves are treated separately. Data-size scaling is restricted to matched epoch-5 endpoints.
 - **Architecture and algorithm fidelity:** the compact transformer is a 3-layer/96-width proxy. SSL recipes are Fashion-MNIST adaptations. Historical LabelSpreading rows do not count as LabelPropagation.

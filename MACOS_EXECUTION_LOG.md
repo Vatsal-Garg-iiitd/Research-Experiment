@@ -18,7 +18,7 @@ This summary documents the macOS environment represented in the retained results
 - Reinforcement learning: DQN, Double DQN, A2C, PPO, and SAC at recorded requested budgets and seed counts; PPO-Pendulum is an extension.
 - LLM checkpoint inference and harness evaluations are separate evaluation records; they do not represent local pretraining.
 
-All 20 conventional schedules and all 15 literature-only objectives pass their respective audits. The unchanged 50-objective framework is 35/50 complete; local LLM scope remains partial. Literature completion indicates source-based review and does not claim local reproduction. `PROJECT_AUDIT.md`, `EXPERIMENT_COMPLETION_MATRIX.md`, and the final report contain result-level details and limitations.
+All 20 conventional schedules and all 15 literature-only objectives pass their respective audits. The 50-objective matrix is 46/50 under the per-model full-test endpoint rule; four LLM endpoints and multi-model benchmark/trajectory subtasks remain incomplete. Literature completion indicates source-based review and does not claim local reproduction. `PROJECT_AUDIT.md`, `EXPERIMENT_COMPLETION_MATRIX.md`, and the final report contain result-level details and limitations.
 
 ## Analysis
 

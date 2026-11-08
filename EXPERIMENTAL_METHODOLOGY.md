@@ -2,7 +2,7 @@
 
 ## Current status
 
-The registered conventional schedules are complete and the analysis is finalized. The pseudo-label and matched labeled-only runs resumed from saved epoch-5 checkpoints to the original 30-epoch target, preserving the same seeds and splits. This document describes the measured protocols and analysis. The strict objective matrix is 35/50: 20 conventional local studies and 15 literature-only reviews are complete under separate criteria; 15 local LLM objectives remain incomplete. See `FINAL_COMPLETION_MATRIX.md` for statuses.
+The registered conventional schedules are complete and the analysis is finalized. The pseudo-label and matched labeled-only runs resumed from saved epoch-5 checkpoints to the original 30-epoch target, preserving the same seeds and splits. This document describes the measured protocols and analysis. The matrix records 46/50 complete: 20 conventional studies, 11 LLM configurations with complete full-test endpoints, and 15 literature-only reviews. Multi-model benchmark and checkpoint-trajectory work remains partial; four LLM configurations lack endpoints. See `FINAL_COMPLETION_MATRIX.md` for statuses.
 
 ## Evidence hierarchy
 
@@ -45,4 +45,4 @@ The ResNet-18 seed-11 epoch-2-to-3 elapsed interval is 1,122.1625 seconds. It is
 
 ## Completion and limitations
 
-Completion criteria were not relaxed after results. The denominator remains 50: all 20 conventional schedules and all 15 literature-only reviews pass their respective audits, while the 15 local LLM objectives remain partial or unevaluated. Literature completion denotes source-based review, not local experiments or reproduction. Evidence supports selected descriptive comparisons, but not broad saturation claims, family rankings, or training-compute comparisons for locally evaluated public LLMs.
+The current LLM per-configuration completion unit is the full WikiText-2 test endpoint; broader suite coverage remains reported separately. The denominator remains 50. The current score is 46/50 by counting each LLM model with a full WikiText-2 test endpoint as a completed per-configuration objective, alongside 20 conventional schedules and 15 literature reviews. Four LLM configurations have no completed endpoint, and groupwise benchmark/trajectory coverage remains partial. Literature completion denotes source-based review, not local experiments or reproduction. Evidence supports selected descriptive comparisons, but not broad saturation claims, family rankings, or training-compute comparisons for locally evaluated public LLMs.

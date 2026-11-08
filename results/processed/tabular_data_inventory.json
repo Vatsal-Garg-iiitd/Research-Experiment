@@ -778,7 +778,7 @@
     },
     {
       "path": "results/processed/identifier_findings.csv",
-      "rows": 1533,
+      "rows": 1545,
       "columns": 7,
       "column_names": [
         "severity",

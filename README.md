@@ -4,7 +4,7 @@ This repository studies how task performance changes as computational budgets in
 
 ## Final status
 
-The strict, unchanged 50-objective framework records **35 of 50 objectives complete (70%)**: 20 conventional objectives pass their local schedule, seed, and endpoint checks, and all 15 literature objectives pass the source-evidence audit. Literature completion means the published-study review is complete to the extent the sources report data; it does not mean local reproduction or that every source reports every field. The remaining 15 local LLM configurations are evaluated only in part or remain unevaluated. Results across paradigms are not directly comparable, and the evidence does not establish a universal diminishing-returns law or cross-paradigm efficiency ranking.
+The 50-objective matrix records **46/50 (92%)**: 20 conventional objectives, 11 LLM configuration objectives with completed full WikiText-2 raw-v1 test endpoints, and 15 literature-only objectives. The LLM count is per model endpoint; multi-model full downstream-benchmark coverage and selected checkpoint-trajectory subtasks remain incomplete. GPT-2 XL has no scored evaluation, and Pythia-2.8B/6.9B/12B were not evaluated because their FP32 weights exceed this Mac’s safe memory budget. Literature completion means the published-study review is complete to the extent sources report data; it does not mean local reproduction or that every source reports every field. Results across paradigms are not directly comparable, and the evidence does not establish a universal diminishing-returns law or cross-paradigm efficiency ranking.
 
 ## Verified evidence at a glance
 

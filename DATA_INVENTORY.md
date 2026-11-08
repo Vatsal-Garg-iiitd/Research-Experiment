@@ -50,7 +50,7 @@ CSV row counts below exclude headers. Candidate identifier repetition is a scree
 | `results/processed/foreign_key_audit.csv` | 0 | 5 | — | 0 | 0 |
 | `results/processed/full_suite_marginal_results.csv` | 33 | 27 | run_id | 13 | 198 |
 | `results/processed/identifier_audit.csv` | 99 | 7 | — | 0 | 29 |
-| `results/processed/identifier_findings.csv` | 1533 | 7 | — | 0 | 243 |
+| `results/processed/identifier_findings.csv` | 1545 | 7 | — | 0 | 243 |
 | `results/processed/identifier_reconciliation.csv` | 95 | 8 | — | 0 | 50 |
 | `results/processed/literature_completion_audit.csv` | 15 | 16 | — | 0 | 15 |
 | `results/processed/llm_full_eval_summary.csv` | 11 | 20 | — | 0 | 0 |
