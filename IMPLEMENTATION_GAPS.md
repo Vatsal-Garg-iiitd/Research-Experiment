@@ -12,4 +12,4 @@ This file records implementation limitations after the experimental phase closed
 | Published evidence | 300 field-level rows over 15 configurations. | 104 fields remain uncertain; estimated values are explicitly classified and no missing compute is imputed. |
 | Cost instrumentation | Per-run wall time and selected memory/backend fields are retained. | Energy and actual FLOPs are incomplete. ResNet timing anomaly is preserved and qualified. Windows/DirectML and Mac/MPS times are not pooled. |
 
-The unchanged strict completion score is 0/50. This is a completion-criteria status, not a count of executed experiments. See `FINAL_COMPLETION_MATRIX.md`, `PROJECT_AUDIT.md`, and the final report.
+The unchanged strict completion framework is 20/50: all 20 conventional objectives pass their coverage checks, while the 15 local LLM objectives remain partial/not evaluated and the 15 literature entries are not local replications. See `FINAL_COMPLETION_MATRIX.md`, `PROJECT_AUDIT.md`, and the final report.

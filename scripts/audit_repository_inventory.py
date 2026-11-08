@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'results/processed'; OUT.mkdir(parents=True,exist_ok=True)
-SKIP={'.git','__pycache__'}
+SKIP={'.git','__pycache__','snapshots'}
 def eligible(p):
     rel=p.relative_to(ROOT)
     return not any(part in SKIP or part.startswith('.venv') for part in rel.parts) and p.suffix not in {'.pyc','.pyo'}
@@ -28,7 +28,7 @@ def main():
         duplicate_records=sum(n-1 for k,n in counts.items() if k and n>1)
         status_key='experiment_status' if 'experiment_status' in cols else ('status' if 'status' in cols else '')
         detail.append({'path':p.relative_to(ROOT).as_posix(),'rows':len(data),'columns':len(cols),'column_names':cols,'candidate_identifier':candidate or None,'candidate_identifier_duplicate_excess':duplicate_records,'missing_cells':sum(missing.values()),'missing_by_column':{k:v for k,v in missing.items() if v},'status_column':status_key or None,'status_counts':dict(Counter(r.get(status_key,'') for r in data)) if status_key else {},'provenance_columns':[c for c in cols if any(s in c.lower() for s in ('source','path','revision','checkpoint','hardware','backend','seed','split','run_id','experiment_id'))]})
-    (OUT/'tabular_data_inventory.json').write_text(json.dumps({'scope':'all results CSV files, including retained snapshots, excluding virtual environments and caches','files':detail},indent=2,ensure_ascii=False),encoding='utf-8')
+    (OUT/'tabular_data_inventory.json').write_text(json.dumps({'scope':'current results CSV files excluding preserved local snapshots, virtual environments, and caches','files':detail},indent=2,ensure_ascii=False),encoding='utf-8')
     json_detail=[]
     for p in sorted((ROOT/'results').rglob('*')):
         if not p.is_file() or not eligible(p) or p.suffix.lower() not in ('.json','.jsonl'):continue
@@ -51,7 +51,7 @@ def main():
                 else:keys=[];records=1;kind=type(obj).__name__
                 json_detail.append({'path':p.relative_to(ROOT).as_posix(),'format':'json','top_level_type':kind,'records_or_items':records,'top_level_keys':keys,'identifier_fields':[k for k in ('experiment_id','run_id','model','model_name','checkpoint_id','revision','dataset','seed','status') if k in keys],'parse_error':None})
         except Exception as e:json_detail.append({'path':p.relative_to(ROOT).as_posix(),'format':p.suffix.lower(),'parse_error':str(e)})
-    (OUT/'json_data_inventory.json').write_text(json.dumps({'scope':'JSON and JSONL files under results, including retained snapshots, excluding virtual environments and caches','files':json_detail},indent=2,ensure_ascii=False),encoding='utf-8')
+    (OUT/'json_data_inventory.json').write_text(json.dumps({'scope':'current JSON and JSONL files under results, excluding preserved local snapshots, virtual environments, and caches','files':json_detail},indent=2,ensure_ascii=False),encoding='utf-8')
     md=['# Repository and data inventory','',f'Inventory generated from `{ROOT}`; {len(files)} files after excluding Git internals, virtual environments, bytecode, and cache folders. Raw records are read-only inputs.','', '## File types','', '| Type | Files |','|---|---:|']
     md += [f'| `{k}` | {v} |' for k,v in sorted(kinds.items())]
     md += ['', '## Result tables','', 'CSV row counts below exclude headers. Candidate identifier repetition is a screening signal, not an automatic duplicate verdict: repeated identifiers may represent legitimate checkpoint budgets. Full columns, missingness, status counts, and provenance fields are recorded in `results/processed/tabular_data_inventory.json`. JSON/JSONL record counts and key/identifier coverage are in `results/processed/json_data_inventory.json`.','', '| File | Rows | Columns | Candidate ID | Repeated ID excess | Missing cells |','|---|---:|---:|---|---:|---:|']

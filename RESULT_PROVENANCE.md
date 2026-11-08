@@ -8,11 +8,11 @@ Raw records in `results/raw/*.csv` and saved evaluator records in `results/llm/`
 
 - **430 rows:** historical execution-log milestone without a matching saved snapshot; exact membership cannot be reconstructed.
 - **619 rows:** recoverable historical index at commit `afc488a`, from an earlier source state.
-- **2,612 rows:** current common index, comprising 2,548 selected conventional raw records and 64 selected LLM records. It is not a count of independent experiments; repeated budgets and non-completed statuses are retained.
-- **3,720 rows:** run/evidence registry across 29 source paths, a distinct index with a different unit of counting.
-- **3,614 / 2,417 / 169:** current grouped metric summaries / paired within-seed marginal transitions / final held-out metric groups.
+- **3,362 rows:** current common index of heterogeneous source records. It is not a count of independent experiments; repeated budgets and non-completed statuses are retained.
+- **5,250 rows:** run/evidence registry across 29 source paths, a distinct catalog with a different unit of counting.
+- **4,864 / 3,167 / 219:** current grouped metric summaries / paired within-seed marginal transitions / final held-out metric groups.
 
-Older 458/279/84 statistical counts refer to an earlier analysis generation. Current raw truth is never replaced by these historical derived totals.
+Older 430/619 canonical and 458/279/84 statistical counts refer to earlier source or analysis generations. The previous 2,612/3,614/2,417/169 snapshot predates the completed pseudo-label schedule. Historical totals are not added to current results; raw evidence is never replaced by derived totals.
 
 ## Rebuilding the data products
 

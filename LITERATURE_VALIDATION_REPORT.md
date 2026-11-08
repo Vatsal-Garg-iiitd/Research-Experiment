@@ -2,14 +2,15 @@
 
 ## Scope and evidence rules
 
-The literature ledger covers 15 published configurations across GPT-3, Gopher, Chinchilla, PaLM, OPT, LLaMA, and BLOOM. It contains 300 model-field rows (20 fields per configuration) in `results/literature/literature_field_evidence.csv`. Evidence classes distinguish directly reported values (`reported`), calculations from reported inputs (`derived`), secondary estimates (`estimated`), and unresolved or insufficiently verified fields (`uncertain`). An uncertain field is not interpreted as zero or as proof that a paper omitted it. Local experiments and published evidence remain separate.
+The literature ledger covers 15 published configurations across GPT-3, Gopher, Chinchilla, PaLM, OPT, LLaMA, and BLOOM. It contains 300 model-field rows (20 fields per configuration) in `results/literature/literature_field_evidence.csv`. Evidence classes distinguish directly reported values (`reported`), calculations from reported inputs (`derived`), secondary estimates (`estimated`), unresolved fields (`uncertain`), and fields with no value in a reviewed source location (`unavailable`). Blank or unavailable values are not interpreted as zero. Local experiments and published evidence remain separate.
 
 | Evidence class | Rows | Interpretation |
 |---|---:|---|
-| Reported | 172 | Directly located in a cited primary paper, official technical report, or model documentation. |
-| Derived | 8 | Reproducible calculation from reported inputs; source and method are in the field note. |
+| Reported | 174 | Directly located in a cited primary paper, official technical report, or model documentation. |
+| Derived | 6 | Reproducible calculation from reported inputs; source and method are in the field note. |
 | Estimated | 16 | Explicit estimates, generally from secondary sources; not presented as paper-reported. |
-| Uncertain | 104 | Not resolved from saved evidence; may be unavailable, unextracted, or unclear. |
+| Uncertain | 88 | Not resolved from available evidence; not treated as source-confirmed absence. |
+| Unavailable | 16 | No verified value appears in the cited source location reviewed for that field. |
 
 Every ledger row includes model, field, value, evidence class, source URL, locator, and notes. Source names and link mapping are in `results/literature/literature_sources.md`. The automated integrity check confirms 300 unique model/field keys and non-empty URL/locator fields. This structural check does not substitute for a fresh line-by-line review of every cited paper.
 
@@ -27,6 +28,8 @@ The core claims central to the comparison are consistent with the cited primary 
 
 These spot checks verify stated headline identities, not every benchmark cell or training-runtime estimate. Benchmark values are reported only with the source attribution and protocol note available in the field ledger. If a later paper reproduces an earlier paper’s score, the ledger notes that attribution rather than presenting the score as a new measurement.
 
+PaLM compute fields were reconciled to their source units: PaLM-540B is reported at 2.56×10²⁴ FLOPs in Appendix Table 22; PaLM-62B at 795B tokens is reported at 3.08×10²³ FLOPs in the same table; and the continued 62B run's 492.9 zettaFLOPs in Appendix Table 31 is converted to 4.929×10²³ FLOPs. The last value is a unit conversion of source-reported compute, not a 6PT estimate. Project-derived 6PT estimates remain separately labeled `estimated`.
+
 ## Comparability and unresolved fields
 
 Published parameter counts and token totals are often directly documented, but training duration, optimizer details, hardware utilization, energy, FLOPs, evaluation prompts, and comparable held-out benchmark metrics have uneven coverage. FLOPs, accelerator-hours, wall-clock duration, and carbon emissions are different quantities. No conversion is implied without explicit assumptions, and estimated fields are not promoted to reported values.
@@ -35,4 +38,4 @@ Cross-paper benchmark outcomes are not a controlled scaling curve: models use di
 
 ## Conclusion
 
-The literature records support selected factual comparisons about published model scale and documented training setup. They do not supply a complete, uniform compute-performance dataset for the project’s research question. The 104 uncertain fields remain explicit limitations; no missing hardware, training compute, duration, or score has been fabricated.
+The literature records support selected factual comparisons about published model scale and documented training setup. They do not supply a complete, uniform compute-performance dataset for the project’s research question. Uncertain and unavailable fields remain explicit limitations; no missing hardware, training compute, duration, or score has been fabricated.

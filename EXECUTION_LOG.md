@@ -1,67 +1,20 @@
-# Execution log
+# Execution and provenance summary
 
-# Final audit reconciliation (2026-11-07)
+This file records the final verified state. Row-level measurements, settings, source paths, seeds, statuses, and checkpoints are retained in the raw result tables, `results/configurations/`, and `EXPERIMENT_RUN_REGISTRY.csv`. Historical development notes are omitted here; dated run logs under `results/run_logs/` preserve command-level provenance for the final continuation.
 
-The dated entries below are a chronological record; figures in older entries describe the outputs at those milestones, not current totals. The current repository state is summarized here: fetched GitHub `main` matched local HEAD `d5fdc732f9527e20ee687a27daded3145670741e` before audit edits; the worktree was clean; a pre-edit backup is `../Tcom_project-pre-final-audit-20261107.tar.gz`. No new experiments, training, inference, benchmarking, or data collection were run.
+## Final state (8 November 2026)
 
-Current reproducible totals: 2,612 canonical index rows (2,548 raw conventional rows + 64 selected LLM rows), 3,614 grouped statistical summaries, 2,417 seed-paired marginal transitions, and 169 final held-out metric groups. The earlier logged 430-row export and 458/279/84 analysis are historical milestones. A committed 619-row export is present at historical commit `afc488a`; neither historical export is the current source of truth. Fifteen later K-Means duplicate-checkpoint rows are retained in raw CSV and excluded from curves; the 10K data-size endpoint now filters to five epochs; Double DQN `local_measurement` rows are included as recorded RL measurements. See `PROJECT_AUDIT.md` and `DATA_QUALITY_REGISTER.md` for discrepancy-level detail.
+- Local `main` and fetched `research-experiment/main` were both at `d775ad18611b95c516800d646a2870b367796456` before finalization edits. The separate `origin` remote points to a different repository and was not used for publication.
+- All 20 conventional objectives pass `scripts/audit_conventional_completion.py` against raw rows, seeds, budgets, configuration references, and required endpoints. The original 50-objective denominator is unchanged; 20 are complete, 15 LLM objectives remain partial/not evaluated, and 15 literature entries are literature-only.
+- Pseudo-Labeling and its matched labeled-only baseline resumed from epoch-5 checkpoints through the registered epoch-30 target using the existing five fractions and seeds 11, 23, and 37. The wrapper log is under `results/run_logs/`; original checkpoints/configurations were snapshotted before continuation.
+- Rebuilt outputs: 3,362 canonical source-index rows, 4,864 grouped summaries, 3,167 paired marginal transitions, 219 held-out metric groups, 5,250 evidence-registry rows, and 25 publication figures in PNG/SVG.
+- Fifteen K-Means duplicate checkpoint-reuse rows remain in raw data and are excluded from derived curves. The malformed Double DQN raw field and the 1,122.1625285-second ResNet wall-clock interval remain documented without rewriting measured values.
+- Literature evidence is recorded in 300 field rows with `reported`, `derived`, `estimated`, `uncertain`, or `unavailable` classifications and source locators.
 
-Times are local Asia/Kolkata where known. This log records verified actions and does not infer missing historical logs.
+## Execution environments
 
-## 2026-11-06 — audit and preservation
+Historical Windows/DirectML and later macOS Apple M3/MPS records remain separate. Classical methods and RL used CPU where indicated by run records. Full language-model checkpoint evaluation used the per-run protocols documented in `LLM_EVALUATION_REPORT.md`; local inference of released checkpoints is not original pretraining. No hardware-platform speed ranking is claimed.
 
-- Read the new master execution prompt and inventoried the project excluding both Python environments.
-- Created `results/snapshots/pre_strengthening_20261106_150150/` and copied existing reports, configs, scripts, raw/processed results, LLM and literature records, hardware files and figures; copied the proposal PDF and saved extracted text there.
-- Searched project and checked attachment paths for `results.zip`; no supplied archive was found. Current workspace files are therefore the available evidence.
-- Extracted the seven-page proposal. It asks whether increased compute improves accuracy, whether marginal accuracy gain diminishes, records accuracy and elapsed time over training levels, and separately analyzes comparable published results.
-- Verified actual CSV counts: 26 historical conventional rows; 33 full-suite rows (20 pilot, 13 superseded); 34 expanded LLM rows; 15 literature rows. Current full-suite marginal file has 0 populated marginal-gain cells because it has only single-point active records per model.
-- Installed `pypdf` in the existing project `.venv` only to read the source proposal; `pip check` passed afterward. No environment was replaced.
-- Re-audited method labels and found the requested Label Propagation run actually used scikit-learn LabelSpreading; the ViT pilot is custom compact (3 layers, 96 width). Updated the matrix/report to identify these as proxies. The 160M/410M `main` LLM rows duplicate the step143000 checkpoint; matrix now calls out the alias.
-- Historical data files remain preserved in the snapshot. No new experiment scores were entered during this audit segment.
+## Rebuild and validate
 
-## Prior execution evidence already in workspace
-
-Detailed historical actions are represented by source scripts and raw result rows, not by a supplied run-log archive. See `results/raw/experiment_results.csv`, `results/raw/full_suite_results.csv`, LLM ledgers and `results/hardware/hardware_capabilities.md`. Do not infer unlogged events beyond those artifacts.
-
-## 2026-11-06 — expanded experiments, evaluation and deliverables
-
-- Executed replicated epochs 1–5 (seeds 11, 23, 37) for MLP, LeNet-style CNN, ResNet-18 and custom compact transformer; generated validation learning curves and independent official-test endpoints. See `results/raw/replicated_scaling_results.csv` and matching test-results CSV.
-- Executed Random Forest warm-start tree budgets 10–400 across three seeds; MiniBatch K-Means and GMM algorithmic sweeps across three seeds; pseudo-labeling vs matched labeled-only baselines at five label fractions and epochs 1–5; AE/VAE epochs 1–5 across three seeds; DBSCAN eight-setting parameter sensitivity grid; RL DQN, Double DQN, A2C, PPO and SAC at 5K/10K/25K interactions across three seeds. Raw outputs and checkpoints are retained.
-- Superseded the first AE/VAE linear-probe run after convergence warnings; reran using standardized features and a corrected convergence configuration. Both historical and corrected records remain, with old rows marked `superseded`.
-- Completed CPU FP32 50K-token WikiText-2 raw test evaluations for Pythia-70M/160M/410M step143000, GPT-2 Small, OPT-125M and OPT-350M. Exact scores and runtime are in `results/llm/full_wikitext2_evaluations.csv`.
-- Installed lm-evaluation-harness in an isolated environment. First downstream task attempt failed before model loading: Windows Application Control blocked the isolated pandas binary (`pandas_parser` DLL load). A second isolated environment reuses the working environment's packages and installs only lm-eval; a retry is in progress.
-- The initial successful model evaluation then hit a Windows CP1252 console-print error after aggregated JSON was saved; reran with UTF-8 and completed cleanly. Successful 0-shot CPU FP32 harness evaluations: Pythia-70M step143000 (100 each HellaSwag/PIQA/ARC-Easy; 97.48s), GPT-2 Small (100 each; 72.61s), and OPT-125M (100 each; 180.38s). Full task results and sampled examples are under `results/llm/harness/`; `results/llm/harness_summary.csv` contains 9 model-task rows after deduplicating Pythia's failed-print output.
-- Generated language-model report and size/loss/perplexity/throughput plots; regenerated completion matrices with 20 conventional, 15 LLM and 15 literature rows. Added hardware, literature validation and final research reports, canonical result builder, and output validator.
-- The statistical analysis pipeline was run after corrected AE/VAE records; it produced 458 grouped summaries, 279 within-seed adjacent-budget increments and 84 held-out endpoint summaries. It does not assert general saturation or cross-paradigm metric equivalence.
-- No scores were invented or inserted for missing experiments. Exact incompleteness and the observed proxy implementations are recorded in `REMAINING_WORK.md` and the matrices.
-- Canonical export contains 430 local result rows. The first automated validation exposed a malformed v2 AE/VAE test CSV header (the actual `probe_n_iter` field lacked a header); made a dated snapshot, repaired the header while preserving all 12 rows, regenerated the analysis, and reran validation successfully: zero CSV errors and zero warnings. Core `.venv` `pip check` passed.
-
-## 2026-11-06 — follow-up prompt execution
-
-- Read the latest master execution prompt. Its scope excludes further hardware investigations; followed that constraint and made no additional hardware measurements or provider changes.
-- Inspected the named reports, canonical data, scripts, configs, raw CSV files and checkpoint directories. Preserved prior outputs and retained the strict 0/50 complete-objective count.
-- Implemented and executed actual sklearn LabelPropagation with 3 seeds and maximum iteration budgets 1, 5, 10, 30, 100 on fixed 2,500-sample Fashion-MNIST transductive splits (2,000 train nodes, 500 test nodes, 10% labels, standardized PCA-32 features, 10-neighbor graph). Convergence warnings were generated and retained in terminal run history; rows record actual iterations/convergence status. Output: `results/raw/label_propagation_scaling.csv`.
-- Added the LabelPropagation rows to canonical export and updated the research/remaining-work reports and reproducibility guide. Legacy LabelSpreading pilot remains distinct and unchanged.
-
-- Implemented and executed Mean Teacher, FixMatch and MixMatch on shared Fashion-MNIST split: 5 label fractions x 3 seeds x 3 epoch checkpoints per method (135 seed-budget rows) plus 45 final test endpoints. DirectML failed on a FixMatch boolean-mask autograd op and MixMatch indexed MixUp op; FixMatch was corrected with a float mask and MixMatch ran on CPU, both recorded.
-
-## 2026-11-07 — current project-wide inventory
-
-- Inventoried the active project tree excluding virtual environments, bytecode caches, and preserved snapshots; file counts by extension:  4, .csv 33, .gitignore 1, .gz 4, .joblib 9, .json 127, .jsonl 12, .md 22, .pdf 1, .png 44, .pt 108, .py 27, .txt 2, .yaml 1, .zip 37.
-- Read the final reports, implementation gaps, completion matrix, remaining-work ledger, methodology, statistics, marginal gains, LLM, literature, hardware record, execution log and reproducibility guide. Checked raw/processed CSV headers, model registry, experiment scripts, and checkpoint directories.
-- Reconciled prompt-specific status: LabelPropagation is its own implementation; historical LabelSpreading is separate. LabelPropagation convergence was reached under tolerance 1e-3 in 197–438 iterations; no remaining proxy claim should refer to it.
-
-## 2026-11-07 — macOS continuation and final artifact checks
-
-- Continued on the verified Apple M3 macOS environment documented in `MACOS_EXECUTION_LOG.md`; preserved the pre-existing dirty workspace and its timestamped external backup. The `research-experiment` remote matched the recorded starting revision. Existing Windows/DirectML evidence was not replaced.
-- Completed extended local runs: 10K supervised neural and AE/VAE curves through 30 epochs; SSL algorithm runs through 30 epochs across five label fractions; MLP/LeNet five-epoch size runs at 30K and requested 60K (58K actual train plus 2K validation); Random Forest through 1,000 trees; RL checkpoints through 250K for all six methods, with five seeds for SAC and Double DQN. Full row-level details and run caveats are in raw CSVs/configurations and the Mac execution log.
-- Evaluated six published checkpoints on the full WikiText-2 raw-v1 test text using FP32 MPS, context 1024, stride 512. Fixed byte-span union accounting and made end-of-evaluation RSS distinct from peak-memory telemetry. Added Pythia-70M and 160M eight-checkpoint CPU prefix trajectories, with selected 410M endpoints.
-- Completed full zero-shot Pythia-70M validation-split harness evaluation on HellaSwag (10,042), PIQA (1,838), and ARC-Easy (2,376); no task limit was used. Full JSON and per-sample logs are retained. Earlier GPT-2 Small and OPT-125M 100-example/task results remain smoke subsets.
-- Regenerated 3,614 statistical group summaries, 2,407 paired marginal increments, 169 test endpoint summaries separated by final budget, figures, the canonical index (2,612 rows), both completion matrices (20+15+15 objectives), and the 3,720-row experiment registry. Literature ledger has 300 fields and uses explicit reported/derived/estimated/uncertain classifications.
-- Ran `.venv-mac/bin/python -m compileall -q scripts` and `.venv-mac/bin/python scripts/validate_project_outputs.py`; compile succeeded and final validator reported 0 errors and 0 warnings. `git -c core.whitespace=cr-at-eol diff --check` passed. No standalone `tests/` directory or pytest configuration was found. The strict completion status remains 0/50; this remains an incomplete exploratory study.
-
-- Implemented and executed Mean Teacher, FixMatch and MixMatch on shared Fashion-MNIST split: 5 label fractions x 3 seeds x 3 epoch checkpoints per method (135 seed-budget rows) plus 45 final test endpoints. DirectML failed on a FixMatch boolean-mask autograd op and MixMatch indexed MixUp op; FixMatch was corrected with a float mask and MixMatch ran on CPU, both recorded. Results: results/raw/ssl_algorithms.csv, ssl_algorithms_test.csv; summary and plots generated.
-
-- Added separate DBSCAN data-size scaling at n=2,500/5,000/10,000, fixed eps/min_samples/PCA settings, three seeds (9 runs total); saved runtime, ARI, NMI, silhouette, cluster count and noise fraction. Results: results/raw/dbscan_size_scaling.csv. This is labeled data-size compute scaling, separate from parameter sensitivity.
-
-- Canonical schema extended with metric direction, budget unit, run type, checkpoint revision, source and explicit empty training/evaluation compute fields; LLM WikiText and harness smoke records included (local harness rows distinguished by run_type/source_type). Backed up prior canonical data to results/snapshots/pre_canonical_schema_20261107/. Canonical now has 619 rows.
+See `REPRODUCIBILITY.md` for analysis-only rebuild commands and validation. Training outputs are not regenerated by that workflow.

@@ -11,7 +11,7 @@ from torchvision.transforms import ToTensor
 from sklearn.metrics import accuracy_score,precision_recall_fscore_support
 
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'results/raw/pseudolabel_baseline_sweep.csv';TEST=ROOT/'results/raw/pseudolabel_test_results.csv';CURVE=ROOT/'results/raw/pseudolabel_learning_curves.csv';CFG=ROOT/'results/configurations';CK=ROOT/'results/checkpoints/pseudolabel'
-FRACTIONS=[.01,.05,.10,.20,.40];MAX_EPOCH=5;DEVICE=get_device()
+FRACTIONS=[.01,.05,.10,.20,.40];DEVICE=get_device()
 class MLP(nn.Module):
  def __init__(self):super().__init__();self.net=nn.Sequential(nn.Flatten(),nn.Linear(784,256),nn.ReLU(),nn.Linear(256,10))
  def forward(self,x):return self.net(x)
@@ -34,17 +34,23 @@ def evaluate(m,x,y):
    xb=x[i:i+256].to(DEVICE);yb=y[i:i+256].to(DEVICE);z=m(xb);s+=float(nn.functional.cross_entropy(z,yb,reduction='sum').cpu());ok+=int((z.argmax(1)==yb).sum().cpu())
  return s/len(y),ok/len(y)
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--seeds',nargs='+',type=int,default=[11,23,37]);ap.add_argument('--train-size',type=int,default=10000);args=ap.parse_args();torch.set_num_threads(8);x,y,xv,yv,xt,yt,split=load(args.train_size)
+ ap=argparse.ArgumentParser();ap.add_argument('--seeds',nargs='+',type=int,default=[11,23,37]);ap.add_argument('--train-size',type=int,default=10000);ap.add_argument('--max-epochs',type=int,default=30);args=ap.parse_args();max_epoch=args.max_epochs
+ if max_epoch<5:ap.error('--max-epochs must be at least 5 to preserve the existing completed checkpoints')
+ torch.set_num_threads(8);x,y,xv,yv,xt,yt,split=load(args.train_size)
  for seed in args.seeds:
   for frac in FRACTIONS:
    rng=np.random.default_rng(seed+int(frac*10000));perm=rng.permutation(len(x));nl=max(10,int(len(x)*frac));li=perm[:nl];ui=perm[nl:];lx,ly=x[li],y[li];ux=x[ui];steps=int(np.ceil(len(ui)/128))
    for method in ('labeled_only','pseudo_label'):
-    run=f'{method}_frac{int(frac*100):02d}_seed{seed}_v1';cfg=CFG/f'{run}.json';cfg.parent.mkdir(parents=True,exist_ok=True);cfg.write_text(json.dumps({'experiment_id':run,'model':'MLP','method':method,'dataset':'Fashion-MNIST','split_id':split,'seed':seed,'labeled_fraction':frac,'labeled_n':nl,'unlabeled_n':len(ui),'epochs':list(range(1,MAX_EPOCH+1)),'optimizer':'Adam','learning_rate':.001,'batch_size':128,'matched_optimizer_steps_per_epoch':steps,'pseudo_threshold':.8 if method=='pseudo_label' else None,'unsupervised_loss_weight':1.0 if method=='pseudo_label' else 0,'test_evaluation':'final epoch only'},indent=2),encoding='utf-8')
-    ck=CK/f'{run}.pt';m=MLP().to(DEVICE);opt=torch.optim.Adam(m.parameters(),lr=.001);start=0;cum=0.
+    run=f'{method}_frac{int(frac*100):02d}_seed{seed}_v1';cfg=CFG/f'{run}.json';cfg.parent.mkdir(parents=True,exist_ok=True)
+    base_ck=CK/f'{run}.pt';continued_ck=CK/f'{run}_through_epoch{max_epoch}.pt'
+    ck=continued_ck if continued_ck.exists() else (base_ck if base_ck.exists() else continued_ck)
+    config={'experiment_id':run,'model':'MLP','method':method,'dataset':'Fashion-MNIST','split_id':split,'seed':seed,'labeled_fraction':frac,'labeled_n':nl,'unlabeled_n':len(ui),'epochs':list(range(1,max_epoch+1)),'optimizer':'Adam','learning_rate':.001,'batch_size':128,'matched_optimizer_steps_per_epoch':steps,'pseudo_threshold':.8 if method=='pseudo_label' else None,'unsupervised_loss_weight':1.0 if method=='pseudo_label' else 0,'test_evaluation':'official test set at final epoch only','resume_source':str(base_ck.relative_to(ROOT)) if ck==continued_ck else '', 'continuation_checkpoint':str(continued_ck.relative_to(ROOT))}
+    cfg.write_text(json.dumps(config,indent=2),encoding='utf-8')
+    m=MLP().to(DEVICE);opt=torch.optim.Adam(m.parameters(),lr=.001);start=0;cum=0.
     if ck.exists():
      state=torch.load(ck,map_location='cpu',weights_only=False);m.load_state_dict(state['model']);opt.load_state_dict(state['optimizer']);start=state['epoch'];cum=state['cumulative_seconds']
     exist=readids(OUT)
-    for epoch in range(start+1,MAX_EPOCH+1):
+    for epoch in range(start+1,max_epoch+1):
      rs=np.random.default_rng(seed+epoch+int(frac*1e6));lp=rs.permutation(nl);up=rs.permutation(len(ui));lcur=ucur=0;loss_total=0.;sup_total=unsup_total=0.;accepted=seen=0;actual_steps=0;m.train();t0=time.perf_counter()
      for _ in range(steps):
       if lcur+128>nl:lp=rs.permutation(nl);lcur=0
@@ -63,12 +69,12 @@ def main():
      if eid not in exist:append(OUT,row);exist.add(eid)
      append(CURVE,{'experiment_id':eid,'run_id':run,'method':method,'seed':seed,'labeled_fraction':frac,'epoch':epoch,'validation_accuracy':va,'validation_loss':vl,'mean_supervised_loss':sup_total/actual_steps,'mean_unsupervised_loss':unsup_total/actual_steps,'accepted_pseudo_labels':accepted,'pseudo_label_acceptance_fraction':accepted/seen if seen else 0,'cumulative_training_time_seconds':cum})
      print(f'{method} seed={seed} frac={frac:.2f} epoch={epoch} val={va:.4f} pseudo_accept={accepted}/{seen}',flush=True)
-    tid=f'{run}_test_epoch{MAX_EPOCH}';teids=readids(TEST)
+    tid=f'{run}_test_epoch{max_epoch}';teids=readids(TEST)
     if tid not in teids:
      loss,acc=evaluate(m,xt,yt);pred=[];m.eval()
      with torch.no_grad():
       for i in range(0,len(xt),256):pred.extend(m(xt[i:i+256].to(DEVICE)).argmax(1).cpu().tolist())
      p,r,f,_=precision_recall_fscore_support(yt.numpy(),np.asarray(pred),average='macro',zero_division=0)
-     append(TEST,{'experiment_id':tid,'model_name':'MLP','method':method,'seed':seed,'labeled_fraction':frac,'labeled_n':nl,'epochs':MAX_EPOCH,'test_loss':loss,'test_accuracy':acc,'macro_precision':p,'macro_recall':r,'macro_f1':f,'test_size':len(yt),'status':'completed'})
+     append(TEST,{'experiment_id':tid,'model_name':'MLP','method':method,'seed':seed,'labeled_fraction':frac,'labeled_n':nl,'epochs':max_epoch,'test_loss':loss,'test_accuracy':acc,'macro_precision':p,'macro_recall':r,'macro_f1':f,'test_size':len(yt),'status':'completed'})
  print('saved',OUT,TEST,CURVE)
 if __name__=='__main__':main()

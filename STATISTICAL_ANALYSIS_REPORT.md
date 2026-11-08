@@ -1,16 +1,16 @@
 # Statistical analysis of strengthened runs
 
-Analyses use saved local measurements from MLP/LeNet/ResNet/custom-transformer epoch sweeps, a Random Forest tree curve, MiniBatch K-Means/GMM native-budget curves, AE/VAE reconstruction and linear-probe sweeps, pseudo-label/labeled-only ablation, RL interaction curves, and a separate DBSCAN parameter/size analysis. Most learning curves use the fixed Fashion-MNIST 10K-train/2K-validation split; RL uses CartPole/Pendulum. These are exploratory partial results, not a completed 20-model confirmatory study. No experimental execution occurred during this statistical audit.
+Analyses use verified local measurements from MLP/LeNet/ResNet/transformer epoch sweeps, Random Forest, K-Means/GMM, AE/VAE, pseudo-labeling and its labeled-only comparator, other SSL methods, RL, and DBSCAN. Most learning curves use the fixed Fashion-MNIST 10K-train/2K-validation split; RL uses CartPole/Pendulum. All 20 registered conventional schedules pass the coverage audit. This is a descriptive multi-paradigm study, not a confirmatory cross-paradigm comparison. Pseudo-labeling and its matched baseline resumed from saved epoch-5 checkpoints to the original 30-epoch target; all other results were pre-existing records.
 
-- Validation metric/budget summary rows: 3614.
-- Paired within-seed adjacent-budget marginal transitions: 2417.
-- Held-out endpoint metric groups: 169.
+- Validation metric/budget summary rows: 4864.
+- Paired within-seed adjacent-budget marginal transitions: 3167.
+- Held-out endpoint metric groups: 219.
 - Grouped summaries report mean, median, minimum, maximum, standard deviation, valid seed count, and two-sided 95% Student t intervals where n > 1. Intervals are imprecise with n=3 and describe seed variation conditional on the fixed split.
 - Budget observations within a seed are repeated measures. Marginal increments pair only within model, seed, split, and setting; no checkpoint is treated as an independent seed.
 - The dataset-size endpoint summary uses epoch 5 only. This prevents the 10K epoch-30 endpoints from being pooled into the matched 10K/30K/58K comparison.
 - Fifteen later K-Means rows duplicate experiment IDs and reuse the 50-update state at earlier budgets. They remain in raw data but are excluded from the derived K-Means curves.
 - Double DQN rows are restored to completed status and local_measurement source type in normalized outputs; success_rate is unavailable because the raw field was omitted.
-- Two consecutive favorable relative gains below the stated screen: 0.5% threshold: 55 model/setting/seed series met the two-increment screen; 1% threshold: 80 model/setting/seed series met the two-increment screen; 2% threshold: 95 model/setting/seed series met the two-increment screen. These are descriptive flags; short curves and small seed counts do not establish general saturation.
+- Two consecutive favorable relative gains below the stated screen: 0.5% threshold: 77 model/setting/seed series met the two-increment screen; 1% threshold: 101 model/setting/seed series met the two-increment screen; 2% threshold: 110 model/setting/seed series met the two-increment screen. These are descriptive flags; short curves and small seed counts do not establish general saturation.
 - Final test endpoints are grouped by model, metric, split, and final budget; validation curves are analyzed separately. No p-values or cross-model significance claims are reported.
 - Initial AE/VAE v1 probe rows are retained but superseded after convergence warnings; analyses use the standardized v2 probe.
 
@@ -143,6 +143,56 @@ Analyses use saved local measurements from MLP/LeNet/ResNet/custom-transformer e
 | MLP / pseudo_label / 0.4 /  / 5 | macro_precision | 3 | 0.8161 | 0.8147 | 0.8138 | 0.8197 | 0.0032 | [0.8082, 0.8240] |
 | MLP / pseudo_label / 0.4 /  / 5 | macro_recall | 3 | 0.8147 | 0.8142 | 0.8109 | 0.8189 | 0.0040 | [0.8047, 0.8247] |
 | MLP / pseudo_label / 0.4 /  / 5 | macro_f1 | 3 | 0.8107 | 0.8124 | 0.8025 | 0.8171 | 0.0075 | [0.7921, 0.8292] |
+| MLP / labeled_only / 0.01 /  / 30 | test_accuracy | 3 | 0.6544 | 0.6458 | 0.6362 | 0.6813 | 0.0238 | [0.5954, 0.7134] |
+| MLP / labeled_only / 0.01 /  / 30 | test_loss | 3 | 2.0985 | 2.1394 | 1.8615 | 2.2947 | 0.2194 | [1.5534, 2.6436] |
+| MLP / labeled_only / 0.01 /  / 30 | macro_precision | 3 | 0.6904 | 0.6913 | 0.6871 | 0.6928 | 0.0030 | [0.6831, 0.6977] |
+| MLP / labeled_only / 0.01 /  / 30 | macro_recall | 3 | 0.6544 | 0.6458 | 0.6362 | 0.6813 | 0.0238 | [0.5954, 0.7134] |
+| MLP / labeled_only / 0.01 /  / 30 | macro_f1 | 3 | 0.6502 | 0.6522 | 0.6283 | 0.6701 | 0.0209 | [0.5981, 0.7022] |
+| MLP / pseudo_label / 0.01 /  / 30 | test_accuracy | 3 | 0.6389 | 0.6405 | 0.6313 | 0.6450 | 0.0070 | [0.6216, 0.6563] |
+| MLP / pseudo_label / 0.01 /  / 30 | test_loss | 3 | 9.2239 | 9.6875 | 7.9418 | 10.0424 | 1.1245 | [6.4306, 12.0172] |
+| MLP / pseudo_label / 0.01 /  / 30 | macro_precision | 3 | 0.6991 | 0.7189 | 0.6564 | 0.7219 | 0.0370 | [0.6072, 0.7909] |
+| MLP / pseudo_label / 0.01 /  / 30 | macro_recall | 3 | 0.6389 | 0.6405 | 0.6313 | 0.6450 | 0.0070 | [0.6216, 0.6563] |
+| MLP / pseudo_label / 0.01 /  / 30 | macro_f1 | 3 | 0.6107 | 0.6055 | 0.5945 | 0.6320 | 0.0193 | [0.5628, 0.6586] |
+| MLP / labeled_only / 0.05 /  / 30 | test_accuracy | 3 | 0.7695 | 0.7690 | 0.7665 | 0.7730 | 0.0033 | [0.7614, 0.7776] |
+| MLP / labeled_only / 0.05 /  / 30 | test_loss | 3 | 1.3419 | 1.3432 | 1.2564 | 1.4262 | 0.0849 | [1.1310, 1.5529] |
+| MLP / labeled_only / 0.05 /  / 30 | macro_precision | 3 | 0.7766 | 0.7768 | 0.7754 | 0.7775 | 0.0011 | [0.7739, 0.7793] |
+| MLP / labeled_only / 0.05 /  / 30 | macro_recall | 3 | 0.7695 | 0.7690 | 0.7665 | 0.7730 | 0.0033 | [0.7614, 0.7776] |
+| MLP / labeled_only / 0.05 /  / 30 | macro_f1 | 3 | 0.7701 | 0.7686 | 0.7684 | 0.7734 | 0.0028 | [0.7631, 0.7771] |
+| MLP / pseudo_label / 0.05 /  / 30 | test_accuracy | 3 | 0.7839 | 0.7802 | 0.7780 | 0.7935 | 0.0084 | [0.7631, 0.8047] |
+| MLP / pseudo_label / 0.05 /  / 30 | test_loss | 3 | 2.5806 | 2.6145 | 2.2402 | 2.8870 | 0.3248 | [1.7738, 3.3873] |
+| MLP / pseudo_label / 0.05 /  / 30 | macro_precision | 3 | 0.7909 | 0.7888 | 0.7823 | 0.8016 | 0.0098 | [0.7665, 0.8154] |
+| MLP / pseudo_label / 0.05 /  / 30 | macro_recall | 3 | 0.7839 | 0.7802 | 0.7780 | 0.7935 | 0.0084 | [0.7631, 0.8047] |
+| MLP / pseudo_label / 0.05 /  / 30 | macro_f1 | 3 | 0.7820 | 0.7796 | 0.7729 | 0.7935 | 0.0105 | [0.7559, 0.8080] |
+| MLP / labeled_only / 0.1 /  / 30 | test_accuracy | 3 | 0.8054 | 0.8059 | 0.8023 | 0.8081 | 0.0029 | [0.7982, 0.8127] |
+| MLP / labeled_only / 0.1 /  / 30 | test_loss | 3 | 1.0545 | 1.0458 | 1.0372 | 1.0803 | 0.0228 | [0.9978, 1.1111] |
+| MLP / labeled_only / 0.1 /  / 30 | macro_precision | 3 | 0.8076 | 0.8083 | 0.8037 | 0.8108 | 0.0036 | [0.7986, 0.8166] |
+| MLP / labeled_only / 0.1 /  / 30 | macro_recall | 3 | 0.8054 | 0.8059 | 0.8023 | 0.8081 | 0.0029 | [0.7982, 0.8127] |
+| MLP / labeled_only / 0.1 /  / 30 | macro_f1 | 3 | 0.8054 | 0.8061 | 0.8025 | 0.8075 | 0.0026 | [0.7990, 0.8118] |
+| MLP / pseudo_label / 0.1 /  / 30 | test_accuracy | 3 | 0.8087 | 0.8098 | 0.8049 | 0.8114 | 0.0034 | [0.8003, 0.8171] |
+| MLP / pseudo_label / 0.1 /  / 30 | test_loss | 3 | 1.5726 | 1.5453 | 1.5237 | 1.6489 | 0.0669 | [1.4063, 1.7389] |
+| MLP / pseudo_label / 0.1 /  / 30 | macro_precision | 3 | 0.8111 | 0.8120 | 0.8083 | 0.8130 | 0.0025 | [0.8049, 0.8173] |
+| MLP / pseudo_label / 0.1 /  / 30 | macro_recall | 3 | 0.8087 | 0.8098 | 0.8049 | 0.8114 | 0.0034 | [0.8003, 0.8171] |
+| MLP / pseudo_label / 0.1 /  / 30 | macro_f1 | 3 | 0.8085 | 0.8096 | 0.8055 | 0.8106 | 0.0027 | [0.8018, 0.8153] |
+| MLP / labeled_only / 0.2 /  / 30 | test_accuracy | 3 | 0.8214 | 0.8224 | 0.8191 | 0.8228 | 0.0020 | [0.8164, 0.8265] |
+| MLP / labeled_only / 0.2 /  / 30 | test_loss | 3 | 0.8208 | 0.8158 | 0.7856 | 0.8611 | 0.0380 | [0.7264, 0.9153] |
+| MLP / labeled_only / 0.2 /  / 30 | macro_precision | 3 | 0.8219 | 0.8234 | 0.8188 | 0.8235 | 0.0027 | [0.8152, 0.8285] |
+| MLP / labeled_only / 0.2 /  / 30 | macro_recall | 3 | 0.8214 | 0.8224 | 0.8191 | 0.8228 | 0.0020 | [0.8164, 0.8265] |
+| MLP / labeled_only / 0.2 /  / 30 | macro_f1 | 3 | 0.8207 | 0.8211 | 0.8185 | 0.8223 | 0.0019 | [0.8159, 0.8254] |
+| MLP / pseudo_label / 0.2 /  / 30 | test_accuracy | 3 | 0.8252 | 0.8256 | 0.8187 | 0.8313 | 0.0063 | [0.8095, 0.8409] |
+| MLP / pseudo_label / 0.2 /  / 30 | test_loss | 3 | 1.0352 | 1.0542 | 0.9672 | 1.0843 | 0.0608 | [0.8841, 1.1864] |
+| MLP / pseudo_label / 0.2 /  / 30 | macro_precision | 3 | 0.8260 | 0.8261 | 0.8211 | 0.8307 | 0.0048 | [0.8140, 0.8379] |
+| MLP / pseudo_label / 0.2 /  / 30 | macro_recall | 3 | 0.8252 | 0.8256 | 0.8187 | 0.8313 | 0.0063 | [0.8095, 0.8409] |
+| MLP / pseudo_label / 0.2 /  / 30 | macro_f1 | 3 | 0.8237 | 0.8251 | 0.8163 | 0.8298 | 0.0069 | [0.8067, 0.8408] |
+| MLP / labeled_only / 0.4 /  / 30 | test_accuracy | 3 | 0.8379 | 0.8390 | 0.8354 | 0.8394 | 0.0022 | [0.8325, 0.8434] |
+| MLP / labeled_only / 0.4 /  / 30 | test_loss | 3 | 0.5369 | 0.5323 | 0.5304 | 0.5481 | 0.0097 | [0.5128, 0.5611] |
+| MLP / labeled_only / 0.4 /  / 30 | macro_precision | 3 | 0.8398 | 0.8396 | 0.8381 | 0.8418 | 0.0019 | [0.8352, 0.8445] |
+| MLP / labeled_only / 0.4 /  / 30 | macro_recall | 3 | 0.8379 | 0.8390 | 0.8354 | 0.8394 | 0.0022 | [0.8325, 0.8434] |
+| MLP / labeled_only / 0.4 /  / 30 | macro_f1 | 3 | 0.8371 | 0.8371 | 0.8341 | 0.8400 | 0.0029 | [0.8298, 0.8444] |
+| MLP / pseudo_label / 0.4 /  / 30 | test_accuracy | 3 | 0.8397 | 0.8414 | 0.8359 | 0.8419 | 0.0033 | [0.8315, 0.8480] |
+| MLP / pseudo_label / 0.4 /  / 30 | test_loss | 3 | 0.5962 | 0.5951 | 0.5881 | 0.6053 | 0.0086 | [0.5748, 0.6176] |
+| MLP / pseudo_label / 0.4 /  / 30 | macro_precision | 3 | 0.8404 | 0.8409 | 0.8374 | 0.8428 | 0.0028 | [0.8335, 0.8472] |
+| MLP / pseudo_label / 0.4 /  / 30 | macro_recall | 3 | 0.8397 | 0.8414 | 0.8359 | 0.8419 | 0.0033 | [0.8315, 0.8480] |
+| MLP / pseudo_label / 0.4 /  / 30 | macro_f1 | 3 | 0.8379 | 0.8382 | 0.8335 | 0.8420 | 0.0042 | [0.8274, 0.8484] |
 | MeanTeacher / 0.01 / 24574ee00a20ab31 / 3 | test_accuracy | 3 | 0.6519 | 0.6452 | 0.6422 | 0.6683 | 0.0143 | [0.6164, 0.6874] |
 | FixMatch / 0.01 / 24574ee00a20ab31 / 3 | test_accuracy | 3 | 0.6619 | 0.6626 | 0.6585 | 0.6647 | 0.0032 | [0.6541, 0.6698] |
 | MixMatch / 0.01 / 24574ee00a20ab31 / 3 | test_accuracy | 3 | 0.6586 | 0.6643 | 0.6460 | 0.6656 | 0.0110 | [0.6314, 0.6859] |

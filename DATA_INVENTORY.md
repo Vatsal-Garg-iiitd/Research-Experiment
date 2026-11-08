@@ -1,25 +1,26 @@
 # Repository and data inventory
 
-Inventory generated from `/Users/jagdishgarg/Downloads/Tcom_project`; 748 files after excluding Git internals, virtual environments, bytecode, and cache folders. Raw records are read-only inputs.
+Inventory generated from `/Users/jagdishgarg/Downloads/Tcom_project`; 687 files after excluding Git internals, virtual environments, bytecode, and cache folders. Raw records are read-only inputs.
 
 ## File types
 
 | Type | Files |
 |---|---:|
-| `.csv` | 70 |
+| `.csv` | 52 |
 | `.gz` | 4 |
 | `.joblib` | 9 |
 | `.json` | 153 |
 | `.jsonl` | 15 |
-| `.md` | 38 |
-| `.pdf` | 3 |
+| `.log` | 1 |
+| `.md` | 30 |
+| `.pdf` | 2 |
 | `.pkl` | 30 |
-| `.png` | 95 |
+| `.png` | 73 |
 | `.pt` | 144 |
-| `.py` | 48 |
+| `.py` | 39 |
 | `.svg` | 25 |
-| `.txt` | 5 |
-| `.yaml` | 2 |
+| `.txt` | 2 |
+| `.yaml` | 1 |
 | `.zip` | 102 |
 | `[no extension]` | 5 |
 
@@ -38,7 +39,8 @@ CSV row counts below exclude headers. Candidate identifier repetition is a scree
 | `results/llm/harness_summary.csv` | 9 | 13 | — | 0 | 0 |
 | `results/llm/llm_checkpoint_results.csv` | 40 | 20 | — | 0 | 131 |
 | `results/llm/macos_full_wikitext2_evaluations.csv` | 6 | 32 | experiment_id | 0 | 6 |
-| `results/processed/canonical_results.csv` | 2612 | 35 | canonical_id | 0 | 18733 |
+| `results/processed/canonical_results.csv` | 3362 | 35 | canonical_id | 0 | 23983 |
+| `results/processed/conventional_completion_audit.csv` | 20 | 7 | — | 0 | 20 |
 | `results/processed/data_quality_exclusions.csv` | 15 | 5 | experiment_id | 0 | 0 |
 | `results/processed/data_quality_register.csv` | 21 | 5 | — | 0 | 5 |
 | `results/processed/data_size_scaling_seed_results.csv` | 24 | 7 | experiment_id | 0 | 0 |
@@ -47,16 +49,15 @@ CSV row counts below exclude headers. Candidate identifier repetition is a scree
 | `results/processed/figure_catalogue.csv` | 25 | 8 | — | 0 | 0 |
 | `results/processed/foreign_key_audit.csv` | 0 | 5 | — | 0 | 0 |
 | `results/processed/full_suite_marginal_results.csv` | 33 | 27 | run_id | 13 | 198 |
-| `results/processed/identifier_audit.csv` | 101 | 7 | — | 0 | 29 |
-| `results/processed/identifier_findings.csv` | 1388 | 7 | — | 0 | 153 |
+| `results/processed/identifier_audit.csv` | 99 | 7 | — | 0 | 29 |
+| `results/processed/identifier_findings.csv` | 1533 | 7 | — | 0 | 243 |
 | `results/processed/identifier_reconciliation.csv` | 95 | 8 | — | 0 | 50 |
 | `results/processed/llm_full_eval_summary.csv` | 6 | 20 | — | 0 | 0 |
-| `results/processed/pilot_marginal_results.csv` | 13 | 27 | run_id | 8 | 33 |
 | `results/processed/ssl_algorithm_summary.csv` | 45 | 8 | — | 0 | 0 |
-| `results/processed/strengthened_marginal_gains.csv` | 2417 | 22 | — | 0 | 3939 |
-| `results/processed/strengthened_statistical_summaries.csv` | 3614 | 16 | — | 0 | 5138 |
-| `results/processed/strengthened_test_statistics.csv` | 169 | 11 | — | 0 | 0 |
-| `results/processed/verified_canonical_results.csv` | 2612 | 39 | canonical_id | 0 | 18844 |
+| `results/processed/strengthened_marginal_gains.csv` | 3167 | 22 | — | 0 | 4325 |
+| `results/processed/strengthened_statistical_summaries.csv` | 4864 | 16 | — | 0 | 5138 |
+| `results/processed/strengthened_test_statistics.csv` | 219 | 11 | — | 0 | 0 |
+| `results/processed/verified_canonical_results.csv` | 3362 | 39 | canonical_id | 0 | 24094 |
 | `results/raw/autoencoder_scaling.csv` | 210 | 23 | experiment_id | 0 | 210 |
 | `results/raw/autoencoder_test_results.csv` | 18 | 12 | experiment_id | 0 | 6 |
 | `results/raw/dbscan_parameter_sweep.csv` | 8 | 24 | experiment_id | 0 | 11 |
@@ -64,9 +65,9 @@ CSV row counts below exclude headers. Candidate identifier repetition is a scree
 | `results/raw/experiment_results.csv` | 26 | 20 | run_id | 16 | 26 |
 | `results/raw/full_suite_results.csv` | 33 | 20 | run_id | 13 | 66 |
 | `results/raw/label_propagation_scaling.csv` | 45 | 18 | experiment_id | 0 | 0 |
-| `results/raw/pseudolabel_baseline_sweep.csv` | 150 | 31 | experiment_id | 0 | 150 |
-| `results/raw/pseudolabel_learning_curves.csv` | 150 | 13 | experiment_id | 0 | 0 |
-| `results/raw/pseudolabel_test_results.csv` | 30 | 14 | experiment_id | 0 | 0 |
+| `results/raw/pseudolabel_baseline_sweep.csv` | 900 | 31 | experiment_id | 0 | 900 |
+| `results/raw/pseudolabel_learning_curves.csv` | 900 | 13 | experiment_id | 0 | 0 |
+| `results/raw/pseudolabel_test_results.csv` | 60 | 14 | experiment_id | 0 | 0 |
 | `results/raw/random_forest_scaling.csv` | 24 | 28 | experiment_id | 0 | 96 |
 | `results/raw/random_forest_test_results.csv` | 6 | 12 | experiment_id | 0 | 0 |
 | `results/raw/replicated_learning_curves.csv` | 420 | 13 | experiment_id | 0 | 0 |
@@ -78,21 +79,3 @@ CSV row counts below exclude headers. Candidate identifier repetition is a scree
 | `results/raw/unsupervised_scaling.csv` | 51 | 26 | experiment_id | 15 | 30 |
 | `results/raw/vit_tiny_scaling.csv` | 90 | 24 | experiment_id | 0 | 90 |
 | `results/raw/vit_tiny_test_results.csv` | 3 | 15 | experiment_id | 0 | 0 |
-| `results/snapshots/pre_canonical_schema_20261107/canonical_results.csv` | 604 | 20 | canonical_id | 0 | 1073 |
-| `results/snapshots/pre_full_wikitext_accounting_repair_20261107/macos_full_wikitext2_evaluations.csv` | 6 | 29 | experiment_id | 0 | 0 |
-| `results/snapshots/pre_literature_field_refresh_20261107/literature_field_evidence.csv` | 300 | 9 | — | 0 | 455 |
-| `results/snapshots/pre_llm_trajectory_dedup_20261107/expanded_llm_evaluations.csv` | 51 | 19 | — | 0 | 174 |
-| `results/snapshots/pre_replicated_example_count_repair_20261107/replicated_learning_curves.csv` | 420 | 11 | experiment_id | 0 | 0 |
-| `results/snapshots/pre_replicated_example_count_repair_20261107/replicated_scaling_results.csv` | 420 | 40 | experiment_id | 0 | 4200 |
-| `results/snapshots/pre_replicated_example_count_repair_20261107/replicated_scaling_test_results.csv` | 36 | 14 | experiment_id | 0 | 0 |
-| `results/snapshots/pre_schema_repair_20261106/autoencoder_test_results.csv` | 12 | 11 | experiment_id | 0 | 0 |
-| `results/snapshots/pre_ssl_csv_repair_20261107/ssl_algorithms.csv` | 1350 | 22 | experiment_id | 0 | 810 |
-| `results/snapshots/pre_strengthening_20261106_150150/configs/model_registry.csv` | 20 | 8 | — | 0 | 0 |
-| `results/snapshots/pre_strengthening_20261106_150150/results/hardware/backend_benchmark.csv` | 2 | 15 | — | 0 | 0 |
-| `results/snapshots/pre_strengthening_20261106_150150/results/literature/large_model_literature.csv` | 15 | 27 | — | 0 | 142 |
-| `results/snapshots/pre_strengthening_20261106_150150/results/llm/expanded_llm_evaluations.csv` | 34 | 19 | — | 0 | 140 |
-| `results/snapshots/pre_strengthening_20261106_150150/results/llm/llm_checkpoint_results.csv` | 23 | 20 | — | 0 | 77 |
-| `results/snapshots/pre_strengthening_20261106_150150/results/processed/full_suite_marginal_results.csv` | 33 | 27 | run_id | 13 | 198 |
-| `results/snapshots/pre_strengthening_20261106_150150/results/processed/pilot_marginal_results.csv` | 13 | 27 | run_id | 8 | 33 |
-| `results/snapshots/pre_strengthening_20261106_150150/results/raw/experiment_results.csv` | 26 | 20 | run_id | 16 | 26 |
-| `results/snapshots/pre_strengthening_20261106_150150/results/raw/full_suite_results.csv` | 33 | 20 | run_id | 13 | 66 |

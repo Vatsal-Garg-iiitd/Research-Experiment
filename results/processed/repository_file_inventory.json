@@ -7,22 +7,23 @@
     "*.pyc",
     "*.pyo"
   ],
-  "file_count": 748,
+  "file_count": 687,
   "extension_counts": {
-    ".csv": 70,
+    ".csv": 52,
     ".gz": 4,
     ".joblib": 9,
     ".json": 153,
     ".jsonl": 15,
-    ".md": 38,
-    ".pdf": 3,
+    ".log": 1,
+    ".md": 30,
+    ".pdf": 2,
     ".pkl": 30,
-    ".png": 95,
+    ".png": 73,
     ".pt": 144,
-    ".py": 48,
+    ".py": 39,
     ".svg": 25,
-    ".txt": 5,
-    ".yaml": 2,
+    ".txt": 2,
+    ".yaml": 1,
     ".zip": 102,
     "[no extension]": 5
   },
@@ -34,7 +35,7 @@
     },
     {
       "path": "DATA_INVENTORY.md",
-      "bytes": 7184,
+      "bytes": 4966,
       "suffix": ".md"
     },
     {
@@ -44,27 +45,27 @@
     },
     {
       "path": "EXECUTION_LOG.md",
-      "bytes": 12355,
+      "bytes": 2499,
       "suffix": ".md"
     },
     {
       "path": "EXPERIMENTAL_METHODOLOGY.md",
-      "bytes": 5835,
+      "bytes": 5908,
       "suffix": ".md"
     },
     {
       "path": "EXPERIMENT_COMPLETION_MATRIX.md",
-      "bytes": 13535,
+      "bytes": 13743,
       "suffix": ".md"
     },
     {
       "path": "EXPERIMENT_DESIGN.md",
-      "bytes": 2687,
+      "bytes": 2720,
       "suffix": ".md"
     },
     {
       "path": "EXPERIMENT_RUN_REGISTRY.csv",
-      "bytes": 1242719,
+      "bytes": 1707130,
       "suffix": ".csv"
     },
     {
@@ -74,17 +75,17 @@
     },
     {
       "path": "FINAL_COMPLETION_MATRIX.md",
-      "bytes": 13535,
+      "bytes": 13743,
       "suffix": ".md"
     },
     {
       "path": "FINAL_INDEPENDENT_AUDIT.md",
-      "bytes": 3828,
+      "bytes": 1634,
       "suffix": ".md"
     },
     {
       "path": "FINAL_RESEARCH_REPORT.md",
-      "bytes": 27819,
+      "bytes": 28764,
       "suffix": ".md"
     },
     {
@@ -94,7 +95,7 @@
     },
     {
       "path": "IDENTIFIER_AUDIT.md",
-      "bytes": 1597,
+      "bytes": 1596,
       "suffix": ".md"
     },
     {
@@ -104,17 +105,17 @@
     },
     {
       "path": "IMPLEMENTATION_GAPS.md",
-      "bytes": 2320,
+      "bytes": 2430,
       "suffix": ".md"
     },
     {
       "path": "LITERATURE_REVIEW.md",
-      "bytes": 3262,
+      "bytes": 3277,
       "suffix": ".md"
     },
     {
       "path": "LITERATURE_VALIDATION_REPORT.md",
-      "bytes": 4740,
+      "bytes": 5325,
       "suffix": ".md"
     },
     {
@@ -129,7 +130,7 @@
     },
     {
       "path": "MACOS_EXECUTION_LOG.md",
-      "bytes": 19872,
+      "bytes": 2143,
       "suffix": ".md"
     },
     {
@@ -139,37 +140,42 @@
     },
     {
       "path": "MARGINAL_GAIN_ANALYSIS.md",
-      "bytes": 271120,
+      "bytes": 359572,
       "suffix": ".md"
     },
     {
       "path": "METHODOLOGY_GAPS.md",
-      "bytes": 2197,
+      "bytes": 2306,
       "suffix": ".md"
     },
     {
       "path": "PROJECT_AUDIT.md",
-      "bytes": 7963,
+      "bytes": 5033,
       "suffix": ".md"
     },
     {
       "path": "README.md",
-      "bytes": 5854,
+      "bytes": 6675,
       "suffix": ".md"
     },
     {
       "path": "REMAINING_WORK.md",
-      "bytes": 2147,
+      "bytes": 1955,
       "suffix": ".md"
     },
     {
       "path": "REPRODUCIBILITY.md",
-      "bytes": 3069,
+      "bytes": 3220,
       "suffix": ".md"
     },
     {
       "path": "RESULT_PROVENANCE.md",
-      "bytes": 3781,
+      "bytes": 3885,
+      "suffix": ".md"
+    },
+    {
+      "path": "RUN_LOG_AUDIT.md",
+      "bytes": 1977,
       "suffix": ".md"
     },
     {
@@ -179,22 +185,22 @@
     },
     {
       "path": "STATISTICAL_ANALYSIS_REPORT.md",
-      "bytes": 24176,
+      "bytes": 30225,
       "suffix": ".md"
     },
     {
       "path": "configs/experiments.yaml",
-      "bytes": 1939,
+      "bytes": 1920,
       "suffix": ".yaml"
     },
     {
       "path": "configs/model_registry.csv",
-      "bytes": 6386,
+      "bytes": 4935,
       "suffix": ".csv"
     },
     {
       "path": "reports/FINAL_RESEARCH_REPORT.pdf",
-      "bytes": 3769185,
+      "bytes": 3769322,
       "suffix": ".pdf"
     },
     {
@@ -309,152 +315,152 @@
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac01_seed11_v1.pt",
-      "bytes": 3505280,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac01_seed23_v1.pt",
-      "bytes": 3509248,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac01_seed37_v1.pt",
-      "bytes": 3501824,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac05_seed11_v1.pt",
-      "bytes": 3533248,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac05_seed23_v1.pt",
-      "bytes": 3545920,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac05_seed37_v1.pt",
-      "bytes": 3543296,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac10_seed11_v1.pt",
-      "bytes": 3538368,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac10_seed23_v1.pt",
-      "bytes": 3536448,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac10_seed37_v1.pt",
-      "bytes": 3536640,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac20_seed11_v1.pt",
-      "bytes": 3540608,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac20_seed23_v1.pt",
-      "bytes": 3545216,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac20_seed37_v1.pt",
-      "bytes": 3538176,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac40_seed11_v1.pt",
-      "bytes": 3528640,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac40_seed23_v1.pt",
-      "bytes": 3534784,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/labeled_only_frac40_seed37_v1.pt",
-      "bytes": 3523776,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac01_seed11_v1.pt",
-      "bytes": 3525632,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac01_seed23_v1.pt",
-      "bytes": 3525120,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac01_seed37_v1.pt",
-      "bytes": 3519744,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac05_seed11_v1.pt",
-      "bytes": 3542272,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac05_seed23_v1.pt",
-      "bytes": 3535616,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac05_seed37_v1.pt",
-      "bytes": 3546752,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac10_seed11_v1.pt",
-      "bytes": 3541696,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac10_seed23_v1.pt",
-      "bytes": 3547776,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac10_seed37_v1.pt",
-      "bytes": 3536384,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac20_seed11_v1.pt",
-      "bytes": 3538624,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac20_seed23_v1.pt",
-      "bytes": 3535680,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac20_seed37_v1.pt",
-      "bytes": 3532672,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac40_seed11_v1.pt",
-      "bytes": 3536960,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac40_seed23_v1.pt",
-      "bytes": 3530112,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
       "path": "results/checkpoints/pseudolabel/pseudo_label_frac40_seed37_v1.pt",
-      "bytes": 3540416,
+      "bytes": 2448663,
       "suffix": ".pt"
     },
     {
@@ -1864,77 +1870,77 @@
     },
     {
       "path": "results/configurations/labeled_only_frac01_seed11_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac01_seed23_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac01_seed37_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac05_seed11_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac05_seed23_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac05_seed37_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac10_seed11_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac10_seed23_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac10_seed37_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac20_seed11_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac20_seed23_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac20_seed37_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac40_seed11_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac40_seed23_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/labeled_only_frac40_seed37_v1.json",
-      "bytes": 541,
+      "bytes": 870,
       "suffix": ".json"
     },
     {
@@ -2119,77 +2125,77 @@
     },
     {
       "path": "results/configurations/pseudo_label_frac01_seed11_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac01_seed23_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac01_seed37_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac05_seed11_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac05_seed23_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac05_seed37_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac10_seed11_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac10_seed23_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac10_seed37_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac20_seed11_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac20_seed23_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac20_seed37_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac40_seed11_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac40_seed23_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
       "path": "results/configurations/pseudo_label_frac40_seed37_v1.json",
-      "bytes": 542,
+      "bytes": 871,
       "suffix": ".json"
     },
     {
@@ -2824,7 +2830,7 @@
     },
     {
       "path": "results/figures/strengthened_labeled_only_learning_curves.png",
-      "bytes": 110608,
+      "bytes": 123266,
       "suffix": ".png"
     },
     {
@@ -2839,7 +2845,7 @@
     },
     {
       "path": "results/figures/strengthened_pseudo_label_learning_curves.png",
-      "bytes": 116623,
+      "bytes": 122475,
       "suffix": ".png"
     },
     {
@@ -2904,7 +2910,7 @@
     },
     {
       "path": "results/literature/literature_field_evidence.csv",
-      "bytes": 68947,
+      "bytes": 76525,
       "suffix": ".csv"
     },
     {
@@ -3044,7 +3050,12 @@
     },
     {
       "path": "results/processed/canonical_results.csv",
-      "bytes": 4735725,
+      "bytes": 6170991,
+      "suffix": ".csv"
+    },
+    {
+      "path": "results/processed/conventional_completion_audit.csv",
+      "bytes": 4329,
       "suffix": ".csv"
     },
     {
@@ -3089,12 +3100,12 @@
     },
     {
       "path": "results/processed/identifier_audit.csv",
-      "bytes": 61041,
+      "bytes": 64910,
       "suffix": ".csv"
     },
     {
       "path": "results/processed/identifier_findings.csv",
-      "bytes": 356621,
+      "bytes": 394933,
       "suffix": ".csv"
     },
     {
@@ -3104,7 +3115,7 @@
     },
     {
       "path": "results/processed/json_data_inventory.json",
-      "bytes": 114803,
+      "bytes": 116609,
       "suffix": ".json"
     },
     {
@@ -3113,13 +3124,8 @@
       "suffix": ".csv"
     },
     {
-      "path": "results/processed/pilot_marginal_results.csv",
-      "bytes": 5165,
-      "suffix": ".csv"
-    },
-    {
       "path": "results/processed/repository_file_inventory.json",
-      "bytes": 101331,
+      "bytes": 91321,
       "suffix": ".json"
     },
     {
@@ -3129,27 +3135,27 @@
     },
     {
       "path": "results/processed/strengthened_marginal_gains.csv",
-      "bytes": 752271,
+      "bytes": 1006723,
       "suffix": ".csv"
     },
     {
       "path": "results/processed/strengthened_statistical_summaries.csv",
-      "bytes": 728360,
+      "bytes": 990503,
       "suffix": ".csv"
     },
     {
       "path": "results/processed/strengthened_test_statistics.csv",
-      "bytes": 33650,
+      "bytes": 43632,
       "suffix": ".csv"
     },
     {
       "path": "results/processed/tabular_data_inventory.json",
-      "bytes": 86401,
+      "bytes": 50943,
       "suffix": ".json"
     },
     {
       "path": "results/processed/verified_canonical_results.csv",
-      "bytes": 5123250,
+      "bytes": 6671646,
       "suffix": ".csv"
     },
     {
@@ -3189,17 +3195,17 @@
     },
     {
       "path": "results/raw/pseudolabel_baseline_sweep.csv",
-      "bytes": 86576,
+      "bytes": 505013,
       "suffix": ".csv"
     },
     {
       "path": "results/raw/pseudolabel_learning_curves.csv",
-      "bytes": 27019,
+      "bytes": 162804,
       "suffix": ".csv"
     },
     {
       "path": "results/raw/pseudolabel_test_results.csv",
-      "bytes": 5097,
+      "bytes": 10149,
       "suffix": ".csv"
     },
     {
@@ -3258,319 +3264,9 @@
       "suffix": ".csv"
     },
     {
-      "path": "results/snapshots/pre_canonical_schema_20261107/canonical_results.csv",
-      "bytes": 919486,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_full_wikitext_accounting_repair_20261107/macos_full_wikitext2_evaluations.csv",
-      "bytes": 4388,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_literature_field_refresh_20261107/literature_field_evidence.csv",
-      "bytes": 68629,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_llm_trajectory_dedup_20261107/expanded_llm_evaluations.csv",
-      "bytes": 24557,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_replicated_example_count_repair_20261107/replicated_learning_curves.csv",
-      "bytes": 75142,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_replicated_example_count_repair_20261107/replicated_scaling_results.csv",
-      "bytes": 274068,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_replicated_example_count_repair_20261107/replicated_scaling_test_results.csv",
-      "bytes": 20423,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_schema_repair_20261106/autoencoder_test_results.csv",
-      "bytes": 1885,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_ssl_csv_repair_20261107/ssl_algorithms.csv",
-      "bytes": 831565,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/EXPERIMENT_DESIGN.md",
-      "bytes": 3830,
-      "suffix": ".md"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/FINAL_COMPLETION_MATRIX.md",
-      "bytes": 10802,
-      "suffix": ".md"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/LITERATURE_REVIEW.md",
-      "bytes": 3348,
-      "suffix": ".md"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/LLM_RESEARCH_DESIGN.md",
-      "bytes": 3151,
-      "suffix": ".md"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/README.md",
-      "bytes": 4694,
-      "suffix": ".md"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/REMAINING_WORK.md",
-      "bytes": 3750,
-      "suffix": ".md"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/ResearchProp_Grp119_sec_C (1).pdf",
-      "bytes": 159949,
-      "suffix": ".pdf"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/configs/experiments.yaml",
-      "bytes": 1569,
-      "suffix": ".yaml"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/configs/model_registry.csv",
-      "bytes": 6386,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/proposal_extracted.txt",
-      "bytes": 26135,
-      "suffix": ".txt"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/requirements-directml.txt",
-      "bytes": 143,
-      "suffix": ".txt"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/requirements.txt",
-      "bytes": 242,
-      "suffix": ".txt"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/research_report.md",
-      "bytes": 24104,
-      "suffix": ".md"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/full_suite_labelprop_accuracy.png",
-      "bytes": 34822,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/full_suite_performance_native_cost.png",
-      "bytes": 171734,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/full_suite_random_forest_accuracy.png",
-      "bytes": 31030,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/full_suite_reconstruction_mse.png",
-      "bytes": 34922,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/full_suite_rl_return.png",
-      "bytes": 36729,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/full_suite_semisupervised_accuracy.png",
-      "bytes": 37222,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/full_suite_supervised_accuracy.png",
-      "bytes": 37718,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/full_suite_unsupervised_ari.png",
-      "bytes": 38057,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/hardware_inference_cpu_directml.png",
-      "bytes": 36644,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/hardware_training_cpu_directml.png",
-      "bytes": 39854,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/literature_hellaswag_vs_parameters.png",
-      "bytes": 63707,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/literature_model_size_compute.png",
-      "bytes": 57584,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/literature_palm_continuation.png",
-      "bytes": 77720,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/llm_local_model_size_loss.png",
-      "bytes": 56519,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/llm_pythia70m_loss_tokens.png",
-      "bytes": 47910,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/llm_pythia70m_perplexity_tokens.png",
-      "bytes": 43475,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/pilot_dqn_return_steps.png",
-      "bytes": 54751,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/pilot_dqn_return_time.png",
-      "bytes": 50974,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/pilot_kmeans_ari_time.png",
-      "bytes": 43918,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/pilot_marginal_gain_efficiency.png",
-      "bytes": 103086,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/pilot_mlp_accuracy_time.png",
-      "bytes": 56075,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/figures/pilot_pseudolabel_thresholds.png",
-      "bytes": 67962,
-      "suffix": ".png"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/hardware/backend_benchmark.csv",
-      "bytes": 849,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/hardware/hardware_capabilities.md",
-      "bytes": 5151,
-      "suffix": ".md"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/literature/large_model_literature.csv",
-      "bytes": 5910,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/literature/literature_sources.md",
-      "bytes": 5363,
-      "suffix": ".md"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/llm/expanded_llm_evaluations.csv",
-      "bytes": 16266,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/llm/llm_checkpoint_results.csv",
-      "bytes": 11271,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/processed/full_suite_marginal_results.csv",
-      "bytes": 16568,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/processed/pilot_marginal_results.csv",
-      "bytes": 5165,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/raw/experiment_results.csv",
-      "bytes": 8639,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/results/raw/full_suite_results.csv",
-      "bytes": 15700,
-      "suffix": ".csv"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/scripts/analyze_results.py",
-      "bytes": 4299,
-      "suffix": ".py"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/scripts/benchmark_backends.py",
-      "bytes": 2360,
-      "suffix": ".py"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/scripts/finalize_study_status.py",
-      "bytes": 19584,
-      "suffix": ".py"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/scripts/plot_pilots.py",
-      "bytes": 4853,
-      "suffix": ".py"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/scripts/run_llm_evaluations.py",
-      "bytes": 8580,
-      "suffix": ".py"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/scripts/run_missing_classical.py",
-      "bytes": 5357,
-      "suffix": ".py"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/scripts/run_missing_neural.py",
-      "bytes": 9657,
-      "suffix": ".py"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/scripts/run_missing_rl.py",
-      "bytes": 4498,
-      "suffix": ".py"
-    },
-    {
-      "path": "results/snapshots/pre_strengthening_20261106_150150/scripts/run_pilots.py",
-      "bytes": 16540,
-      "suffix": ".py"
+      "path": "results/run_logs/20261108T102856Z_pseudolabel-matched-sweeps-30ep.log",
+      "bytes": 78605,
+      "suffix": ".log"
     },
     {
       "path": "scripts/analyze_dbscan_size_scaling.py",
@@ -3594,7 +3290,12 @@
     },
     {
       "path": "scripts/analyze_strengthened_runs.py",
-      "bytes": 35056,
+      "bytes": 35111,
+      "suffix": ".py"
+    },
+    {
+      "path": "scripts/audit_conventional_completion.py",
+      "bytes": 12778,
       "suffix": ".py"
     },
     {
@@ -3604,7 +3305,7 @@
     },
     {
       "path": "scripts/audit_repository_inventory.py",
-      "bytes": 6089,
+      "bytes": 6108,
       "suffix": ".py"
     },
     {
@@ -3634,7 +3335,7 @@
     },
     {
       "path": "scripts/build_literature_evidence.py",
-      "bytes": 21504,
+      "bytes": 22011,
       "suffix": ".py"
     },
     {
@@ -3658,23 +3359,13 @@
       "suffix": ".py"
     },
     {
-      "path": "scripts/finalize_study_status.py",
-      "bytes": 19584,
-      "suffix": ".py"
-    },
-    {
       "path": "scripts/generate_completion_matrix.py",
-      "bytes": 8522,
+      "bytes": 8871,
       "suffix": ".py"
     },
     {
       "path": "scripts/plot_final_figures.py",
       "bytes": 27461,
-      "suffix": ".py"
-    },
-    {
-      "path": "scripts/plot_pilots.py",
-      "bytes": 4853,
       "suffix": ".py"
     },
     {
@@ -3708,6 +3399,11 @@
       "suffix": ".py"
     },
     {
+      "path": "scripts/run_logged.py",
+      "bytes": 3432,
+      "suffix": ".py"
+    },
+    {
       "path": "scripts/run_missing_classical.py",
       "bytes": 5357,
       "suffix": ".py"
@@ -3729,7 +3425,7 @@
     },
     {
       "path": "scripts/run_pseudolabel_ablation.py",
-      "bytes": 7729,
+      "bytes": 8244,
       "suffix": ".py"
     },
     {
@@ -3764,7 +3460,7 @@
     },
     {
       "path": "scripts/validate_project_outputs.py",
-      "bytes": 12523,
+      "bytes": 12588,
       "suffix": ".py"
     }
   ]

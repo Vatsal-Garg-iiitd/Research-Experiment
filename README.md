@@ -1,20 +1,20 @@
 # Research Experiment: Accuracy and Computational Cost
 
-This repository studies how task performance changes as computational budgets increase and whether the additional gain diminishes. The experimental phase is closed. This final audit used existing records only; it conducted no training, inference, benchmark runs, data collection, or hardware testing.
+This repository studies how task performance changes as computational budgets increase and whether marginal improvements diminish. The research is finalized from verified local experiments, selected checkpoint evaluations, and published literature. One incomplete semi-supervised sweep was continued from its saved epoch-5 checkpoints to the already registered 30-epoch budget, using its existing seeds and data splits; no new seeds, datasets, benchmark protocols, or hardware studies were added. The continuation is recorded in `results/run_logs/` and its original checkpoints are preserved.
 
 ## Final status
 
-The strict, unchanged completion framework records **0 of 50 registered objectives fully complete** (20 conventional methods, 15 LLM configurations, and 15 literature configurations). That count describes objective completion, not the amount of evidence collected. The repository contains extensive partial and completed runs, but no registered objective met all criteria. The current conclusion is descriptive: gains vary by method, task, and budget; the evidence does not establish a universal diminishing-returns law or a cross-paradigm compute-efficiency ranking.
+The strict, unchanged 50-objective framework records **20 of 50 objectives complete (40%)**: all 20 conventional objectives meet their registered schedule, seed, and endpoint checks. The remaining 15 local LLM configurations are evaluated only in part, and the 15 literature entries are source-based comparisons rather than local experiments. Completion status reflects the original objectives and does not imply that results across paradigms are directly comparable. The evidence remains descriptive and does not establish a universal diminishing-returns law or a cross-paradigm compute-efficiency ranking.
 
 ## Verified evidence at a glance
 
-- **Canonical local index:** 2,612 rows, consisting of 2,548 conventional raw-result rows and 64 selected LLM evaluation rows. It is a heterogeneous index, not 2,612 independent experiments.
-- **Analysis:** 3,614 grouped metric summaries, 2,417 paired within-seed budget transitions, and 169 held-out metric groups. Fifteen repeated K-Means records were excluded from its curve analysis, while raw records remain unchanged.
+- **Canonical local index:** 3,362 rows. This heterogeneous source index is not a count of independent experiments; it includes checkpoints, repeated exports, historical/superseded evidence, and current measurements.
+- **Analysis:** 4,864 grouped metric summaries, 3,167 paired within-seed budget transitions, and 219 held-out metric groups. Fifteen repeated K-Means records were excluded from its curve analysis, while raw records remain unchanged.
 - **Supervised learning:** MLP, LeNet-style CNN, ResNet-18, and the genuine ViT-Tiny-dimension implementation have three-seed curves through 30 epochs on the fixed 10K Fashion-MNIST split. The repository also retains a separate three-layer, width-96 compact transformer proxy. MLP and LeNet have matched five-epoch comparisons at 30K and 58K actual training examples.
-- **Unsupervised and semi-supervised learning:** K-Means/GMM, DBSCAN, Autoencoder/VAE, LabelPropagation, pseudo-labeling, Mean Teacher, FixMatch, and MixMatch are documented with their native budgets and metrics. The transformer is a compact proxy; SSL methods are task adaptations.
+- **Unsupervised and semi-supervised learning:** K-Means/GMM, DBSCAN, Autoencoder/VAE, LabelPropagation, pseudo-labeling, Mean Teacher, FixMatch, and MixMatch are documented with their native budgets and metrics. Pseudo-labeling and its matched labeled-only baseline now cover five label fractions, three seeds, and 30 epochs. The transformer is a compact proxy; SSL methods are task adaptations.
 - **Reinforcement learning:** DQN, Double DQN, A2C, PPO, and SAC are the original scope. PPO-Pendulum is a separately identified recorded extension. Double DQN rows have `completed` status and `local_measurement` provenance after the derived builder repairs a missing raw CSV field; raw records remain unchanged.
 - **Language models:** six public checkpoints have full WikiText-2 raw-v1 test evaluations (FP32, Apple M3 MPS, context 1,024, stride 512). Pythia checkpoint-prefix evaluations and a Pythia-70M full validation-split zero-shot run are reported separately. No model was pretrained locally; smoke tests are not reported as full benchmarks.
-- **Literature:** 15 configurations have 300 field-level evidence records: 172 reported, 8 derived, 16 estimated, and 104 uncertain. Published configurations were not locally reproduced.
+- **Literature:** 15 configurations have 300 field-level evidence records. Reported, derived, estimated, uncertain, and unavailable values are distinguished; unavailable values are not treated as zero. Published configurations were not locally reproduced.
 
 ## Key result and interpretation
 
@@ -46,9 +46,14 @@ Using the recorded `.venv-mac` environment from the repository root:
 .venv-mac/bin/python scripts/analyze_strengthened_runs.py
 .venv-mac/bin/python scripts/analyze_llm_full_eval.py
 .venv-mac/bin/python scripts/build_literature_evidence.py
+.venv-mac/bin/python scripts/audit_conventional_completion.py
+.venv-mac/bin/python scripts/generate_completion_matrix.py
+.venv-mac/bin/python scripts/build_experiment_run_registry.py
 .venv-mac/bin/python scripts/plot_final_figures.py
 .venv-mac/bin/python scripts/audit_repository_inventory.py
+.venv-mac/bin/python scripts/audit_identifiers.py
+.venv-mac/bin/python scripts/build_final_report_pdf.py
 .venv-mac/bin/python scripts/validate_project_outputs.py
 ```
 
-These workflows read saved data and regenerate analysis artifacts only. They do not complete missing experiments. See [reproducibility notes](REPRODUCIBILITY.md), [final report](FINAL_RESEARCH_REPORT.md), [statistical analysis](STATISTICAL_ANALYSIS_REPORT.md), and [limitations and gaps](REMAINING_WORK.md).
+These workflows read saved data and regenerate analysis artifacts only. They do not train models or run inference. See [reproducibility notes](REPRODUCIBILITY.md), [final report](FINAL_RESEARCH_REPORT.md), [statistical analysis](STATISTICAL_ANALYSIS_REPORT.md), and [limitations](REMAINING_WORK.md).

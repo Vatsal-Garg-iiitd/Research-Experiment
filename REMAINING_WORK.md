@@ -1,22 +1,19 @@
-# Remaining work and evidence limits
+# Limitations and scope boundaries
 
-## Experimental phase
+The registered conventional schedules are complete; this file records limits on interpretation rather than unfinished runs to be silently carried forward.
 
-Closed. No further training, inference, benchmarking, hardware testing, data collection, or attempts to finish missing runs were performed for the final audit. Incomplete items are recorded below as limitations rather than tasks silently carried into this report.
+## Unresolved evidence limits
 
-## Unresolved research coverage
+- The strict completion matrix remains 20/50. Fifteen local LLM objectives are partial or unevaluated; 15 literature entries are published evidence, not local experiments.
+- Six public checkpoints have complete WikiText-2 test evaluations, but checkpoint trajectories and zero-shot tasks cover only selected models. No local model pretraining was performed. Restricted smoke subsets are not complete benchmarks.
+- Transformer and semi-supervised implementations are Fashion-MNIST task adaptations. The custom three-layer width-96 transformer proxy is separate from the ViT-Tiny-dimension implementation.
+- Published literature fields are unevenly reported. Unavailable and uncertain values remain unfilled, and estimates are explicitly labeled.
+- Energy and direct training FLOPs are unavailable for most local experiments. The 1,122.1625285-second ResNet interval is a valid wall-clock observation with unresolved cause; adjusted efficiency figures are diagnostic only.
+- Small seed counts and fixed splits limit uncertainty estimates. Short curves and threshold flags cannot establish a general saturation law.
+- Windows/DirectML and macOS/MPS timing measurements are not a controlled hardware comparison.
 
-- Strict completion remains 0/50 under the original criterion; see `FINAL_COMPLETION_MATRIX.md` for detailed statuses.
-- Many of the 15 planned local LLM configurations were not evaluated with full-corpus and standardized benchmark protocols. Six full WikiText-2 checkpoint evaluations and the separate Pythia results do not satisfy that broader scope.
-- The five original RL algorithms have saved curves, but finite seeds, task coverage, protocol details, budget overshoot, and recorded statuses constrain comparison. PPO-Pendulum is an extension, not an original objective.
-- The compact transformer is a custom three-layer, width-96 proxy; SSL implementations are task adaptations. They should not be represented as canonical benchmark reproductions.
-- Literature field coverage includes 104 uncertain values. Existing primary-source spot checks do not replace complete field-by-field human verification.
-- Energy and measured accelerator compute are unavailable or incomplete. Logged wall time has at least one unexplained 1,122.16-second ResNet interval.
+## Conclusions not supported
 
-## Audit artifacts now available
+The results do not establish universal diminishing returns, causal compute-efficiency rankings across paradigms, a single accuracy-per-compute score, or generalization beyond recorded tasks and protocols. Any extension beyond this evidence would require a separately scoped study.
 
-The final repository includes a rebuilt canonical index and statistics, paired marginal-gain table, full CSV inventory, data-quality register, 19 PNG/SVG figure pairs with catalogue, final Markdown/PDF report, literature validation report, and reproducibility workflow. These outputs make the existing evidence reviewable; they do not fill any experimental gap.
-
-## Conclusions that remain unsupported
-
-The current observations do not establish universal diminishing returns, cross-model causal efficiency, an overall “accuracy per compute” ranking, or generalization beyond the recorded tasks and protocols. Further evidence would require a separately authorized and preregistered study.
+The repository contains a reproducible analysis workflow, 25 PNG/SVG figure pairs, a canonical data index, data-quality and identifier audits, a field-level literature ledger, and the final Markdown/PDF report.

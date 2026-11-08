@@ -1,5 +1,5 @@
 project:
-  status: partial_exploratory_evidence_as_of_2026_11_07_full_50_objective_study_incomplete
+  status: final_audit_2026_11_08_20_of_50_registered_objectives_complete
   question: "How does performance change as computational expenditure increases, and does marginal improvement diminish?"
   seeds: [11, 23, 37]
   output_dir: results/raw

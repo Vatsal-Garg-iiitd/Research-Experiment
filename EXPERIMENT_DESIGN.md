@@ -10,7 +10,7 @@ The strict completion framework has 50 objectives: 20 conventional methods (supe
 
 ## Evidence and completion criteria
 
-Raw CSV/JSON/JSONL records, model/configuration files, evaluator outputs, and execution logs define the evidence. A result counts as complete only under the original registered objective; a pilot, smoke test, partial schedule, literature-only observation, or resource-limited run is not upgraded to complete. Therefore, the final strict status remains 0/50 while the amount of collected partial evidence is substantial. Current status by objective is in `FINAL_COMPLETION_MATRIX.md`.
+Raw CSV/JSON/JSONL records, model/configuration files, evaluator outputs, and execution logs define the evidence. A result counts as complete only under the original registered objective; smoke tests, partial LLM schedules, and literature-only observations remain separate from complete local objectives. The final strict status is 20/50: 20 conventional objectives meet their registered schedules and the other 30 remain incomplete or literature-only. Current status by objective is in `FINAL_COMPLETION_MATRIX.md`.
 
 ## Current dataset and protocol summary
 

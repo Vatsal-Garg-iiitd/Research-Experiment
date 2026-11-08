@@ -36,7 +36,8 @@ OUT_FIELDS = [
 
 # Field-level locators for the quantities represented in the ledger. These use
 # paper sections/tables instead of broad paper-level citations so each extracted
-# cell can be independently checked. Empty fields remain uncertain until checked.
+# cell can be independently checked. A blank remains uncertain unless an exact
+# source locator was reviewed for that field; then it is explicitly unavailable.
 FIELD_LOCATORS = {
     "BROWN2020": {
         "parameters": "Section 2.1, Table 2.1, GPT-3 175B row",
@@ -202,8 +203,8 @@ MODEL_FIELDS = {
     },
     "CHOWDHERY2022": {
         "PaLM 540B": {"training_compute": ("2.56e24", "FLOPs", "reported", "Appendix Table 22; includes rematerialization"), "batch_size": ("1M → 2M → 4M", "tokens per batch", "reported", "Section 5; Appendix Table 22"), "accelerator_count": ("6144 for 1200 hours; 3072 for 336 hours", "TPU v4 chips", "reported", "Appendix B"), "training_duration": ("1200 hours at 6144 chips + 336 hours at 3072 chips (includes downtime/repeated steps)", "reported accelerator wall time", "reported", "Appendix B")},
-        "PaLM-62B (795B tokens)": {"training_compute": ("2.957e23", "FLOPs", "derived", "Appendix Table 31; converted from reported zettaFLOPs"), "batch_size": ("1M → 2M", "tokens per batch", "reported", "Section 5, Table 1; 62B schedule" )},
-        "PaLM-62B continued (1.325T tokens)": {"training_compute": ("4.929e23", "FLOPs", "derived", "Appendix Table 31; converted from reported zettaFLOPs"), "batch_size": ("1M → 2M", "tokens per batch", "reported", "Section 5, Table 1; 62B schedule" )},
+        "PaLM-62B (795B tokens)": {"training_compute": ("3.08e23", "FLOPs", "reported", "Appendix Table 22; source-reported FLOPs including rematerialization"), "batch_size": ("1M → 2M", "tokens per batch", "reported", "Section 5, Table 1; 62B schedule" )},
+        "PaLM-62B continued (1.325T tokens)": {"training_compute": ("4.929e23", "FLOPs", "reported", "Appendix Table 31; 492.9 zettaFLOPs converted to FLOPs"), "batch_size": ("1M → 2M", "tokens per batch", "reported", "Section 5, Table 1; 62B schedule" )},
     },
     "ZHANG2022": {
         "OPT-13B": {"learning_rate": ("1e-4", "peak LR", "reported", "Section 2.1, Table 1, OPT-13B row"), "batch_size": ("4M", "tokens per batch", "reported", "Section 2.1, Table 1")},
@@ -268,7 +269,7 @@ def main():
                 value, known_unit, evidence, known_locator = known
                 unit = known_unit or unit
             else:
-                evidence = "reported" if value else "uncertain"
+                evidence = "reported" if value else ("unavailable" if FIELD_LOCATORS.get(row.get("source_id", ""), {}).get(field) else "uncertain")
             locators = FIELD_LOCATORS.get(row.get("source_id", ""), {})
             locator = known[3] if known else locators.get(field, row.get("locator", ""))
             source_url = FIELD_URLS.get(row.get("source_id", ""), row.get("source_url", ""))
@@ -276,12 +277,17 @@ def main():
                 source_url = "https://arxiv.org/abs/2211.02001"
             if field == "training_duration" and row.get("source_id") == "ZHANG2022" and row.get("model") == "OPT-175B":
                 source_url = FIELD_URLS["TOUVRON2023"]
-            note = f"Ledger value checked against the field locator: {locator}." if value else "Not extracted or verified; do not treat as zero or as proof the source omits it."
+            if value:
+                note = f"Ledger value checked against the field locator: {locator}."
+            elif evidence == "unavailable":
+                note = f"No verified value is reported in the reviewed source location ({locator}); this is unavailable, not zero."
+            else:
+                note = "No verified value is currently available in the ledger; this field remains uncertain and must not be interpreted as zero or as source-confirmed absence."
             if field == "training_tokens" and value:
                 evidence = row.get("training_tokens_evidence_type", "reported") or "reported"
                 evidence = "derived" if evidence.lower() in ("calculated", "derived") else evidence
             if field == "training_compute" and value:
-                if "converted from" in row.get("notes", ""):
+                if "converted from" in row.get("notes", "") and evidence != "reported":
                     evidence = "derived"
                     note = "Converted from source-reported compute units; see model-specific notes and locator."
                 elif "Reported train FLOPs" in row.get("notes", ""):

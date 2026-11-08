@@ -1,0 +1,21 @@
+﻿model,source_files,valid_record_count,expected_coverage,missing_coverage,status,verification_note
+MLP,replicated_scaling_results.csv; replicated_scaling_test_results.csv,132,3 seeds; 10K epochs 1-30; 30K/58K epochs 1-5; final official-test endpoints,,completed,"Coverage checked by source row, seed, configuration path, budget, and held-out-test endpoint."
+LeNet-style CNN,replicated_scaling_results.csv; replicated_scaling_test_results.csv,132,3 seeds; 10K epochs 1-30; 30K/58K epochs 1-5; final official-test endpoints,,completed,"Coverage checked by source row, seed, configuration path, budget, and held-out-test endpoint."
+ResNet-18,replicated_scaling_results.csv; replicated_scaling_test_results.csv,96,3 seeds; 10K epochs 1-30; final official-test endpoints,,completed,"Coverage checked by source row, seed, configuration path, budget, and held-out-test endpoint."
+ViT-Tiny,vit_tiny_scaling.csv; vit_tiny_test_results.csv,93,12-block ViT-Tiny-dimension model; 3 seeds; 30 epochs; final test endpoint,,completed,Separate from the compact transformer proxy.
+Random Forest,random_forest_scaling.csv; random_forest_test_results.csv,30,"3 seeds; 10-1,000 warm-start trees; test endpoints",,completed,Native budget is tree count; no epoch conversion.
+K-Means,unsupervised_scaling.csv,30,"3 seeds; native budgets 1,5,10,20,50",,completed,Repeated K-Means source IDs are deduplicated for coverage; raw records are preserved.
+Gaussian Mixture Model,unsupervised_scaling.csv,21,"3 seeds; native budgets 1,3,5,10,20,50,100",,completed,Repeated K-Means source IDs are deduplicated for coverage; raw records are preserved.
+DBSCAN,dbscan_size_scaling.csv; dbscan_parameter_sweep.csv,17,3 seeds at 2.5K/5K/10K samples plus 8-setting parameter sensitivity,,completed,"DBSCAN is a parameter/size study, not an iterative epoch curve."
+Autoencoder,autoencoder_scaling.csv; autoencoder_test_results.csv,96,3 seeds; epochs 1-30; reconstruction and final test metrics,,completed,Autoencoder reconstruction and downstream probe metrics remain distinct.
+Variational Autoencoder,autoencoder_scaling.csv; autoencoder_test_results.csv,96,3 seeds; epochs 1-30; reconstruction and final test metrics,,completed,Autoencoder reconstruction and downstream probe metrics remain distinct.
+Pseudo-Labeling,pseudolabel_baseline_sweep.csv; pseudolabel_test_results.csv,960,3 seeds x 5 label fractions x epochs 1-30; matched labeled-only baseline and final official-test endpoints,,completed,Epochs 6-30 resumed from saved epoch-5 states; original checkpoints retained.
+Mean Teacher,ssl_algorithms.csv; ssl_algorithms_test.csv,480,3 seeds x 5 label fractions x epochs 1-30; final official-test endpoints,,completed,Fashion-MNIST algorithm adaptations with separate held-out test endpoints.
+FixMatch,ssl_algorithms.csv; ssl_algorithms_test.csv,480,3 seeds x 5 label fractions x epochs 1-30; final official-test endpoints,,completed,Fashion-MNIST algorithm adaptations with separate held-out test endpoints.
+MixMatch,ssl_algorithms.csv; ssl_algorithms_test.csv,480,3 seeds x 5 label fractions x epochs 1-30; final official-test endpoints,,completed,Fashion-MNIST algorithm adaptations with separate held-out test endpoints.
+Label Propagation,label_propagation_scaling.csv,30,"3 seeds; iteration ceilings 1-2,000; actual LabelPropagation",,completed,Only current LabelPropagation records count; superseded legacy estimator rows are excluded.
+DQN,rl_scaling_results.csv,18,3 seeds x six budgets through 250K; checkpoint evaluation,,completed,Double DQN field shift is handled analytically; its raw CSV remains unchanged.
+Double DQN,rl_scaling_results.csv,30,5 seeds x six budgets through 250K; checkpoint evaluation,,completed,Double DQN field shift is handled analytically; its raw CSV remains unchanged.
+A2C,rl_scaling_results.csv,18,3 seeds x six budgets through 250K; checkpoint evaluation,,completed,Double DQN field shift is handled analytically; its raw CSV remains unchanged.
+PPO,rl_scaling_results.csv,18,3 seeds x six budgets through 250K; checkpoint evaluation,,completed,Double DQN field shift is handled analytically; its raw CSV remains unchanged.
+SAC,rl_scaling_results.csv,30,5 seeds x six budgets through 250K; checkpoint evaluation,,completed,Double DQN field shift is handled analytically; its raw CSV remains unchanged.

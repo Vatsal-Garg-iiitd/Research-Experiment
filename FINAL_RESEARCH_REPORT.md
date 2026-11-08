@@ -8,12 +8,12 @@ Final research audit and results report
 
 Research project, Group 119, Section C
 
-Evidence cut-off: 7 November 2026
+Evidence cut-off: 8 November 2026
 Repository: `Vatsal-Garg-iiitd/Research-Experiment`
 
 ## 2. Abstract
 
-This report audits the project’s existing supervised, unsupervised, semi-supervised, reinforcement-learning (RL), language-model, and literature records. It recomputes descriptive statistics and within-run marginal changes from saved measurements only. No training, inference, benchmarking, or data collection was conducted for this audit. Evidence includes multi-seed Fashion-MNIST learning curves, RL interaction curves, local evaluation of six public language-model checkpoints on WikiText-2, three full zero-shot task evaluations for Pythia-70M, and a field-level literature ledger. The strict project framework records **0 of 50 requested objectives fully complete**. This coexists with substantial partial evidence: 2,548 raw conventional-result rows are indexed, 64 LLM evaluation rows are indexed, and the analysis contains 3,614 grouped metric summaries, 2,417 within-seed marginal transitions, and 169 held-out metric groups. Fifteen duplicate K-Means records were excluded from the analytical trajectory because each repeats an earlier experiment ID and copies the final checkpoint score into earlier budgets; raw values remain untouched. The results show descriptive, task-specific changes with budget, including reversals and plateaus. They do not establish a general diminishing-returns law or a cross-paradigm compute-efficiency ranking. The defensible answer to the research question is therefore conditional: added budget sometimes improves measured performance, but whether its cost is worthwhile depends on task, metric, model, evaluation protocol, and stopping point; current evidence is insufficient for a universal threshold or causal claim.
+This report audits supervised, unsupervised, semi-supervised, reinforcement-learning (RL), language-model, and literature evidence. The one unfinished registered semi-supervised schedule was continued from saved epoch-5 checkpoints to epoch 30 for the same configurations, seeds, and data splits; no additional methods, seeds, datasets, or evaluation protocols were introduced. All remaining statistics and figures are rebuilt from saved measurements. The strict project framework records **20 of 50 registered objectives complete**: the 20 conventional objectives meet their registered schedule, seed, and endpoint checks; 15 local LLM configurations remain partially evaluated; and 15 literature configurations are source-based rather than local experiments. The canonical index contains 3,362 heterogeneous source rows, not 3,362 independent experiments. Current analyses contain 4,864 grouped metric summaries, 3,167 within-seed marginal transitions, and 219 held-out metric groups. Fifteen duplicate K-Means records are excluded from its analytical trajectory because they reuse experiment IDs and copy a final checkpoint score into earlier budgets; raw values remain untouched. Results are task-specific, include reversals and plateaus, and do not establish a general diminishing-returns law or a cross-paradigm efficiency ranking. Whether additional budget is worthwhile depends on task, metric, model, evaluation protocol, and stopping point; evidence is insufficient for a universal threshold or causal claim.
 
 ## 3. Keywords
 
@@ -42,7 +42,7 @@ The central problem is to determine whether observed gains justify the added mea
 
 ## 8. Research objectives
 
-The original scope spans 20 conventional methods, 15 LLM configurations, and 15 literature configurations. The current strict all-or-nothing matrix remains 0/50. This criterion is preserved: an experiment can be executed and informative while its requested objective remains incomplete. The audit objective is to verify the evidence and produce a reproducible record, not to increase the completion score retrospectively.
+The original scope spans 20 conventional methods, 15 LLM configurations, and 15 literature configurations. The unchanged strict all-or-nothing matrix records 20/50 complete. The evidence audit verifies that all conventional schedules, seeds, and endpoints are present. The remaining 30 objectives are not complete: local LLM coverage is partial and literature records are not local replications.
 
 ## 9. Background and related work
 
@@ -54,7 +54,7 @@ For a higher-is-better metric (y), the adjacent gain is (\Delta y_i=y_i-y_{i-1})
 
 ## 11. Experimental methodology
 
-This is a post hoc audit of existing records. Raw CSV, JSON, JSONL, checkpoint/configuration, and log artifacts remain source evidence. Analysis scripts rebuild the common index, summaries, marginal tables, inventory, and figures. They do not call training or evaluation entry points. Superseded, failed, incomplete, smoke, and alternate protocol records are kept in the repository and separated by status. Duplicate exports with shared experiment IDs are not pooled.
+This is a post hoc audit with one documented continuation of a previously incomplete, registered semi-supervised schedule. The pseudo-labeling and matched labeled-only runs resume from preserved epoch-5 checkpoints and stop at the pre-existing 30-epoch target, retaining the original 3 seeds and 5 label fractions. All other analyses use existing records. Raw CSV, JSON, JSONL, checkpoint/configuration, and log artifacts remain source evidence. Analysis scripts rebuild the common index, summaries, marginal tables, inventory, and figures without training or evaluation. Superseded, failed, incomplete, smoke, and alternate protocol records are retained and separated by status. Duplicate exports with shared experiment IDs are not pooled.
 
 ## 12. Experimental setup
 
@@ -82,7 +82,7 @@ For repeated runs, means, sample standard deviations, medians, minima, maxima, v
 
 ## 18. Experimental results: evidence overview
 
-The current canonical local index contains 2,612 rows: 2,548 source rows from conventional raw CSVs and 64 rows from selected LLM CSV exports. This is a lossless heterogeneous index, not a count of independent experiments. It includes repeated checkpoints, superseded and partial records. A prior 619-row canonical export is recoverable from the committed historical version at `afc488a`; an execution-log milestone cited 430 rows, but no matching snapshot was found, so exact membership of that intermediate export is unavailable. The old report’s 458 grouped summaries, 279 marginal increments, and 84 held-out groups reflect an earlier analysis state; the current reproducible run reports 3,614, 2,417, and 169 respectively. These are different processing generations and must not be added together.
+The current canonical local index contains 3,362 source rows across conventional and selected LLM result files. This heterogeneous index is not a count of independent experiments and includes repeated checkpoints, superseded records, and mirrored exports. Prior count snapshots refer to different export generations and aggregation levels; they must not be added together. The current reproducible analysis reports 4,864 grouped metric summaries, 3,167 paired within-seed marginal transitions, and 219 held-out metric groups. These counts were regenerated after adding the verified 30-epoch pseudo-labeling and labeled-only continuations.
 
 ## 19. Supervised learning analysis
 
@@ -96,7 +96,7 @@ The raw unsupervised table has 51 rows. Fifteen later K-Means rows repeat earlie
 
 ## 21. Semi-supervised learning analysis
 
-Pseudo-labeling and its labeled-only baseline cover five label fractions with three seeds and short five-epoch curves. Mean Teacher, FixMatch, and MixMatch each have 450 validation rows: five label fractions × 30 epochs × three seeds. Their 90 test rows contain one terminal evaluation per model/fraction/seed. These are grayscale Fashion-MNIST adaptations, not canonical benchmark replications. Figure 11 compares endpoint test accuracy by label fraction; Figure 12 compares validation curves at 10% labels; Figure 21 compares pseudo-labeling with the matched labeled-only MLP baseline at five epochs. Results are not generalized beyond this dataset and recipe. Label Propagation has 30 current completed rows (three seeds × iteration ceilings) and 15 explicitly superseded legacy LabelSpreading/implementation rows; it is reported as LabelPropagation only for the current implementation. Figure 22 plots linear-probe representation quality against measured training time, separately from reconstruction loss.
+Pseudo-labeling and its matched labeled-only baseline each cover five label fractions, three seeds, and 30 epochs; historical epoch-5 test endpoints remain preserved alongside new epoch-30 endpoints. At epoch 30, pseudo-labeling mean test accuracies by label fraction are 0.6389, 0.7839, 0.8087, 0.8252, and 0.8397 (n=3 each), while the matched labeled-only means are 0.6544, 0.7695, 0.8054, 0.8214, and 0.8379. Paired seed-level differences (pseudo-label minus labeled-only) are -0.0155 (SD 0.0300; 95% t CI [-0.0900, 0.0590]), +0.0144 (0.0109; [-0.0128, 0.0416]), +0.0033 (0.0007; [0.0017, 0.0049]), +0.0038 (0.0082; [-0.0165, 0.0240]), and +0.0018 (0.0011; [-0.0010, 0.0046]) at 1%, 5%, 10%, 20%, and 40% labels respectively. Only the observed 10% paired interval excludes zero; with three seeds and one fixed split, this is not evidence of a general benefit. Mean Teacher, FixMatch, and MixMatch each have five label fractions × 30 epochs × three seeds, with one terminal test evaluation per model/fraction/seed. Figure 11 compares endpoint test accuracy by label fraction; Figure 12 compares validation curves at 10% labels; Figure 21 compares pseudo-labeling with its matched labeled-only baseline. Label Propagation has 30 current completed rows (three seeds × iteration ceilings) and 15 superseded legacy LabelSpreading/implementation rows; it is reported as LabelPropagation only for the current implementation. Figure 22 plots linear-probe representation quality against measured training time, separately from reconstruction loss.
 
 ## 22. Reinforcement learning analysis
 
@@ -110,11 +110,11 @@ Checkpoint-prefix scaling is a different protocol: Pythia-70M and 160M each have
 
 ## 24. Published literature comparison
 
-The literature ledger contains 15 published configurations and 300 requested model-field rows (20 fields per configuration). Evidence classes are 172 reported, 8 derived, 16 estimated, and 104 uncertain. A field marked uncertain may be absent, not yet extracted, or not established by available evidence. Training tokens, parameter totals, hardware, duration, compute, datasets, and benchmarks are not forced into a common unit. FLOPs and GPU-hours are never conflated without a stated conversion. Literature-only configurations are not counted as locally completed experiments.
+The literature ledger contains 15 published configurations and 300 requested model-field rows (20 fields per configuration). Evidence classes are 174 reported, 6 derived, 16 estimated, 88 uncertain, and 16 unavailable. Uncertain fields lack a verified value; unavailable values were not found in the reviewed source location. Neither is treated as zero. Training tokens, parameter totals, hardware, duration, compute, datasets, and benchmarks are not forced into a common unit. FLOPs and GPU-hours are never conflated without a stated conversion. Literature-only configurations are not counted as locally completed experiments.
 
 ## 25. Marginal performance improvement analysis
 
-The regenerated table contains 2,417 adjacent within-seed transitions. Each row records native budget delta, favorable-direction score change, relative change, additional logged seconds where available, gain per native budget unit, gain per second, and seconds per positive unit gain. Positive, zero, and negative changes are retained. Time-normalized values are not reported where the time delta is nonpositive or missing. Table-level summaries and row-level results are in `results/processed/strengthened_marginal_gains.csv`; the complete discussion is in `MARGINAL_GAIN_ANALYSIS.md`.
+The regenerated table contains 3,167 adjacent within-seed transitions. Each row records native budget delta, favorable-direction score change, relative change, additional logged seconds where available, gain per native budget unit, gain per second, and seconds per positive unit gain. Positive, zero, and negative changes are retained. Time-normalized values are not reported where the time delta is nonpositive or missing. Table-level summaries and row-level results are in `results/processed/strengthened_marginal_gains.csv`; the complete discussion is in `MARGINAL_GAIN_ANALYSIS.md`.
 
 ## 26. Accuracy-versus-compute trade-off
 
@@ -130,7 +130,7 @@ Figure 19 displays percent change from each series’ first recorded point in se
 
 ## 29. Limitations
 
-The work is incomplete against its 50-objective framework. Several intended model configurations are unavailable or partial. Many conventional curves have only three seeds and fixed splits; SSL recipes are task adaptations; RL rewards are noisy and seed counts differ; model-selection/test protocols are not perfectly uniform across historical outputs. Energy and peak-memory coverage is incomplete. Local full-test LLM evidence covers six checkpoints, whereas many planned model sizes were not evaluated. The literature ledger has 104 uncertain fields. No new experiment is authorized or needed to state these limits.
+The project remains incomplete against its 50-objective framework: 20 conventional objectives are complete, while local LLM coverage is partial and literature entries are not local replications. Many conventional curves have three seeds and fixed splits; SSL recipes are task adaptations; RL rewards are noisy and seed counts differ; model-selection/test protocols vary across historical outputs. Energy and peak-memory coverage is incomplete. Local full-test LLM evidence covers six checkpoints, whereas many planned model sizes were not evaluated. The literature ledger has 88 uncertain and 16 unavailable fields. The registered experimental phase is complete; these limits are reported without filling missing evidence.
 
 ## 30. Threats to validity
 
@@ -138,15 +138,21 @@ Internal validity is limited by heterogeneous code paths, platform changes, hist
 
 ## 31. Reproducibility
 
-From the project root, rebuild derived records without invoking model execution:
+From the project root, rebuild derived records and reports without invoking model execution:
 
 ```sh
 .venv-mac/bin/python scripts/build_canonical_results.py
+.venv-mac/bin/python scripts/build_verified_dataset.py
 .venv-mac/bin/python scripts/analyze_strengthened_runs.py
 .venv-mac/bin/python scripts/analyze_llm_full_eval.py
 .venv-mac/bin/python scripts/build_literature_evidence.py
+.venv-mac/bin/python scripts/audit_conventional_completion.py
+.venv-mac/bin/python scripts/generate_completion_matrix.py
+.venv-mac/bin/python scripts/build_experiment_run_registry.py
 .venv-mac/bin/python scripts/plot_final_figures.py
 .venv-mac/bin/python scripts/audit_repository_inventory.py
+.venv-mac/bin/python scripts/audit_identifiers.py
+.venv-mac/bin/python scripts/build_final_report_pdf.py
 .venv-mac/bin/python scripts/validate_project_outputs.py
 ```
 
@@ -179,4 +185,4 @@ The experiment run registry and `results/configurations/*.json` record run-level
 
 ## 36. Appendix: completion status and additional figures
 
-The strict completion denominator remains 50: 20 conventional, 15 LLM, 15 literature objectives. Fully complete objectives: 0; the matrix still records partial work and statuses per model. Evidence amount, partial objectives, and complete objectives are different quantities. The 0/50 result means none met all registered criteria, not that no work was performed. Figure paths, sources, scripts, interpretation, and limitations for 25 figures are listed in `FIGURE_CATALOGUE.md`; PNG and vector SVG files are under `results/figures/final/`. Inventory and row-level schema/missingness summaries are in `DATA_INVENTORY.md` and `results/processed/tabular_data_inventory.json`. Identifier and foreign-key audit outputs are in `IDENTIFIER_AUDIT.md` and `results/processed/`.
+The strict completion denominator remains 50: 20 conventional, 15 LLM, and 15 literature objectives. Twenty objectives are verified complete; the remaining 30 are partial local LLM evaluations and literature-only comparisons, not local replications. Evidence volume, partial objectives, and complete objectives are distinct quantities. Figure paths, sources, scripts, interpretation, and limitations for 25 figures are listed in `FIGURE_CATALOGUE.md`; PNG and vector SVG files are under `results/figures/final/`. Inventory and row-level schema/missingness summaries are in `DATA_INVENTORY.md` and `results/processed/tabular_data_inventory.json`. Identifier and foreign-key audit outputs are in `IDENTIFIER_AUDIT.md` and `results/processed/`.

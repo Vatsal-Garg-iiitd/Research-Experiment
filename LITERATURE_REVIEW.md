@@ -12,7 +12,7 @@ This repository evaluates released Pythia, GPT-2, and OPT checkpoints; it does n
 
 ## Evidence quality
 
-The field ledger includes 15 published configurations and 300 fields classified as 172 reported, 8 derived, 16 estimated, and 104 uncertain. It stores source links and source locators. Literature estimates are distinguished from source-reported quantities. Training FLOPs, accelerator-hours, wall time, data volume, and energy are not treated as equivalent. See `LITERATURE_VALIDATION_REPORT.md` for primary-source spot checks and limitations.
+The field ledger includes 15 published configurations and 300 fields classified as 174 reported, 6 derived, 16 estimated, 88 uncertain, and 16 unavailable. It stores source links and field locators. Literature estimates are distinguished from source-reported quantities. Training FLOPs, accelerator-hours, wall time, data volume, and energy are not treated as equivalent. See `LITERATURE_VALIDATION_REPORT.md` for primary-source verification and limitations.
 
 ## Primary references
 

@@ -2,7 +2,7 @@
 
 The following limitations apply to the saved evidence and are reflected in the final report. They are not resolved by post hoc analysis and do not trigger new runs.
 
-- **Completion criterion:** the original 50-objective all-or-nothing framework remains 0/50. Partial evidence is not promoted to complete.
+- **Completion criterion:** the original 50-objective all-or-nothing framework is 20/50. All 20 conventional schedules are verified complete; partial local LLM coverage and literature-only records are not promoted to local experimental objectives.
 - **Replicates:** most supervised, SSL, representation, and core RL conditions have three seeds; Double DQN and SAC have five. Intervals are conditional on fixed splits and small-sample uncertainty is substantial.
 - **Validation and testing:** historical endpoint selection is not completely uniform. Some analyses use held-out endpoints at designated budgets; validation curves are treated separately. Data-size scaling is restricted to matched epoch-5 endpoints.
 - **Architecture and algorithm fidelity:** the compact transformer is a 3-layer/96-width proxy. SSL recipes are Fashion-MNIST adaptations. Historical LabelSpreading rows do not count as LabelPropagation.
