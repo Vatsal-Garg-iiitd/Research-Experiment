@@ -1,12 +1,12 @@
 # Final project audit
 
-Audit date: 8 November 2026. The local `main` branch was compared with fetched `research-experiment/main`; both pointed to `d775ad18611b95c516800d646a2870b367796456` before this finalization pass. The working tree contained a documented semi-supervised continuation and analysis additions. Raw records, historical evidence, configurations, and checkpoints were preserved. The pseudo-labeling and matched labeled-only studies resumed from saved epoch-5 checkpoints and completed the already registered 30-epoch schedule with the same five label fractions and three seeds.
+Audit date: 9 November 2026. The local `main` branch was compared with fetched `research-experiment/main`; both pointed to `d775ad18611b95c516800d646a2870b367796456` before this finalization pass. The working tree contained a documented semi-supervised continuation and analysis additions. Raw records, historical evidence, configurations, and checkpoints were preserved. The pseudo-labeling and matched labeled-only studies resumed from saved epoch-5 checkpoints and completed the already registered 30-epoch schedule with the same five label fractions and three seeds.
 
 ## Verified result counts
 
 | Count | Meaning |
 |---:|---|
-| 3,362 | Canonical heterogeneous index rows with source path and row locators; not a count of independent experiments. |
+| 3,368 | Canonical heterogeneous index rows with source path and row locators; not a count of independent experiments. |
 | 4,864 | Grouped metric summaries by model, setting, metric, and budget. |
 | 3,167 | Paired adjacent-budget marginal transitions within matched seed/configuration series. |
 | 219 | Held-out metric endpoint groups. |
@@ -31,7 +31,7 @@ The 20 conventional objectives cover supervised learning, unsupervised learning,
 
 The 15 literature objectives are source-based review tasks, not local model runs. Each configuration has one source-ledger row and 20 unique field-evidence rows; source identity, parameter/token evidence, and every field's source URL, locator, and evidence class pass `scripts/audit_literature_completion.py`. The status `completed_literature_only` means the review is complete to the extent data are reported. Uncertain/unavailable fields remain explicit and do not imply local reproduction. Per-entry counts are in `results/processed/literature_completion_audit.csv`.
 
-The 15 local LLM configurations are not all evaluated. Six public checkpoints have full WikiText-2 test-set evaluations under a shared local protocol; checkpoint-prefix trajectories, selected endpoints, full zero-shot Pythia-70M tasks, smoke subsets, failed attempts, and unevaluated models remain separately identified. Public checkpoint inference is not local pretraining.
+The 15 local LLM configurations are not all evaluated under the broader registered scope. Eleven public checkpoints have full WikiText-2 test-set evaluations under a shared local protocol, including five additional endpoints completed in this final pass. GPT-2 XL was interrupted before inference, and Pythia-2.8B/6.9B/12B were not run because FP32 weights exceed safe local MPS memory. Checkpoint-prefix trajectories, selected endpoints, full zero-shot Pythia-70M tasks, smoke subsets, failed attempts, and unevaluated models remain separately identified. Public checkpoint inference is not local pretraining.
 
 The literature ledger has 15 model configurations × 20 fields. Evidence classes are `reported`, `derived`, `estimated`, `uncertain`, and `unavailable`. PaLM compute conversions and 6-parameter-times-token estimates are labeled explicitly; unreported values are never treated as zero. Primary source locators are recorded in the field ledger.
 

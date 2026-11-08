@@ -6,7 +6,7 @@ required=['PROJECT_AUDIT.md','EXPERIMENTAL_METHODOLOGY.md','EXPERIMENT_COMPLETIO
 errors=[];warnings=[]
 for f in required:
     if not (ROOT/f).is_file(): errors.append(f'Missing deliverable: {f}')
-statuses={'planned','implemented','pilot','running','completed','completed_literature_only','failed','superseded','resource_limited','literature_only','unknown'}
+statuses={'planned','implemented','pilot','running','completed','completed_literature_only','failed','interrupted','superseded','resource_limited','literature_only','unknown'}
 for p in sorted((ROOT/'results').rglob('*.csv')):
     if 'snapshots' in p.parts: continue
     try:
@@ -65,9 +65,11 @@ if (ROOT/'IDENTIFIER_RECONCILIATION.csv').is_file():
     if any(not r.get('validation_status') for r in rows):errors.append('Identifier reconciliation has unvalidated correction')
 if (ROOT/'results/llm/macos_full_wikitext2_evaluations.csv').is_file():
     rows=load_csv('results/llm/macos_full_wikitext2_evaluations.csv');done=[r for r in rows if r.get('status')=='completed']
-    if len(done)!=6:errors.append(f'Expected six completed full WikiText-2 checkpoint evaluations, found {len(done)}')
+    if len(done)!=11:errors.append(f'Expected eleven completed full WikiText-2 checkpoint evaluations, found {len(done)}')
     if len({r.get('text_sha256') for r in done})!=1:errors.append('Full WikiText evaluations do not share a text hash')
     if any(r.get('context_length')!='1024' or r.get('stride')!='512' for r in done):errors.append('Full WikiText protocol mismatch')
+    stopped=[r for r in rows if r.get('model_name')=='GPT-2 XL']
+    if not stopped or any(r.get('status')!='interrupted' or r.get('scored_tokens') for r in stopped):errors.append('GPT-2 XL interruption must be recorded without scored tokens')
 if (ROOT/'results/llm/harness_full_summary.csv').is_file():
     rows=load_csv('results/llm/harness_full_summary.csv');tasks={r.get('task') for r in rows}
     if tasks!={'hellaswag','piqa','arc_easy'}:errors.append(f'Unexpected full harness task coverage: {sorted(tasks)}')

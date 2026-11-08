@@ -8,7 +8,7 @@ Raw records in `results/raw/*.csv` and saved evaluator records in `results/llm/`
 
 - **430 rows:** historical execution-log milestone without a matching saved snapshot; exact membership cannot be reconstructed.
 - **619 rows:** recoverable historical index at commit `afc488a`, from an earlier source state.
-- **3,362 rows:** current common index of heterogeneous source records. It is not a count of independent experiments; repeated budgets and non-completed statuses are retained.
+- **3,368 rows:** current common index of heterogeneous source records. It is not a count of independent experiments; repeated budgets and non-completed statuses are retained.
 - **5,250 rows:** run/evidence registry across 29 source paths, a distinct catalog with a different unit of counting.
 - **4,864 / 3,167 / 219:** current grouped metric summaries / paired within-seed marginal transitions / final held-out metric groups.
 

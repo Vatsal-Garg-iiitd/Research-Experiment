@@ -11,7 +11,7 @@ The registered conventional schedules are complete and the analysis is finalized
 3. Processed CSVs and reports are derived artifacts and are regenerated from raw evidence.
 4. Literature observations are cited external evidence and are never labeled as local reproductions.
 
-Raw experimental files are preserved. A repeated source export is not treated as an additional independent observation. The current canonical index contains 3,362 heterogeneous source rows; it includes repeated budgets and superseded/partial statuses and is not an independent-run count.
+Raw experimental files are preserved. A repeated source export is not treated as an additional independent observation. The current canonical index contains 3,368 heterogeneous source rows; it includes repeated budgets and superseded/partial statuses and is not an independent-run count.
 
 ## Datasets and splits
 
@@ -36,7 +36,7 @@ Descriptive tables report valid (n), mean, standard deviation, median, minimum, 
 - Unsupervised: K-Means uses partial-fit updates; GMM uses warm-start EM calls; DBSCAN uses data-size and parameter grids. Fifteen later K-Means duplicate checkpoint-reuse rows are excluded from curves but remain in raw data.
 - Semi-supervised: Mean Teacher, FixMatch, MixMatch, pseudo-labeling, and the matched labeled-only baseline cover 1%, 5%, 10%, 20%, and 40% labels, 30 epochs, and three seeds.
 - RL: 5K–250K requested interactions, checkpoints at 5K/10K/25K/50K/100K/250K, 20 deterministic evaluation episodes per saved checkpoint. Double DQN has five seeds and status `local_measurement`; these valid recorded rewards are included with status preserved. PPO-Pendulum is outside the original algorithm count.
-- LLM full corpus: six checkpoints, WikiText-2 raw-v1 test, FP32, Apple M3 MPS, context 1,024, stride 512, batch one. Pythia models score 285,830 tokens; GPT-2/OPT score 283,286. Prefix scaling and zero-shot harness runs are separate protocols; checkpoint evaluation is not pretraining.
+- LLM full corpus: eleven checkpoints, WikiText-2 raw-v1 test, FP32, Apple M3 MPS, context 1,024, stride 512, batch one. Pythia models score 285,830 tokens; GPT-2/OPT score 283,286. Prefix scaling and zero-shot harness runs are separate protocols; checkpoint evaluation is not pretraining.
 - Literature: 300 field records over 15 configurations carry reported/derived/estimated/uncertain labels, source URLs, and locators. Unknown fields remain unknown.
 
 ## Known anomalies and exclusions

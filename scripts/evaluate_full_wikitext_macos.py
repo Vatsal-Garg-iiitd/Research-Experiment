@@ -23,17 +23,27 @@ MODELS = [
     ("Pythia-70M", "EleutherAI/pythia-70m", "step143000", 70_426_624),
     ("Pythia-160M", "EleutherAI/pythia-160m", "step143000", 162_322_944),
     ("Pythia-410M", "EleutherAI/pythia-410m", "step143000", 405_334_016),
+    ("Pythia-1B", "EleutherAI/pythia-1b", "step143000", 1_011_382_272),
+    ("Pythia-1.4B", "EleutherAI/pythia-1.4b", "step143000", 1_414_647_808),
+    ("Pythia-2.8B", "EleutherAI/pythia-2.8b", "step143000", 2_805_067_776),
+    ("Pythia-6.9B", "EleutherAI/pythia-6.9b", "step143000", 6_915_155_968),
+    ("Pythia-12B", "EleutherAI/pythia-12b", "step143000", 12_002_822_144),
     ("GPT-2 Small", "openai-community/gpt2", "main", 124_439_808),
+    ("GPT-2 Medium", "openai-community/gpt2-medium", "main", 354_823_168),
+    ("GPT-2 Large", "openai-community/gpt2-large", "main", 774_030_080),
+    ("GPT-2 XL", "openai-community/gpt2-xl", "main", 1_557_611_200),
     ("OPT-125M", "facebook/opt-125m", "main", 125_239_808),
     ("OPT-350M", "facebook/opt-350m", "main", 331_000_000),
+    ("OPT-1.3B", "facebook/opt-1.3b", "main", 1_315_000_000),
 ]
+DEFAULT_MODELS = ["Pythia-70M", "Pythia-160M", "Pythia-410M", "GPT-2 Small", "OPT-125M", "OPT-350M"]
 FIELDS = [
     "experiment_id", "model_name", "model_repo", "model_revision", "parameter_count",
     "dataset", "dataset_revision", "text_sha256", "text_characters", "text_utf8_bytes",
     "tokenizer", "token_count", "context_length", "stride", "scored_tokens", "scored_utf8_bytes",
     "negative_log_likelihood", "perplexity", "bits_per_byte", "precision", "device",
     "backend", "model_load_seconds", "evaluation_seconds", "tokens_per_second",
-    "batch_size", "weight_memory_estimate_bytes", "ram_bytes_after_eval", "status", "notes", "timestamp_utc",
+    "batch_size", "weight_memory_estimate_bytes", "ram_bytes_after_eval", "peak_ram_bytes", "status", "notes", "timestamp_utc",
 ]
 
 
@@ -168,7 +178,7 @@ def evaluate_model(name, repo, revision, parameter_count, text, text_hash, max_c
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--models", nargs="+", default=[m[0] for m in MODELS])
+    parser.add_argument("--models", nargs="+", default=DEFAULT_MODELS)
     parser.add_argument("--context", type=int, default=1024)
     parser.add_argument("--stride", type=int, default=512)
     args = parser.parse_args()

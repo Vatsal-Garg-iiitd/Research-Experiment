@@ -54,12 +54,26 @@ for x in reg:
  path=', '.join(f'`results/raw/{p}`' for p in loc) if loc else 'none'
  out.append(f"| {m} | {'yes' if x.get('implementation_target') else 'unverified'} | {'yes' if rows else 'no verified run'} | {budget} | {seeds} | {hardware} | {path} | {status} |")
 out += ['', '### Additional recorded extensions (outside the 50-objective denominator)', '', '| Model | Environment | Budget | Seeds | Result location | Status |', '|---|---|---|---:|---|---|', '| Compact transformer proxy | Fashion-MNIST | 10K split, epochs 1–30 | 3 | `results/raw/replicated_scaling_results.csv`, `results/raw/replicated_scaling_test_results.csv` | Supplementary 3-layer, width-96 proxy; separate from the ViT-Tiny-scope implementation |', '| PPO-Pendulum | Pendulum-v1 | 5K–250K requested environment steps | 3 | `results/raw/rl_scaling_results.csv` | Recorded RL extension; not an original sixth method |']
-llm=[('Pythia-70M','8 released checkpoints (0–143K); full WikiText-2 test; full HellaSwag/PIQA/ARC-Easy zero-shot',True),('Pythia-160M','8 released checkpoints (0–143K); full WikiText-2 test',True),('Pythia-410M','step 0, 10K, 143K prefix checkpoints; full WikiText-2 test',True),('Pythia-1B','no long local evaluation',False),('Pythia-1.4B','no long local evaluation',False),('Pythia-2.8B','no long local evaluation',False),('Pythia-6.9B','no long local evaluation',False),('Pythia-12B','no long local evaluation',False),('GPT-2 Small','main; full WikiText-2 test + 100/task harness smoke subset',True),('GPT-2 Medium','weight retrieval/evaluation incomplete',False),('GPT-2 Large','no long local evaluation',False),('GPT-2 XL','no long local evaluation',False),('OPT-125M','main; full WikiText-2 test + 100/task harness smoke subset',True),('OPT-350M','main; full WikiText-2 test',True),('OPT-1.3B','no long local evaluation',False)]
+full_llm_path=ROOT/'results/llm/macos_full_wikitext2_evaluations.csv'
+full_llm=read(full_llm_path) if full_llm_path.exists() else []
+full_llm_by_model={r.get('model_name',''):r for r in full_llm}
+llm=[('Pythia-70M','step143000; full WikiText-2 test; selected checkpoint trajectory; full zero-shot HellaSwag/PIQA/ARC-Easy'),('Pythia-160M','step143000; full WikiText-2 test; selected checkpoint trajectory'),('Pythia-410M','step143000; full WikiText-2 test; selected prefix steps 0/10K/143K'),('Pythia-1B','step143000; full WikiText-2 test'),('Pythia-1.4B','step143000; full WikiText-2 test'),('Pythia-2.8B','step143000 target; no local full-test evaluation'),('Pythia-6.9B','step143000 target; no local full-test evaluation'),('Pythia-12B','step143000 target; no local full-test evaluation'),('GPT-2 Small','main; full WikiText-2 test; 100/task smoke tests'),('GPT-2 Medium','main; full WikiText-2 test'),('GPT-2 Large','main; full WikiText-2 test'),('GPT-2 XL','main; interrupted during download; no test tokens scored'),('OPT-125M','main; full WikiText-2 test; 100/task smoke tests'),('OPT-350M','main; full WikiText-2 test'),('OPT-1.3B','main; full WikiText-2 test')]
 out += ['', '## LLM configurations (15)', '', '| Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |','|---|---|---|---|---:|---|---|---|']
-for m,b,done in llm:
- status='failed' if m=='GPT-2 Medium' else ('partial evaluation' if done else 'resource-limited / not evaluated')
- eval_status='failed local checkpoint attempt' if m=='GPT-2 Medium' else ('yes, local inference' if done else 'attempt/status in prior ledger only')
- out.append(f"| {m} | checkpoint/config available | {eval_status} | {b} | 1 or n/a | Apple M3 / MPS or CPU (per run record) | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | {status} |")
+for m,b in llm:
+    row=full_llm_by_model.get(m,{})
+    if row.get('status')=='completed':
+        ev='yes, full WikiText-2 raw-v1 test evaluation'
+        status='full-test evaluation completed; broader registered LLM scope remains partial'
+        hardware=row.get('backend') or row.get('device') or 'see result record'
+    elif row.get('status')=='interrupted':
+        ev='interrupted before inference; no score'
+        status='interrupted at user request during checkpoint download'
+        hardware='Apple M3 / MPS; weights were not loaded'
+    else:
+        ev='no verified full-test evaluation'
+        status='resource-limited / not evaluated under the registered full-test protocol'
+        hardware='checkpoint memory requirement exceeds the safe local FP32 budget; no local run'
+    out.append(f"| {m} | checkpoint/config available | {ev} | {b} | 1 or n/a | {hardware} | `results/llm/macos_full_wikitext2_evaluations.csv`, `results/llm/expanded_llm_evaluations.csv`, harness records | {status} |")
 lit=read(ROOT/'results/literature/large_model_literature.csv')
 out += ['',f'## Literature configurations ({len(lit)})','', '| Model | Implemented | Evaluated | Budgets completed | Seeds completed | Hardware | Result location | Status |','|---|---|---|---|---:|---|---|---|']
 for r in lit:

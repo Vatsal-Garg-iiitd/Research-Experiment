@@ -8,7 +8,7 @@ PaLM reports a 540B dense Transformer and separately evaluates a 62B model famil
 
 ## Local project relationship
 
-This repository evaluates released Pythia, GPT-2, and OPT checkpoints; it does not reproduce original pretraining. The six full WikiText-2 evaluations share text, context, stride, precision, and local device protocol, but have family-specific tokenizers and training histories. Pythia checkpoint-prefix trajectories use a restricted text prefix and derive token counts from published step metadata. A full Pythia-70M validation-split zero-shot evaluation is a separate result class. None estimates original pretraining cost.
+This repository evaluates released Pythia, GPT-2, and OPT checkpoints; it does not reproduce original pretraining. The eleven full WikiText-2 evaluations share text, context, stride, precision, and local device protocol, but have family-specific tokenizers and training histories. Pythia checkpoint-prefix trajectories use a restricted text prefix and derive token counts from published step metadata. A full Pythia-70M validation-split zero-shot evaluation is a separate result class. None estimates original pretraining cost.
 
 ## Evidence quality
 

@@ -38,8 +38,8 @@ CSV row counts below exclude headers. Candidate identifier repetition is a scree
 | `results/llm/harness_full_summary.csv` | 3 | 19 | — | 0 | 0 |
 | `results/llm/harness_summary.csv` | 9 | 13 | — | 0 | 0 |
 | `results/llm/llm_checkpoint_results.csv` | 40 | 20 | — | 0 | 131 |
-| `results/llm/macos_full_wikitext2_evaluations.csv` | 6 | 32 | experiment_id | 0 | 6 |
-| `results/processed/canonical_results.csv` | 3362 | 35 | canonical_id | 0 | 23983 |
+| `results/llm/macos_full_wikitext2_evaluations.csv` | 12 | 32 | experiment_id | 0 | 22 |
+| `results/processed/canonical_results.csv` | 3368 | 35 | canonical_id | 0 | 24040 |
 | `results/processed/conventional_completion_audit.csv` | 20 | 7 | — | 0 | 20 |
 | `results/processed/data_quality_exclusions.csv` | 15 | 5 | experiment_id | 0 | 0 |
 | `results/processed/data_quality_register.csv` | 21 | 5 | — | 0 | 5 |
@@ -53,12 +53,12 @@ CSV row counts below exclude headers. Candidate identifier repetition is a scree
 | `results/processed/identifier_findings.csv` | 1533 | 7 | — | 0 | 243 |
 | `results/processed/identifier_reconciliation.csv` | 95 | 8 | — | 0 | 50 |
 | `results/processed/literature_completion_audit.csv` | 15 | 16 | — | 0 | 15 |
-| `results/processed/llm_full_eval_summary.csv` | 6 | 20 | — | 0 | 0 |
+| `results/processed/llm_full_eval_summary.csv` | 11 | 20 | — | 0 | 0 |
 | `results/processed/ssl_algorithm_summary.csv` | 45 | 8 | — | 0 | 0 |
 | `results/processed/strengthened_marginal_gains.csv` | 3167 | 22 | — | 0 | 4325 |
 | `results/processed/strengthened_statistical_summaries.csv` | 4864 | 16 | — | 0 | 5138 |
 | `results/processed/strengthened_test_statistics.csv` | 219 | 11 | — | 0 | 0 |
-| `results/processed/verified_canonical_results.csv` | 3362 | 39 | canonical_id | 0 | 24094 |
+| `results/processed/verified_canonical_results.csv` | 3368 | 39 | canonical_id | 0 | 24151 |
 | `results/raw/autoencoder_scaling.csv` | 210 | 23 | experiment_id | 0 | 210 |
 | `results/raw/autoencoder_test_results.csv` | 18 | 12 | experiment_id | 0 | 6 |
 | `results/raw/dbscan_parameter_sweep.csv` | 8 | 24 | experiment_id | 0 | 11 |

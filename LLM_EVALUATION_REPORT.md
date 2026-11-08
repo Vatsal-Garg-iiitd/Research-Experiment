@@ -4,7 +4,7 @@ All local measurements evaluate published checkpoints; no language model was pre
 
 ## Evaluation inventory and reconciliation
 
-The project contains several distinct evidence sets. The complete WikiText-2 raw-v1 test evaluation is six completed checkpoint rows in `macos_full_wikitext2_evaluations.csv`: Apple M3 MPS, PyTorch 2.15.0, FP32, context 1,024, stride 512, batch size 1. Pythia-70M/160M/410M use step143000; GPT-2 Small, OPT-125M, and OPT-350M use their recorded `main` revisions. Model parameter counts and evaluation seconds are in the table below and raw CSV. This is local checkpoint inference, not original pretraining.
+The complete WikiText-2 raw-v1 test evaluation now contains 11 completed checkpoint rows in `macos_full_wikitext2_evaluations.csv`: Apple M3 MPS, PyTorch 2.15.0, FP32, context 1,024, stride 512, batch size 1. The original six evaluations are joined by full-test evaluations for GPT-2 Medium, GPT-2 Large, Pythia-1B, Pythia-1.4B, and OPT-1.3B. All are local checkpoint inference, not original pretraining. GPT-2 XL was interrupted during checkpoint download at the user's request before weights loaded or any test tokens were scored; no result is reported for it.
 
 `expanded_llm_evaluations.csv` contains 40 records with status counts: 24 completed, 7 superseded, 8 resource-limited, and 1 failed. The 24 completed rows include duplicate `main` aliases for Pythia-160M/410M; they are not extra points beyond explicit step143000. Pythia-70M and 160M each have eight distinct released checkpoint steps in the current prefix series. Pythia-410M has selected 0, 10K, and 143K points. These prefix evaluations use CPU FP32 and 2,048 model tokens from the first 30,000 raw characters. Token counts shown as training progress are model-card-derived metadata, not local training compute.
 
@@ -12,18 +12,23 @@ The older `full_wikitext2_evaluations.csv` contains six completed 50K-token CPU 
 
 ## Matched WikiText-2 test evaluation
 
-Six checkpoints were evaluated on the complete WikiText-2 raw-v1 test text in FP32 on Apple M3 MPS with context 1,024 and stride 512. Each corpus token is scored once, except the initial context token. Raw test corpus and byte accounting are shared across models; GPT-2 and OPT models use their own tokenizers, so scored token counts differ. See `results/llm/macos_full_wikitext2_evaluations.csv`.
+All 11 completed checkpoints were evaluated on the complete WikiText-2 raw-v1 test text in FP32 on Apple M3 MPS with context 1,024 and stride 512. Each corpus token is scored once, except the initial context token. Raw test corpus and byte accounting are shared across models; GPT-2 and OPT models use their own tokenizers, so scored token counts differ. Five additional full-test evaluations were completed from the prior six; no new benchmark tasks or pretraining were conducted. See `results/llm/macos_full_wikitext2_evaluations.csv`.
 
 | Model | Checkpoint | Parameters | Scored tokens | Cross entropy | Perplexity | Eval seconds |
 |---|---|---:|---:|---:|---:|---:|
 | Pythia-70M | step143000 | 70,426,624 | 285,830 | 3.8052 | 44.9334 | 38.54 |
-| Pythia-160M | step143000 | 162,322,944 | 285,830 | 3.2440 | 25.6365 | 167.93 |
-| Pythia-410M | step143000 | 405,334,016 | 285,830 | 2.7381 | 15.4583 | 463.60 |
 | GPT-2 Small | main | 124,439,808 | 283,286 | 3.2181 | 24.9794 | 177.11 |
 | OPT-125M | main | 125,239,808 | 283,286 | 3.2524 | 25.8534 | 158.38 |
+| Pythia-160M | step143000 | 162,322,944 | 285,830 | 3.2440 | 25.6365 | 167.93 |
 | OPT-350M | main | 331,000,000 | 283,286 | 3.0349 | 20.7992 | 420.28 |
+| GPT-2 Medium | main | 354,823,168 | 283,286 | 2.9030 | 18.2287 | 375.73 |
+| Pythia-410M | step143000 | 405,334,016 | 285,830 | 2.7381 | 15.4583 | 463.60 |
+| GPT-2 Large | main | 774,030,080 | 283,286 | 2.7359 | 15.4238 | 1108.80 |
+| Pythia-1B | step143000 | 1,011,382,272 | 285,830 | 2.5449 | 12.7416 | 1435.18 |
+| OPT-1.3B | main | 1,315,000,000 | 283,286 | 2.6227 | 13.7731 | 1734.36 |
+| Pythia-1.4B | step143000 | 1,414,647,808 | 285,830 | 2.4392 | 11.4635 | 1763.61 |
 
-Bits per byte uses the union of UTF-8 byte-offset spans for scored tokens to avoid double-counting overlapping tokenizer offsets. The 50K-token evaluations recorded earlier are smaller prefix evaluations and are retained separately. The 50K and full-corpus results must not be mixed. Eval time and FP32 weight-size estimates are not measurements of original pretraining cost. End-of-evaluation process RSS is recorded; reliable peak RSS is unavailable for these MPS runs.
+Bits per byte uses the union of UTF-8 byte-offset spans for scored tokens to avoid double-counting overlapping tokenizer offsets. The 50K-token evaluations recorded earlier are smaller prefix evaluations and are retained separately. The three larger planned checkpoints Pythia-2.8B/6.9B/12B were not run locally because FP32 weights exceed this Mac's safe MPS memory budget; GPT-2 XL has no score because its download was interrupted before inference. These four configurations remain incomplete under the unchanged strict objective criteria. The 50K and full-corpus results must not be mixed. Eval time and FP32 weight-size estimates are not measurements of original pretraining cost. End-of-evaluation process RSS is recorded; reliable peak RSS is unavailable for these MPS runs.
 
 ## Pythia checkpoint trajectory
 

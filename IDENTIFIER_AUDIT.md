@@ -2,7 +2,7 @@
 
 Identifier scopes are source file plus identifier type unless a cross-file key is explicitly normalized. A run_id intentionally repeats over budget observations; it must map to one model, seed, and configuration within a source. `evaluation_id` and `canonical_id` identify individual analytical records. Seed values repeat across runs by design and are not globally unique.
 
-- Tables scanned: 50.
+- Tables scanned: 51.
 - Identifier-field summaries: 99.
 - Reconciliation entries: 95.
 - Identifier/model/run integrity errors: 0.

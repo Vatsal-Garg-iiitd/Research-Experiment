@@ -224,13 +224,31 @@ def main():
         save(fig,fig_no,f'{env} reward versus steps and time','results/raw/rl_scaling_results.csv',f'Algorithm-specific return trajectories are shown for {env}.','Seed counts differ by algorithm; separate environments and reward scales; logged elapsed time is hardware/protocol specific.')
     # LLM full test endpoint and prefix curves / zero-shot separate protocol plots.
     full=read(LLM/'macos_full_wikitext2_evaluations.csv');full=[r for r in full if r.get('status')=='completed' and n(r,'parameter_count') and n(r,'perplexity')]
-    fig,ax=plt.subplots(figsize=(8,5));families=defaultdict(list)
+    families=defaultdict(list)
     for r in full:families[r['model_name'].split('-')[0] if not r['model_name'].startswith('GPT') else 'GPT-2'].append(r)
-    offsets={'Pythia-70M':(7,5),'Pythia-160M':(6,7),'Pythia-410M':(7,5),'GPT-2 Small':(7,-10),'OPT-125M':(7,8),'OPT-350M':(7,5)}
+    family_colors={'Pythia':COLORS[0],'GPT-2':COLORS[1],'OPT':COLORS[2]}
+    ordered=sorted(full,key=lambda r:n(r,'parameter_count'))
+    fig,(ax,table_ax)=plt.subplots(1,2,figsize=(11,5.4),gridspec_kw={'width_ratios':[1.8,1.05]})
+    fig.suptitle('Full-test checkpoint results under one local evaluation protocol',fontweight='bold',y=.99)
     for family,items in families.items():
-        ax.scatter([n(r,'parameter_count')/1e6 for r in items],[n(r,'perplexity') for r in items],s=58,label=family,edgecolor='white',linewidth=.7,zorder=3)
-        for r in items:ax.annotate(r['model_name'],(n(r,'parameter_count')/1e6,n(r,'perplexity')),xytext=offsets.get(r['model_name'],(5,5)),textcoords='offset points',fontsize=7.5)
-    ax.set_xscale('log');ax.set(xlabel='Parameter count (millions; log scale)',ylabel='WikiText-2 raw-v1 test perplexity',title='Full-test checkpoint results under one local evaluation protocol');ax.legend(title='Model family');ax.text(.02,.1,'Full test split · FP32 · MPS · context 1,024 · stride 512',transform=ax.transAxes,va='center',fontsize=7.5,color='#52616B',bbox={'boxstyle':'round,pad=.3','facecolor':'white','edgecolor':'#D9E1E8','alpha':.9});save(fig,15,'Full WikiText-2 perplexity versus parameter count','results/llm/macos_full_wikitext2_evaluations.csv','The Pythia checkpoints have lower measured perplexity at larger model sizes in this selected set.','Six checkpoints across families; training data and tokenizer differ; parameter count is not training compute.')
+        ax.scatter([n(r,'parameter_count')/1e6 for r in items],[n(r,'perplexity') for r in items],s=124,label=family,edgecolor='white',linewidth=.8,zorder=3,color=family_colors[family])
+    for idx,r in enumerate(ordered,start=1):
+        ax.annotate(str(idx),(n(r,'parameter_count')/1e6,n(r,'perplexity')),ha='center',va='center',fontsize=7.5,color='white',fontweight='bold',zorder=4)
+    ax.set_xscale('log');ax.set_xlim(55,2400);ax.set(xlabel='Parameter count (millions; log scale)',ylabel='WikiText-2 raw-v1 test perplexity');ax.legend(title='Model family',loc='upper right')
+    table_ax.axis('off');table_ax.set_xlim(0,1);table_ax.set_ylim(0,1)
+    table_ax.text(0,.985,'Point key',fontsize=10,fontweight='bold',va='top',color='#17365D')
+    table_ax.text(0,.94,'Full test · FP32 MPS · context 1,024 · stride 512',fontsize=7.1,va='top',color='#52616B')
+    table_ax.text(.01,.88,'#',fontsize=7.5,fontweight='bold',color='#52616B');table_ax.text(.13,.88,'Model',fontsize=7.5,fontweight='bold',color='#52616B');table_ax.text(.70,.88,'Params (M)',fontsize=7.5,fontweight='bold',ha='right',color='#52616B');table_ax.text(.99,.88,'PPL',fontsize=7.5,fontweight='bold',ha='right',color='#52616B')
+    for idx,r in enumerate(ordered,start=1):
+        y=.82-(idx-1)*.068
+        family=r['model_name'].split('-')[0] if not r['model_name'].startswith('GPT') else 'GPT-2'
+        color=family_colors[family]
+        table_ax.text(.01,y,str(idx),fontsize=8,color='#17365D',fontweight='bold',va='center')
+        table_ax.text(.13,y,r['model_name'],fontsize=7.7,color=color,va='center')
+        table_ax.text(.70,y,f"{n(r,'parameter_count')/1e6:,.0f}",fontsize=7.7,ha='right',va='center',color='#263746')
+        table_ax.text(.99,y,f"{n(r,'perplexity'):.2f}",fontsize=7.7,ha='right',va='center',color='#263746')
+        if idx%2==0:table_ax.axhspan(y-.028,y+.028,color='#F4F7FA',zorder=-1)
+    save(fig,15,'Full WikiText-2 perplexity versus parameter count','results/llm/macos_full_wikitext2_evaluations.csv','The numbered points pair with a table listing each checkpoint size and measured perplexity under the shared local test protocol.','Eleven checkpoints across families; tokenizers and training histories differ; parameter count is not training compute. Each point is one checkpoint evaluation, not a seed replicate.')
     pref=read(LLM/'expanded_llm_evaluations.csv');pref=[r for r in pref if r.get('status')=='completed' and r.get('benchmark')=='WikiText-2 raw test prefix' and n(r,'training_step') is not None and n(r,'test_loss') is not None]
     for modelname,fig_no in [('Pythia-70M',16),('Pythia-160M',17)]:
         q=[r for r in pref if r.get('model')==modelname and r.get('checkpoint_id') not in ('main',)];g=defaultdict(list)
