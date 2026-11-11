@@ -2,11 +2,11 @@
 import csv, math, json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-required=['PROJECT_AUDIT.md','EXPERIMENTAL_METHODOLOGY.md','EXPERIMENT_COMPLETION_MATRIX.md','METHODOLOGY_GAPS.md','IMPLEMENTATION_GAPS.md','HARDWARE_BENCHMARK_REPORT.md','LLM_EVALUATION_REPORT.md','LITERATURE_VALIDATION_REPORT.md','STATISTICAL_ANALYSIS_REPORT.md','MARGINAL_GAIN_ANALYSIS.md','FINAL_RESEARCH_REPORT.md','REMAINING_WORK.md','EXECUTION_LOG.md','FINAL_COMPLETION_MATRIX.md','MACOS_SETUP.md','MACOS_EXECUTION_LOG.md','REPRODUCIBILITY.md','RESULT_PROVENANCE.md','IDENTIFIER_AUDIT.md','IDENTIFIER_RECONCILIATION.csv','EXPERIMENT_RUN_REGISTRY.csv','FINAL_INDEPENDENT_AUDIT.md','DATA_INVENTORY.md','DATA_QUALITY_REGISTER.md','FIGURE_CATALOGUE.md','scripts/plot_final_figures.py','scripts/build_final_report_pdf.py','scripts/build_verified_dataset.py','scripts/audit_identifiers.py','scripts/audit_conventional_completion.py','scripts/audit_literature_completion.py','results/processed/canonical_results.csv','results/processed/verified_canonical_results.csv','results/processed/data_quality_register.csv','results/processed/figure_catalogue.csv','results/processed/identifier_audit.csv','results/processed/identifier_findings.csv','results/processed/foreign_key_audit.csv','results/processed/conventional_completion_audit.csv','results/processed/literature_completion_audit.csv','results/llm/macos_full_wikitext2_evaluations.csv','results/llm/harness_full_summary.csv','results/literature/literature_field_evidence.csv','reports/FINAL_RESEARCH_REPORT.pdf']
+required=['docs/PROJECT_AUDIT.md','docs/EXPERIMENTAL_METHODOLOGY.md','reports/EXPERIMENT_COMPLETION_MATRIX.md','docs/METHODOLOGY_GAPS.md','docs/IMPLEMENTATION_GAPS.md','reports/HARDWARE_BENCHMARK_REPORT.md','reports/LLM_EVALUATION_REPORT.md','reports/LITERATURE_VALIDATION_REPORT.md','reports/STATISTICAL_ANALYSIS_REPORT.md','reports/MARGINAL_GAIN_ANALYSIS.md','reports/FINAL_RESEARCH_REPORT.md','docs/REMAINING_WORK.md','EXECUTION_LOG.md','reports/FINAL_COMPLETION_MATRIX.md','docs/MACOS_SETUP.md','MACOS_EXECUTION_LOG.md','docs/REPRODUCIBILITY.md','docs/RESULT_PROVENANCE.md','docs/IDENTIFIER_AUDIT.md','results/processed/identifier_reconciliation.csv','results/processed/experiment_run_registry.csv','reports/FINAL_INDEPENDENT_AUDIT.md','docs/DATA_INVENTORY.md','docs/DATA_QUALITY_REGISTER.md','reports/FIGURE_CATALOGUE.md','scripts/plot_final_figures.py','scripts/build_final_report_pdf.py','scripts/build_verified_dataset.py','scripts/audit_identifiers.py','scripts/audit_conventional_completion.py','scripts/audit_literature_completion.py','results/processed/canonical_results.csv','results/processed/verified_canonical_results.csv','results/processed/data_quality_register.csv','results/processed/figure_catalogue.csv','results/processed/identifier_audit.csv','results/processed/identifier_findings.csv','results/processed/foreign_key_audit.csv','results/processed/conventional_completion_audit.csv','results/processed/literature_completion_audit.csv','results/llm/macos_full_wikitext2_evaluations.csv','results/llm/harness_full_summary.csv','results/literature/literature_field_evidence.csv','reports/FINAL_RESEARCH_REPORT.pdf']
 errors=[];warnings=[]
 for f in required:
     if not (ROOT/f).is_file(): errors.append(f'Missing deliverable: {f}')
-statuses={'planned','implemented','pilot','running','completed','completed_literature_only','failed','interrupted','superseded','resource_limited','literature_only','unknown'}
+statuses={'planned','implemented','pilot','running','completed','completed_literature_only','failed','interrupted','superseded','resource_limited','literature_only','reported','derived','estimated','uncertain','unavailable','unknown'}
 for p in sorted((ROOT/'results').rglob('*.csv')):
     if 'snapshots' in p.parts: continue
     try:
@@ -59,8 +59,8 @@ if (ROOT/'results/processed/verified_canonical_results.csv').is_file():
         if key[1]:scopes[key]=scopes.get(key,0)+1
     if any(v>1 for v in scopes.values()):errors.append('Verified canonical experiment_id is repeated within a source-file scope')
     if sum(r.get('audit_disposition')=='duplicate_checkpoint_reuse' for r in rows)!=15:errors.append('Verified canonical index must mark 15 duplicate K-Means copies')
-if (ROOT/'IDENTIFIER_RECONCILIATION.csv').is_file():
-    rows=load_csv('IDENTIFIER_RECONCILIATION.csv')
+if (ROOT/'results/processed/identifier_reconciliation.csv').is_file():
+    rows=load_csv('results/processed/identifier_reconciliation.csv')
     if len(rows)!=95:errors.append(f'Unexpected identifier reconciliation count: {len(rows)}')
     if any(not r.get('validation_status') for r in rows):errors.append('Identifier reconciliation has unvalidated correction')
 if (ROOT/'results/llm/macos_full_wikitext2_evaluations.csv').is_file():
@@ -93,8 +93,8 @@ if (ROOT/'results/literature/literature_field_evidence.csv').is_file():
     if len(keys)!=len(set(keys)):errors.append('Duplicate model/field rows in literature evidence ledger')
     if any(r.get('evidence_class') not in classes for r in rows):errors.append('Unknown evidence class in literature ledger')
     if any(not r.get('source_url') or not r.get('locator') for r in rows):errors.append('Literature evidence row missing source URL or locator')
-if (ROOT/'EXPERIMENT_RUN_REGISTRY.csv').is_file():
-    rows=load_csv('EXPERIMENT_RUN_REGISTRY.csv');ids=[r.get('registry_id') for r in rows]
+if (ROOT/'results/processed/experiment_run_registry.csv').is_file():
+    rows=load_csv('results/processed/experiment_run_registry.csv');ids=[r.get('registry_id') for r in rows]
     if len(ids)!=len(set(ids)):errors.append('Duplicate registry_id in experiment run registry')
     if not rows:errors.append('Experiment run registry is empty')
     for r in rows:
@@ -105,8 +105,8 @@ if (ROOT/'results/processed/literature_completion_audit.csv').is_file():
     if len(rows)!=15:errors.append(f'Expected 15 literature completion audit rows, found {len(rows)}')
     if any(r.get('status')!='completed_literature_only' or r.get('validation_errors') for r in rows):errors.append('Literature completion audit has an unresolved row')
     if any(int(r.get('source_fields') or 0)!=20 or int(r.get('expected_fields') or 0)!=20 for r in rows):errors.append('Literature audit has incomplete field coverage')
-if (ROOT/'FINAL_COMPLETION_MATRIX.md').is_file():
-    matrix=(ROOT/'FINAL_COMPLETION_MATRIX.md').read_text(encoding='utf-8')
+if (ROOT/'reports/FINAL_COMPLETION_MATRIX.md').is_file():
+    matrix=(ROOT/'reports/FINAL_COMPLETION_MATRIX.md').read_text(encoding='utf-8')
     if '**Per-configuration objective completion: 46/50 configurations (92%).**' not in matrix:errors.append('Completion count missing or inconsistent with the 20 conventional, 11 full-test LLM, and 15 literature objectives')
 if (ROOT/'results/processed/strengthened_statistical_summaries.csv').is_file():
     rows=load_csv('results/processed/strengthened_statistical_summaries.csv')
@@ -129,8 +129,8 @@ if (ROOT/'results/processed/figure_catalogue.csv').is_file():
             if not (ROOT/r[key]).is_file():errors.append(f'Missing catalogued figure: {r[key]}')
         if r.get('file_vector','').split('.')[-1] not in ('svg','pdf'):errors.append(f'Figure vector format missing: {r.get("file_vector")}')
         if not (ROOT/r.get('analysis_script','')).is_file():errors.append(f'Missing figure analysis script: {r.get("analysis_script")}')
-if (ROOT/'FINAL_RESEARCH_REPORT.md').is_file():
-    report=(ROOT/'FINAL_RESEARCH_REPORT.md').read_text(encoding='utf-8')
+if (ROOT/'reports/FINAL_RESEARCH_REPORT.md').is_file():
+    report=(ROOT/'reports/FINAL_RESEARCH_REPORT.md').read_text(encoding='utf-8')
     expected=[f'## {i}.' for i in range(1,37)]
     if any(h not in report for h in expected):errors.append('Final report is missing one or more of its 36 required sections')
     for phrase in ('46 of 50','4,864','3,167','219','1,122.1625'):

@@ -57,6 +57,6 @@ def main():
     md += ['', '## Result tables','', 'CSV row counts below exclude headers. Candidate identifier repetition is a screening signal, not an automatic duplicate verdict: repeated identifiers may represent legitimate checkpoint budgets. Full columns, missingness, status counts, and provenance fields are recorded in `results/processed/tabular_data_inventory.json`. JSON/JSONL record counts and key/identifier coverage are in `results/processed/json_data_inventory.json`.','', '| File | Rows | Columns | Candidate ID | Repeated ID excess | Missing cells |','|---|---:|---:|---|---:|---:|']
     for x in detail:
         if 'rows' in x:md.append(f"| `{x['path']}` | {x['rows']} | {x['columns']} | {x['candidate_identifier'] or '—'} | {x['candidate_identifier_duplicate_excess']} | {x['missing_cells']} |")
-    (ROOT/'DATA_INVENTORY.md').write_text('\n'.join(md)+'\n',encoding='utf-8')
+    (ROOT/'docs/DATA_INVENTORY.md').write_text('\n'.join(md)+'\n',encoding='utf-8')
     print(f'Inventoried {len(files)} files and {len(detail)} result CSVs.')
 if __name__=='__main__':main()

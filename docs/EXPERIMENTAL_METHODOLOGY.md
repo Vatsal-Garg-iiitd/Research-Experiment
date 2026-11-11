@@ -2,7 +2,7 @@
 
 ## Current status
 
-The registered conventional schedules are complete and the analysis is finalized. The pseudo-label and matched labeled-only runs resumed from saved epoch-5 checkpoints to the original 30-epoch target, preserving the same seeds and splits. This document describes the measured protocols and analysis. The matrix records 46/50 complete: 20 conventional studies, 11 LLM configurations with complete full-test endpoints, and 15 literature-only reviews. Multi-model benchmark and checkpoint-trajectory work remains partial; four LLM configurations lack endpoints. See `FINAL_COMPLETION_MATRIX.md` for statuses.
+The registered conventional schedules are complete and the analysis is finalized. The pseudo-label and matched labeled-only runs resumed from saved epoch-5 checkpoints to the original 30-epoch target, preserving the same seeds and splits. This document describes the measured protocols and analysis. The matrix records 46/50 complete: 20 conventional studies, 11 LLM configurations with complete full-test endpoints, and 15 literature-only reviews. Multi-model benchmark and checkpoint-trajectory work remains partial; four LLM configurations lack endpoints. See `reports/FINAL_COMPLETION_MATRIX.md` for statuses.
 
 ## Evidence hierarchy
 
@@ -41,7 +41,7 @@ Descriptive tables report valid (n), mean, standard deviation, median, minimum, 
 
 ## Known anomalies and exclusions
 
-The ResNet-18 seed-11 epoch-2-to-3 elapsed interval is 1,122.1625 seconds. It is retained as wall-clock evidence and excluded only from adjusted efficiency analysis; records cannot establish the underlying cause. The K-Means repeated rows, mirror exports, and Pythia checkpoint aliases are detailed in `DATA_QUALITY_REGISTER.md`. Historical Windows/DirectML timing is not pooled with newer Apple MPS timing.
+The ResNet-18 seed-11 epoch-2-to-3 elapsed interval is 1,122.1625 seconds. It is retained as wall-clock evidence and excluded only from adjusted efficiency analysis; records cannot establish the underlying cause. The K-Means repeated rows, mirror exports, and Pythia checkpoint aliases are detailed in `docs/DATA_QUALITY_REGISTER.md`. Historical Windows/DirectML timing is not pooled with newer Apple MPS timing.
 
 ## Completion and limitations
 

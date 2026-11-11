@@ -27,7 +27,7 @@ From the repository root:
 .venv-mac/bin/python scripts/validate_project_outputs.py
 ```
 
-`analyze_llm_full_eval.py` reads already saved evaluation tables and does not evaluate models. `plot_final_figures.py` reads processed or raw result tables and saves 25 figures as PNG and SVG under `results/figures/final/`. `audit_repository_inventory.py` writes `DATA_INVENTORY.md` and machine-readable inventories. `analyze_strengthened_runs.py` excludes later repeated K-Means checkpoint-reuse rows, uses epoch-5-only dataset-size endpoints, pairs adjacent budgets within seed and setting, retains Double DQN `local_measurement` outputs, and documents the ResNet timing adjustment. Raw rows are preserved.
+`analyze_llm_full_eval.py` reads already saved evaluation tables and does not evaluate models. `plot_final_figures.py` reads processed or raw result tables and saves 25 figures as PNG and SVG under `results/figures/final/`. `audit_repository_inventory.py` writes `docs/DATA_INVENTORY.md` and machine-readable inventories. `analyze_strengthened_runs.py` excludes later repeated K-Means checkpoint-reuse rows, uses epoch-5-only dataset-size endpoints, pairs adjacent budgets within seed and setting, retains Double DQN `local_measurement` outputs, and documents the ResNet timing adjustment. Raw rows are preserved.
 
 ## Statistical reproducibility
 
@@ -35,4 +35,4 @@ Grouped summaries include (n), mean, standard deviation, median, minimum, maximu
 
 ## Integrity and completion
 
-Run `scripts/validate_project_outputs.py` after rebuilding outputs. The 50-objective denominator remains unchanged. Current matrix status is 46/50: 20 conventional objectives, 11 full-test LLM endpoints, and 15 literature reviews. Four LLM endpoints and ancillary multi-model benchmark/trajectory subtasks remain incomplete. The run registry and canonical index are catalogs, not independent observation counts. See `DATA_QUALITY_REGISTER.md` and `PROJECT_AUDIT.md` for anomalies, exclusions, count reconciliation, and limitations. The pseudo-label extension log records the sequential continuation from saved epoch-5 checkpoints to the original 30-epoch schedule; it added no seeds or split changes.
+Run `scripts/validate_project_outputs.py` after rebuilding outputs. The 50-objective denominator remains unchanged. Current matrix status is 46/50: 20 conventional objectives, 11 full-test LLM endpoints, and 15 literature reviews. Four LLM endpoints and ancillary multi-model benchmark/trajectory subtasks remain incomplete. The run registry and canonical index are catalogs, not independent observation counts. See `docs/DATA_QUALITY_REGISTER.md` and `docs/PROJECT_AUDIT.md` for anomalies, exclusions, count reconciliation, and limitations. The pseudo-label extension log records the sequential continuation from saved epoch-5 checkpoints to the original 30-epoch schedule; it added no seeds or split changes.

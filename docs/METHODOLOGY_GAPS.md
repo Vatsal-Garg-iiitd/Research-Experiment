@@ -12,4 +12,4 @@ The following limitations apply to the saved evidence and are reflected in the f
 - **Hardware/resource accounting:** wall time is not energy or accelerator FLOPs. The 1,122.16-second ResNet interval is unexplained; historical Windows/DirectML and newer Mac/MPS timings are separate.
 - **Literature:** all 15 literature objectives pass a field/source audit; 88 of 300 fields remain uncertain and 16 are unavailable. Benchmark protocols are not harmonized.
 
-The current analysis scripts expose these limitations and retain raw values. See `DATA_QUALITY_REGISTER.md`, `LITERATURE_VALIDATION_REPORT.md`, and `FINAL_RESEARCH_REPORT.md`.
+The current analysis scripts expose these limitations and retain raw values. See `docs/DATA_QUALITY_REGISTER.md`, `reports/LITERATURE_VALIDATION_REPORT.md`, and `reports/FINAL_RESEARCH_REPORT.md`.

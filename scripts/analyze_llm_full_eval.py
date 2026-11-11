@@ -28,4 +28,4 @@ for metric,label,name in plots:
     ax.set_xscale('log');ax.set_xlabel('Published checkpoint parameters');ax.set_ylabel(label)
     ax.set_title('Full WikiText-2 raw-v1 test evaluation (FP32, MPS, context 1024, stride 512)')
     ax.grid(True,alpha=.25);fig.tight_layout();fig.savefig(FIG/name,dpi=160);plt.close(fig)
-print(f'Wrote full-corpus summary and regenerated figures for {len(rows)} checkpoints; report content remains maintained in LLM_EVALUATION_REPORT.md')
+print(f'Wrote full-corpus summary and regenerated figures for {len(rows)} checkpoints; report content remains maintained in reports/LLM_EVALUATION_REPORT.md')

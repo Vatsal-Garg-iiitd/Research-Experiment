@@ -11,7 +11,7 @@ def write(path,rows,fields):
     with path.open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)
 def main():
-    paths=sorted(set([*ROOT.glob('EXPERIMENT_RUN_REGISTRY.csv'),*ROOT.glob('IDENTIFIER_RECONCILIATION.csv'),*ROOT.glob('results/raw/*.csv'),*ROOT.glob('results/processed/*.csv'),*ROOT.glob('results/llm/*.csv'),*ROOT.glob('results/literature/*.csv')]))
+    paths=sorted(set([*ROOT.glob('results/processed/experiment_run_registry.csv'),*ROOT.glob('results/processed/identifier_reconciliation.csv'),*ROOT.glob('results/raw/*.csv'),*ROOT.glob('results/processed/*.csv'),*ROOT.glob('results/llm/*.csv'),*ROOT.glob('results/literature/*.csv')]))
     summary=[];findings=[];run_models=defaultdict(set);run_seeds=defaultdict(set);run_configs=defaultdict(set);model_names=defaultdict(set);foreign=[]
     for p in paths:
         try:rows=read(p)
@@ -29,7 +29,7 @@ def main():
                 if fld=='run_id':finding='Expected run identity repeats across budget/checkpoint records; verify model/seed/config consistency.';severity='info'
                 if fld=='experiment_id' and rel.endswith('unsupervised_scaling.csv') and 'minibatch_k-means' in value:
                     finding='Known later duplicate K-Means record reuses final checkpoint value; excluded and assigned unique derived row ID.';severity='corrected'
-                findings.append({'severity':severity,'source_file':rel,'row':','.join(examples),'identifier_type':fld,'identifier':value,'finding':finding,'treatment':'See IDENTIFIER_RECONCILIATION.csv and verified_canonical_results.csv.'})
+                findings.append({'severity':severity,'source_file':rel,'row':','.join(examples),'identifier_type':fld,'identifier':value,'finding':finding,'treatment':'See results/processed/identifier_reconciliation.csv and verified_canonical_results.csv.'})
         for i,r in enumerate(rows,2):
             model=r.get('model_name') or r.get('model') or ''
             if model:
@@ -59,11 +59,11 @@ def main():
     write(OUT/'identifier_audit.csv',summary,['source_file','identifier_type','records','missing','distinct_nonblank','duplicate_excess','duplicate_values'])
     write(OUT/'identifier_findings.csv',findings,['severity','source_file','row','identifier_type','identifier','finding','treatment'])
     write(OUT/'foreign_key_audit.csv',foreign,['source_file','row','field','value','validation'])
-    reconciliation=ROOT/'IDENTIFIER_RECONCILIATION.csv'
+    reconciliation=ROOT/'results/processed/identifier_reconciliation.csv'
     rec=read(reconciliation) if reconciliation.exists() else []
     errors=sum(x.get('severity')=='error' for x in findings)
-    md=['# Identifier audit','','Identifier scopes are source file plus identifier type unless a cross-file key is explicitly normalized. A run_id intentionally repeats over budget observations; it must map to one model, seed, and configuration within a source. `evaluation_id` and `canonical_id` identify individual analytical records. Seed values repeat across runs by design and are not globally unique.','',f'- Tables scanned: {len(paths)}.','- Identifier-field summaries: '+str(len(summary))+'.',f'- Reconciliation entries: {len(rec)}.',f'- Identifier/model/run integrity errors: {errors}.',f'- Unresolved foreign-key paths: {len(foreign)}.','','Known corrections, generated evaluation IDs, and affected rows are listed in `IDENTIFIER_RECONCILIATION.csv`. The full machine-readable identifier scan is `results/processed/identifier_audit.csv`; findings are `results/processed/identifier_findings.csv`; file-path references are in `results/processed/foreign_key_audit.csv`. Raw files are not edited.','','## Important distinctions','','- Repeated `run_id` values across epochs/budgets are legitimate when model, seed, and configuration remain consistent.','- The only duplicate `experiment_id` within a raw source is the later K-Means append; it is excluded from analysis and given a unique derived ID.','- LLM evaluation records without source experiment IDs receive stable row-scoped `evaluation_id` values; they are not fabricated as training experiments.','- Thirty Double DQN CSV rows are one cell short. Derived outputs realign the configuration/checkpoint/timestamp/details fields using their values, leaving the omitted success_rate unavailable. The original malformed rows are preserved.']
-    (ROOT/'IDENTIFIER_AUDIT.md').write_text('\n'.join(md)+'\n',encoding='utf-8')
+    md=['# Identifier audit','','Identifier scopes are source file plus identifier type unless a cross-file key is explicitly normalized. A run_id intentionally repeats over budget observations; it must map to one model, seed, and configuration within a source. `evaluation_id` and `canonical_id` identify individual analytical records. Seed values repeat across runs by design and are not globally unique.','',f'- Tables scanned: {len(paths)}.','- Identifier-field summaries: '+str(len(summary))+'.',f'- Reconciliation entries: {len(rec)}.',f'- Identifier/model/run integrity errors: {errors}.',f'- Unresolved foreign-key paths: {len(foreign)}.','','Known corrections, generated evaluation IDs, and affected rows are listed in `results/processed/identifier_reconciliation.csv`. The full machine-readable identifier scan is `results/processed/identifier_audit.csv`; findings are `results/processed/identifier_findings.csv`; file-path references are in `results/processed/foreign_key_audit.csv`. Raw files are not edited.','','## Important distinctions','','- Repeated `run_id` values across epochs/budgets are legitimate when model, seed, and configuration remain consistent.','- The only duplicate `experiment_id` within a raw source is the later K-Means append; it is excluded from analysis and given a unique derived ID.','- LLM evaluation records without source experiment IDs receive stable row-scoped `evaluation_id` values; they are not fabricated as training experiments.','- Thirty Double DQN CSV rows are one cell short. Derived outputs realign the configuration/checkpoint/timestamp/details fields using their values, leaving the omitted success_rate unavailable. The original malformed rows are preserved.']
+    (ROOT/'docs/IDENTIFIER_AUDIT.md').write_text('\n'.join(md)+'\n',encoding='utf-8')
     print(f'Scanned {len(paths)} tables; identifier errors={errors}; unresolved references={len(foreign)}; reconciliations={len(rec)}.')
     raise SystemExit(1 if errors else 0)
 if __name__=='__main__':main()

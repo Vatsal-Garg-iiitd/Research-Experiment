@@ -7,9 +7,9 @@
     "*.pyc",
     "*.pyo"
   ],
-  "file_count": 689,
+  "file_count": 688,
   "extension_counts": {
-    ".csv": 53,
+    ".csv": 52,
     ".gz": 4,
     ".joblib": 9,
     ".json": 153,
@@ -34,158 +34,18 @@
       "suffix": ""
     },
     {
-      "path": "DATA_INVENTORY.md",
-      "bytes": 5049,
-      "suffix": ".md"
-    },
-    {
-      "path": "DATA_QUALITY_REGISTER.md",
-      "bytes": 5956,
-      "suffix": ".md"
-    },
-    {
       "path": "EXECUTION_LOG.md",
-      "bytes": 3438,
-      "suffix": ".md"
-    },
-    {
-      "path": "EXPERIMENTAL_METHODOLOGY.md",
-      "bytes": 6477,
-      "suffix": ".md"
-    },
-    {
-      "path": "EXPERIMENT_COMPLETION_MATRIX.md",
-      "bytes": 16998,
-      "suffix": ".md"
-    },
-    {
-      "path": "EXPERIMENT_DESIGN.md",
-      "bytes": 2876,
-      "suffix": ".md"
-    },
-    {
-      "path": "EXPERIMENT_RUN_REGISTRY.csv",
-      "bytes": 1707130,
-      "suffix": ".csv"
-    },
-    {
-      "path": "FIGURE_CATALOGUE.md",
-      "bytes": 12878,
-      "suffix": ".md"
-    },
-    {
-      "path": "FINAL_COMPLETION_MATRIX.md",
-      "bytes": 16998,
-      "suffix": ".md"
-    },
-    {
-      "path": "FINAL_INDEPENDENT_AUDIT.md",
-      "bytes": 1808,
-      "suffix": ".md"
-    },
-    {
-      "path": "FINAL_RESEARCH_REPORT.md",
-      "bytes": 30848,
-      "suffix": ".md"
-    },
-    {
-      "path": "HARDWARE_BENCHMARK_REPORT.md",
-      "bytes": 2172,
-      "suffix": ".md"
-    },
-    {
-      "path": "IDENTIFIER_AUDIT.md",
-      "bytes": 1596,
-      "suffix": ".md"
-    },
-    {
-      "path": "IDENTIFIER_RECONCILIATION.csv",
-      "bytes": 34717,
-      "suffix": ".csv"
-    },
-    {
-      "path": "IMPLEMENTATION_GAPS.md",
-      "bytes": 2543,
-      "suffix": ".md"
-    },
-    {
-      "path": "LITERATURE_REVIEW.md",
-      "bytes": 3483,
-      "suffix": ".md"
-    },
-    {
-      "path": "LITERATURE_VALIDATION_REPORT.md",
-      "bytes": 8021,
-      "suffix": ".md"
-    },
-    {
-      "path": "LLM_EVALUATION_REPORT.md",
-      "bytes": 7483,
-      "suffix": ".md"
-    },
-    {
-      "path": "LLM_RESEARCH_DESIGN.md",
-      "bytes": 3485,
+      "bytes": 3469,
       "suffix": ".md"
     },
     {
       "path": "MACOS_EXECUTION_LOG.md",
-      "bytes": 2289,
-      "suffix": ".md"
-    },
-    {
-      "path": "MACOS_SETUP.md",
-      "bytes": 2942,
-      "suffix": ".md"
-    },
-    {
-      "path": "MARGINAL_GAIN_ANALYSIS.md",
-      "bytes": 359572,
-      "suffix": ".md"
-    },
-    {
-      "path": "METHODOLOGY_GAPS.md",
-      "bytes": 2380,
-      "suffix": ".md"
-    },
-    {
-      "path": "PROJECT_AUDIT.md",
-      "bytes": 6051,
+      "bytes": 2307,
       "suffix": ".md"
     },
     {
       "path": "README.md",
-      "bytes": 7245,
-      "suffix": ".md"
-    },
-    {
-      "path": "REMAINING_WORK.md",
-      "bytes": 2132,
-      "suffix": ".md"
-    },
-    {
-      "path": "REPRODUCIBILITY.md",
-      "bytes": 3475,
-      "suffix": ".md"
-    },
-    {
-      "path": "RESULT_PROVENANCE.md",
-      "bytes": 3885,
-      "suffix": ".md"
-    },
-    {
-      "path": "RUN_LOG_AUDIT.md",
-      "bytes": 1977,
-      "suffix": ".md"
-    },
-    {
-      "path": "ResearchProp_Grp119_sec_C (1).pdf",
-      "bytes": 159949,
-      "suffix": ".pdf"
-    },
-    {
-      "path": "STATISTICAL_ANALYSIS_REPORT.md",
-      "bytes": 30225,
+      "bytes": 5231,
       "suffix": ".md"
     },
     {
@@ -199,9 +59,139 @@
       "suffix": ".csv"
     },
     {
-      "path": "reports/FINAL_RESEARCH_REPORT.pdf",
-      "bytes": 5272613,
+      "path": "docs/DATA_INVENTORY.md",
+      "bytes": 5139,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/DATA_QUALITY_REGISTER.md",
+      "bytes": 5956,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/EXPERIMENTAL_METHODOLOGY.md",
+      "bytes": 6490,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/EXPERIMENT_DESIGN.md",
+      "bytes": 2902,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/IDENTIFIER_AUDIT.md",
+      "bytes": 1614,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_GAPS.md",
+      "bytes": 2556,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/LITERATURE_REVIEW.md",
+      "bytes": 3491,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/LLM_RESEARCH_DESIGN.md",
+      "bytes": 3493,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/MACOS_SETUP.md",
+      "bytes": 2942,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/METHODOLOGY_GAPS.md",
+      "bytes": 2401,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/PROJECT_AUDIT.md",
+      "bytes": 6079,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/REMAINING_WORK.md",
+      "bytes": 2132,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/REPRODUCIBILITY.md",
+      "bytes": 3490,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/RESULT_PROVENANCE.md",
+      "bytes": 3890,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/RUN_LOG_AUDIT.md",
+      "bytes": 1977,
+      "suffix": ".md"
+    },
+    {
+      "path": "docs/original_research_proposal.pdf",
+      "bytes": 159949,
       "suffix": ".pdf"
+    },
+    {
+      "path": "reports/EXPERIMENT_COMPLETION_MATRIX.md",
+      "bytes": 16998,
+      "suffix": ".md"
+    },
+    {
+      "path": "reports/FIGURE_CATALOGUE.md",
+      "bytes": 12878,
+      "suffix": ".md"
+    },
+    {
+      "path": "reports/FINAL_COMPLETION_MATRIX.md",
+      "bytes": 16998,
+      "suffix": ".md"
+    },
+    {
+      "path": "reports/FINAL_INDEPENDENT_AUDIT.md",
+      "bytes": 1808,
+      "suffix": ".md"
+    },
+    {
+      "path": "reports/FINAL_RESEARCH_REPORT.md",
+      "bytes": 30931,
+      "suffix": ".md"
+    },
+    {
+      "path": "reports/FINAL_RESEARCH_REPORT.pdf",
+      "bytes": 5272922,
+      "suffix": ".pdf"
+    },
+    {
+      "path": "reports/HARDWARE_BENCHMARK_REPORT.md",
+      "bytes": 2178,
+      "suffix": ".md"
+    },
+    {
+      "path": "reports/LITERATURE_VALIDATION_REPORT.md",
+      "bytes": 8021,
+      "suffix": ".md"
+    },
+    {
+      "path": "reports/LLM_EVALUATION_REPORT.md",
+      "bytes": 7483,
+      "suffix": ".md"
+    },
+    {
+      "path": "reports/MARGINAL_GAIN_ANALYSIS.md",
+      "bytes": 359572,
+      "suffix": ".md"
+    },
+    {
+      "path": "reports/STATISTICAL_ANALYSIS_REPORT.md",
+      "bytes": 30225,
+      "suffix": ".md"
     },
     {
       "path": "requirements-directml.txt",
@@ -3084,6 +3074,11 @@
       "suffix": ".csv"
     },
     {
+      "path": "results/processed/experiment_run_registry.csv",
+      "bytes": 1709314,
+      "suffix": ".csv"
+    },
+    {
       "path": "results/processed/figure_catalogue.csv",
       "bytes": 10414,
       "suffix": ".csv"
@@ -3100,12 +3095,12 @@
     },
     {
       "path": "results/processed/identifier_audit.csv",
-      "bytes": 65210,
+      "bytes": 65264,
       "suffix": ".csv"
     },
     {
       "path": "results/processed/identifier_findings.csv",
-      "bytes": 397517,
+      "bytes": 421457,
       "suffix": ".csv"
     },
     {
@@ -3130,7 +3125,7 @@
     },
     {
       "path": "results/processed/repository_file_inventory.json",
-      "bytes": 91433,
+      "bytes": 91503,
       "suffix": ".json"
     },
     {
@@ -3155,7 +3150,7 @@
     },
     {
       "path": "results/processed/tabular_data_inventory.json",
-      "bytes": 52310,
+      "bytes": 54419,
       "suffix": ".json"
     },
     {
@@ -3280,7 +3275,7 @@
     },
     {
       "path": "scripts/analyze_llm_full_eval.py",
-      "bytes": 2242,
+      "bytes": 2250,
       "suffix": ".py"
     },
     {
@@ -3295,7 +3290,7 @@
     },
     {
       "path": "scripts/analyze_strengthened_runs.py",
-      "bytes": 35111,
+      "bytes": 35132,
       "suffix": ".py"
     },
     {
@@ -3305,7 +3300,7 @@
     },
     {
       "path": "scripts/audit_identifiers.py",
-      "bytes": 8034,
+      "bytes": 8129,
       "suffix": ".py"
     },
     {
@@ -3315,7 +3310,7 @@
     },
     {
       "path": "scripts/audit_repository_inventory.py",
-      "bytes": 6108,
+      "bytes": 6113,
       "suffix": ".py"
     },
     {
@@ -3335,12 +3330,12 @@
     },
     {
       "path": "scripts/build_experiment_run_registry.py",
-      "bytes": 3629,
+      "bytes": 3647,
       "suffix": ".py"
     },
     {
       "path": "scripts/build_final_report_pdf.py",
-      "bytes": 9933,
+      "bytes": 9949,
       "suffix": ".py"
     },
     {
@@ -3350,7 +3345,7 @@
     },
     {
       "path": "scripts/build_verified_dataset.py",
-      "bytes": 5521,
+      "bytes": 5539,
       "suffix": ".py"
     },
     {
@@ -3370,12 +3365,12 @@
     },
     {
       "path": "scripts/generate_completion_matrix.py",
-      "bytes": 10916,
+      "bytes": 10932,
       "suffix": ".py"
     },
     {
       "path": "scripts/plot_final_figures.py",
-      "bytes": 39188,
+      "bytes": 39196,
       "suffix": ".py"
     },
     {
@@ -3470,7 +3465,7 @@
     },
     {
       "path": "scripts/validate_project_outputs.py",
-      "bytes": 14253,
+      "bytes": 14587,
       "suffix": ".py"
     }
   ]

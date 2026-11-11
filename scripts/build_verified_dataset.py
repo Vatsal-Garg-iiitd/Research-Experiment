@@ -47,7 +47,7 @@ for r in rows:
 recpath=out.parent/'identifier_reconciliation.csv'
 with recpath.open('w',encoding='utf-8-sig',newline='') as f:
     w=csv.DictWriter(f,fieldnames=['identifier_type','original_identifier','corrected_identifier','source_file','source_row','reason','related_records','validation_status']);w.writeheader();w.writerows(reconciliation)
-rootrec=ROOT/'IDENTIFIER_RECONCILIATION.csv'
+rootrec=ROOT/'results/processed/identifier_reconciliation.csv'
 with rootrec.open('w',encoding='utf-8-sig',newline='') as f:
     w=csv.DictWriter(f,fieldnames=['identifier_type','original_identifier','corrected_identifier','source_file','source_row','reason','related_records','validation_status']);w.writeheader();w.writerows(reconciliation)
 print(f'Wrote eligibility-annotated verified index: {len(rows)} rows; {len(reconciliation)} identifier reconciliations.')

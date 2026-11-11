@@ -81,6 +81,6 @@ for r in lit:
  status=literature_audit_by_model.get(r['model'],{}).get('status','needs_review')
  hw=r.get('hardware') or 'as documented in cited source; field gaps shown in evidence ledger'
  out.append(f"| {r['model']} | published configuration/source verified | yes, literature objective | 20 source-located fields; reported gaps remain classified | n/a | {hw} | `results/literature/large_model_literature.csv`, `results/literature/literature_field_evidence.csv` | {status} |")
-(ROOT/'FINAL_COMPLETION_MATRIX.md').write_text('\n'.join(out)+'\n',encoding='utf-8')
-(ROOT/'EXPERIMENT_COMPLETION_MATRIX.md').write_text('\n'.join(out)+'\n',encoding='utf-8')
+(ROOT/'reports/FINAL_COMPLETION_MATRIX.md').write_text('\n'.join(out)+'\n',encoding='utf-8')
+(ROOT/'reports/EXPERIMENT_COMPLETION_MATRIX.md').write_text('\n'.join(out)+'\n',encoding='utf-8')
 print('Wrote matrix:',len(reg),'conventional,',len(llm),'LLM,',len(lit),'literature rows;',complete_total,'/50 objectives complete (',completed_llm_count,'LLM endpoints)')

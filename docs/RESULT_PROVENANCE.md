@@ -36,4 +36,4 @@ Older 430/619 canonical and 458/279/84 statistical counts refer to earlier sourc
 - Pythia-160M/410M `main` aliases are not extra prefix trajectory checkpoints beyond explicit step143000.
 - The 1,122.1625-second ResNet interval remains raw. Only the adjusted time-efficiency diagnostic subtracts this interval after epoch 2; its cause is unknown.
 
-The machine-readable exclusion list is `results/processed/data_quality_exclusions.csv`; the broader issue register is `DATA_QUALITY_REGISTER.md` and `results/processed/data_quality_register.csv`.
+The machine-readable exclusion list is `results/processed/data_quality_exclusions.csv`; the broader issue register is `docs/DATA_QUALITY_REGISTER.md` and `results/processed/data_quality_register.csv`.

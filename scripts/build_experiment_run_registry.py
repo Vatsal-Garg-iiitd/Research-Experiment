@@ -3,7 +3,7 @@ import csv
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'EXPERIMENT_RUN_REGISTRY.csv'
+OUT=ROOT/'results/processed/experiment_run_registry.csv'
 FIELDS=['registry_id','source_file','source_row','record_id','model','paradigm','dataset','split_id','seed','budget_type','budget_value','requested_budget','actual_budget','metric','metric_value','status','hardware','backend','configuration_path','checkpoint_path','source_type','timestamp']
 
 def rows_from(path):

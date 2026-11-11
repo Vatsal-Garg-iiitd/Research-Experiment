@@ -37,6 +37,6 @@ The literature ledger has 15 model configurations × 20 fields. Evidence classes
 
 ## Reproducible outputs
 
-The analysis pipeline generated 25 PNG/SVG figure pairs and regenerated the statistical tables, completion audit, canonical indexes, run registry, literature evidence, and report source. See `DATA_INVENTORY.md`, `DATA_QUALITY_REGISTER.md`, `IDENTIFIER_AUDIT.md`, `FIGURE_CATALOGUE.md`, and `REPRODUCIBILITY.md`. Validation checks are recorded in the final audit summary and can be rerun with `scripts/validate_project_outputs.py`.
+The analysis pipeline generated 25 PNG/SVG figure pairs and regenerated the statistical tables, completion audit, canonical indexes, run registry, literature evidence, and report source. See `docs/DATA_INVENTORY.md`, `docs/DATA_QUALITY_REGISTER.md`, `docs/IDENTIFIER_AUDIT.md`, `reports/FIGURE_CATALOGUE.md`, and `docs/REPRODUCIBILITY.md`. Validation checks are recorded in the final audit summary and can be rerun with `scripts/validate_project_outputs.py`.
 
 The conclusions remain descriptive and task-specific. The evidence does not establish a universal diminishing-returns law, a causal ranking of compute efficiency across paradigms, or complete local evaluation of the LLM scope.

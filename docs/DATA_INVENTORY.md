@@ -1,12 +1,12 @@
 # Repository and data inventory
 
-Inventory generated from `/Users/jagdishgarg/Downloads/Tcom_project`; 689 files after excluding Git internals, virtual environments, bytecode, and cache folders. Raw records are read-only inputs.
+Inventory generated from `/Users/jagdishgarg/Downloads/Tcom_project`; 688 files after excluding Git internals, virtual environments, bytecode, and cache folders. Raw records are read-only inputs.
 
 ## File types
 
 | Type | Files |
 |---|---:|
-| `.csv` | 53 |
+| `.csv` | 52 |
 | `.gz` | 4 |
 | `.joblib` | 9 |
 | `.json` | 153 |
@@ -46,6 +46,7 @@ CSV row counts below exclude headers. Candidate identifier repetition is a scree
 | `results/processed/data_size_scaling_seed_results.csv` | 24 | 7 | experiment_id | 0 | 0 |
 | `results/processed/data_size_scaling_summary.csv` | 8 | 12 | — | 0 | 0 |
 | `results/processed/dbscan_size_scaling_summary.csv` | 14 | 5 | — | 0 | 0 |
+| `results/processed/experiment_run_registry.csv` | 5256 | 22 | registry_id | 0 | 44926 |
 | `results/processed/figure_catalogue.csv` | 25 | 8 | — | 0 | 0 |
 | `results/processed/foreign_key_audit.csv` | 0 | 5 | — | 0 | 0 |
 | `results/processed/full_suite_marginal_results.csv` | 33 | 27 | run_id | 13 | 198 |

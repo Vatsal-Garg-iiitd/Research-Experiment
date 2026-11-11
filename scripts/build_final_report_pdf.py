@@ -1,4 +1,4 @@
-"""Render FINAL_RESEARCH_REPORT.md and its figures as a formatted PDF."""
+"""Render reports/FINAL_RESEARCH_REPORT.md and its figures as a formatted PDF."""
 from pathlib import Path
 import csv, html, re
 from reportlab.lib import colors
@@ -69,7 +69,7 @@ def main():
     story += [Paragraph('Contents',styles['H1x'])]
     toc=TableOfContents();toc.levelStyles=[ParagraphStyle(name='TOC1x',fontName=base,fontSize=8.5,leading=12,leftIndent=0,firstLineIndent=0,spaceBefore=2),ParagraphStyle(name='TOC2x',fontName=base,fontSize=7.5,leading=10,leftIndent=12,firstLineIndent=0)]
     story += [toc,PageBreak()]
-    lines=(ROOT/'FINAL_RESEARCH_REPORT.md').read_text(encoding='utf-8').splitlines()
+    lines=(ROOT/'reports/FINAL_RESEARCH_REPORT.md').read_text(encoding='utf-8').splitlines()
     i=0;in_code=False;code_lines=[];paragraph=[]
     def flush_para():
         nonlocal paragraph

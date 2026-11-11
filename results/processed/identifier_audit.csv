@@ -1,7 +1,4 @@
 ﻿source_file,identifier_type,records,missing,distinct_nonblank,duplicate_excess,duplicate_values
-EXPERIMENT_RUN_REGISTRY.csv,registry_id,5250,0,5250,0,
-EXPERIMENT_RUN_REGISTRY.csv,seed,5250,427,5,4818,"{""11"": 1639, ""23"": 1580, ""37"": 1580, ""41"": 12, ""53"": 12}"
-EXPERIMENT_RUN_REGISTRY.csv,split_id,5250,1441,23,3786,"{""24574ee00a20ab31"": 3488, ""5c0893e53c5db57c"": 3, ""ecbe71c5d2b3e14a"": 3, ""f0ff19e74ce98365"": 3, ""570291815b3313a6"": 15, ""71bf255e824af2d9"": 15, ""f674d2665f76b656"": 15, ""c1427ea14824cbdc"": 66, ""4116dae0312b5981"": 66, ""CartPole-v1_eval_seeds_100000_plus_11"": 18, ""CartPole-v1_eval_seeds_100000_plus_23"": 18, ""CartPole-v1_eval_seeds_100000_plus_37"": 18, ""Pendulum-v1_eval_seeds_100000_plus_11"": 12, ""Pendulum-v1_eval_seeds_100000_plus_23"": 12, ""Pendulum-v1_eval_seeds_100000_plus_37"": 12, ""CartPole-v1_eval_seed11"": 6, ""CartPole-v1_eval_seed23"": 6, ""CartPole-v1_eval_seed37"": 6, ""Pendulum-v1_eval_seeds_100000_plus_41"": 6, ""Pendulum-v1_eval_seeds_100000_plus_53"": 6, ""CartPole-v1_eval_seed41"": 6, ""CartPole-v1_eval_seed53"": 6, ""validation"": 3}"
 results/llm/expanded_llm_evaluations.csv,checkpoint_id,40,0,9,31,"{""step0"": 4, ""step1000"": 3, ""step5000"": 3, ""step10000"": 4, ""step20000"": 3, ""step50000"": 3, ""main"": 15, ""step143000"": 3, ""step100000"": 2}"
 results/llm/full_wikitext2_evaluations.csv,experiment_id,6,0,6,0,
 results/llm/full_wikitext2_evaluations.csv,checkpoint_id,6,0,2,4,"{""step143000"": 3, ""main"": 3}"
@@ -20,6 +17,9 @@ results/processed/canonical_results.csv,split_id,3368,129,22,3217,"{""24574ee00a
 results/processed/data_quality_exclusions.csv,experiment_id,15,0,15,0,
 results/processed/data_size_scaling_seed_results.csv,experiment_id,24,0,24,0,
 results/processed/data_size_scaling_seed_results.csv,seed,24,0,3,21,"{""11"": 8, ""23"": 8, ""37"": 8}"
+results/processed/experiment_run_registry.csv,registry_id,5256,0,5256,0,
+results/processed/experiment_run_registry.csv,seed,5256,433,5,4818,"{""11"": 1639, ""23"": 1580, ""37"": 1580, ""41"": 12, ""53"": 12}"
+results/processed/experiment_run_registry.csv,split_id,5256,1447,23,3786,"{""24574ee00a20ab31"": 3488, ""5c0893e53c5db57c"": 3, ""ecbe71c5d2b3e14a"": 3, ""f0ff19e74ce98365"": 3, ""570291815b3313a6"": 15, ""71bf255e824af2d9"": 15, ""f674d2665f76b656"": 15, ""c1427ea14824cbdc"": 66, ""4116dae0312b5981"": 66, ""CartPole-v1_eval_seeds_100000_plus_11"": 18, ""CartPole-v1_eval_seeds_100000_plus_23"": 18, ""CartPole-v1_eval_seeds_100000_plus_37"": 18, ""Pendulum-v1_eval_seeds_100000_plus_11"": 12, ""Pendulum-v1_eval_seeds_100000_plus_23"": 12, ""Pendulum-v1_eval_seeds_100000_plus_37"": 12, ""CartPole-v1_eval_seed11"": 6, ""CartPole-v1_eval_seed23"": 6, ""CartPole-v1_eval_seed37"": 6, ""Pendulum-v1_eval_seeds_100000_plus_41"": 6, ""Pendulum-v1_eval_seeds_100000_plus_53"": 6, ""CartPole-v1_eval_seed41"": 6, ""CartPole-v1_eval_seed53"": 6, ""validation"": 3}"
 results/processed/full_suite_marginal_results.csv,run_id,33,0,20,13,"{""full_mlp_seed11_v1"": 3, ""full_cnn___lenet_seed11_v1"": 3, ""full_resnet-18_seed11_v1"": 3, ""full_vision_transformer_(vit-tiny)_seed11_v1"": 3, ""full_autoencoder_seed11_v1"": 3, ""full_variational_autoencoder_seed11_v1"": 3, ""full_mixmatch_seed11_v1"": 2}"
 results/processed/full_suite_marginal_results.csv,seed,33,0,1,32,"{""11"": 33}"
 results/processed/strengthened_marginal_gains.csv,seed,3167,0,5,3162,"{""11"": 1049, ""23"": 1049, ""37"": 1049, ""41"": 10, ""53"": 10}"
